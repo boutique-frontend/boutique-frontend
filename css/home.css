@@ -91,6 +91,96 @@
     transition: background-color 0.2s;
 }
 
+/* TikTok-style full screen container */
+.product-feed {
+    height: calc(100vh - 120px); /* Full height minus header & navbar */
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-card {
+    height: 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    background: #000000; /* Dark immersive feel for photo pop */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.product-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Overlay overlaying the bottom of the photo like TikTok */
+.product-overlay {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    padding: 20px 16px 30px 16px;
+    color: #ffffff;
+}
+
+.category-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffda79;
+    font-weight: 700;
+}
+
+.product-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 4px 0;
+    color: #ffffff;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #dddddd;
+    margin-bottom: 8px;
+}
+
+.product-sizes {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.product-price {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+
 .whatsapp-btn:active {
     background-color: #1da851;
 }
