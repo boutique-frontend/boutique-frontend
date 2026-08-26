@@ -1,23 +1,42 @@
 .contact-container {
-    padding: 30px 20px;
-    text-align: center;
+    padding: 40px 20px;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
 .contact-card {
     background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.contact-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.contact-card p {
+    color: #666666;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
 }
 
 .contact-link {
-    display: block;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 10px;
     color: #ffffff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 0.9rem;
 }
 
 .wa-bg { background-color: #25D366; }
