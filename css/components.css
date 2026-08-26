@@ -1,0 +1,42 @@
+/* Bottom Navbar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #666666;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+}
+
+.plus-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 26px;
+    border: none;
+    margin-top: -20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
