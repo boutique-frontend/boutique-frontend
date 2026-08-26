@@ -42,16 +42,55 @@ const PostPage = {
                         <input type="file" id="postImage" accept="image/*" required>
                     </div>
 
-                    <button type="submit" class="submit-btn">Publish to SAnA</button>
+                    <button type="submit" id="submitBtn" class="submit-btn">Publish to SAnA</button>
                 </form>
             </div>
         `;
     },
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
-        alert("Backend not connected yet!");
-        e.target.reset();
-        App.navigate('home');
+
+        const submitBtn = document.getElementById('submitBtn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Publishing...";
+        }
+
+        const formData = new FormData();
+        formData.append('title', document.getElementById('postTitle').value);
+        formData.append('category', document.getElementById('postCategory').value);
+        formData.append('price', document.getElementById('postPrice').value);
+        formData.append('sizes', document.getElementById('postSizes').value || '');
+        formData.append('description', document.getElementById('postDescription').value || '');
+        
+        const imageFile = document.getElementById('postImage').files[0];
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+
+        try {
+            const response = await fetch(CONFIG.API_URL, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert("Product published successfully!");
+                e.target.reset();
+                App.navigate('home');
+            } else {
+                const errData = await response.json();
+                alert("Publish failed: " + (errData.error || "Unknown error"));
+            }
+        } catch (error) {
+            console.error("Error publishing post:", error);
+            alert("Network error: Could not reach the server.");
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Publish to SAnA";
+            }
+        }
     }
 };
