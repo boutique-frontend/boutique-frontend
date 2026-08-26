@@ -1,99 +1,5 @@
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    padding: 16px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.product-card {
-    background: #ffffff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #f0f0f0;
-}
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-}
-
-.product-details {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.category-tag {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #888888;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.product-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #1a1a1a;
-    line-height: 1.2;
-}
-
-.product-description {
-    font-size: 0.75rem;
-    color: #666666;
-    margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.product-sizes {
-    font-size: 0.7rem;
-    color: #444444;
-    background: #f4f4f4;
-    padding: 2px 6px;
-    border-radius: 4px;
-    width: fit-content;
-    margin-bottom: 8px;
-}
-
-.product-price {
-    font-weight: 800;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-    color: #000000;
-    margin-top: auto;
-}
-
-.whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background-color: #25D366;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 9px 0;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    transition: background-color 0.2s;
-}
-
-/* TikTok-style full screen container */
 .product-feed {
-    height: calc(100vh - 120px); /* Full height minus header & navbar */
+    height: 100%;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
@@ -105,7 +11,7 @@
     scroll-snap-align: start;
     scroll-snap-stop: always;
     position: relative;
-    background: #000000; /* Dark immersive feel for photo pop */
+    background: #000000;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -121,50 +27,59 @@
     cursor: pointer;
 }
 
-/* Overlay overlaying the bottom of the photo like TikTok */
+/* Darker backdrop overlay to guarantee crisp white text readability */
 .product-overlay {
     position: relative;
     z-index: 10;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-    padding: 20px 16px 30px 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 10%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+    padding: 30px 18px 24px 18px;
     color: #ffffff;
 }
 
 .category-tag {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ffda79;
-    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #ffd700; /* Bright gold accent */
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 .product-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 4px 0;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 4px 0 6px 0;
     color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .product-description {
     font-size: 0.85rem;
-    color: #dddddd;
-    margin-bottom: 8px;
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    line-height: 1.3;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .product-sizes {
     font-size: 0.75rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 8px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 4px 10px;
+    border-radius: 6px;
     display: inline-block;
     margin-bottom: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
 }
 
 .product-price {
-    font-weight: 800;
-    font-size: 1.2rem;
+    font-weight: 900;
+    font-size: 1.3rem;
     color: #ffffff;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .whatsapp-btn {
@@ -174,13 +89,13 @@
     background-color: #25D366;
     color: #ffffff;
     text-decoration: none;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 700;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
-
 .whatsapp-btn:active {
-    background-color: #1da851;
+    transform: scale(0.98);
 }
