@@ -2,14 +2,14 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     height: 60px;
     background-color: #121212;
     border-top: 1px solid #222222;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 999; /* Keeps navbar above all image elements */
+    z-index: 9999;
 }
 
 .nav-item {
