@@ -6,25 +6,24 @@
 }
 
 html, body {
-    height: 100vh;
-    width: 100vw;
+    /* 100dvh fixes the mobile browser address bar cutting off the bottom! */
+    height: 100dvh; 
+    width: 100%;
     background-color: #0d0d0d;
     color: #ffffff;
     overflow: hidden;
-    position: relative;
+    /* This stacks the header, feed, and navbar perfectly */
+    display: flex;
+    flex-direction: column; 
 }
 
 .header {
-    height: 50px;
+    flex: 0 0 50px; /* Locks header to exactly 50px */
     background-color: #121212;
     border-bottom: 1px solid #222222;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     z-index: 1000;
 }
 
@@ -37,10 +36,15 @@ html, body {
 }
 
 #app-content {
-    position: fixed;
-    top: 50px;
-    bottom: 60px;
-    left: 0;
-    right: 0;
+    flex: 1; /* Forces the feed to take exactly the remaining middle space */
+    position: relative;
     overflow: hidden;
+    width: 100%;
+}
+
+#navbar-container {
+    flex: 0 0 60px; /* Locks navbar space to exactly 60px */
+    position: relative;
+    z-index: 1000;
+    background-color: #121212;
 }
