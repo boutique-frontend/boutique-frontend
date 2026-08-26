@@ -9,7 +9,7 @@ const CONFIG = {
     EMAIL: "contact@sanaboutique.com",
     WHATSAPP_NUMBER: "923001234567", // Format: country code + number without plus or spaces
     PHONE_NUMBER: "033106301",
-    TIKTOK_USERNAME: "nasheedvibez",
+    TIKTOK_USERNAME: "SANA motuu",
     
     // Location & Maps
     LOCATION_NAME: "Main Market, Lahore, Pakistan",
