@@ -1,5 +1,6 @@
 .product-feed {
-    height: calc(100vh - 110px); /* Adjusts height to fit 50px header + 60px navbar */
+    height: 100%;
+    width: 100%;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
@@ -27,12 +28,11 @@
     cursor: pointer;
 }
 
-/* Darker backdrop overlay to guarantee crisp white text readability */
 .product-overlay {
     position: relative;
     z-index: 10;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 10%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
-    padding: 30px 18px 24px 18px;
+    padding: 20px 18px 20px 18px;
     color: #ffffff;
 }
 
@@ -40,9 +40,9 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: #ffd700; /* Bright gold accent */
+    color: #ffd700;
     font-weight: 800;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 .product-title {
@@ -69,7 +69,7 @@
     padding: 4px 10px;
     border-radius: 6px;
     display: inline-block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
     backdrop-filter: blur(4px);
 }
@@ -78,7 +78,7 @@
     font-weight: 900;
     font-size: 1.3rem;
     color: #ffffff;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
@@ -89,7 +89,7 @@
     background-color: #25D366;
     color: #ffffff;
     text-decoration: none;
-    padding: 14px;
+    padding: 12px;
     border-radius: 12px;
     font-size: 1rem;
     font-weight: 800;
