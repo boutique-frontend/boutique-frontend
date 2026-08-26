@@ -1,7 +1,17 @@
 const HomePage = {
     sampleItems: [
-        { id: 1, title: "SAnA Silk Dress", price: "45.00", image: "https://via.placeholder.com/200" },
-        { id: 2, title: "Classic Denim Jacket", price: "60.00", image: "https://via.placeholder.com/200" }
+        { 
+            id: 1, 
+            title: "SAnA Silk Dress", 
+            price: "45.00", 
+            image: "https://picsum.photos/400/500?random=1" 
+        },
+        { 
+            id: 2, 
+            title: "Classic Denim Jacket", 
+            price: "60.00", 
+            image: "https://picsum.photos/400/500?random=2" 
+        }
     ],
     
     render() {
