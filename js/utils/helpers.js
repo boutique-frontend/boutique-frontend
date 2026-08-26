@@ -1,10 +1,17 @@
 const Helpers = {
     formatPrice(amount) {
-        return `${CONFIG.CURRENCY_SYMBOL} ${Number(amount).toLocaleString()}`;
+        const num = Number(amount) || 0;
+        const currency = (typeof CONFIG !== 'undefined' && CONFIG.CURRENCY_SYMBOL) ? CONFIG.CURRENCY_SYMBOL : 'Rs.';
+        return `${currency} ${num.toLocaleString()}`;
     },
 
     createWhatsAppLink(title, price, sizes) {
-        const msg = `Hi SAnA! I want to order "${title}" (${this.formatPrice(price)}) ${sizes ? `in Size: ${sizes}` : ''}. Is it available?`;
-        return `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+        const formattedPrice = this.formatPrice(price);
+        const cleanPhone = (typeof CONFIG !== 'undefined' && CONFIG.WHATSAPP_NUMBER) 
+            ? CONFIG.WHATSAPP_NUMBER.replace(/[^0-9]/g, '') 
+            : '';
+        const msg = `Hi SAnA! I want to order "${title}" (${formattedPrice}) ${sizes ? `in Size: ${sizes}` : ''}. Is it available?`;
+        
+        return `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
     }
 };
