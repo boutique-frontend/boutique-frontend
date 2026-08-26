@@ -1,160 +1,187 @@
-.contact-container {
+.contact-page {
     height: 100%;
     width: 100%;
     overflow-y: auto;
-    padding: 20px 16px 100px 16px;
-    background-color: #0d0d0d;
+    padding: 20px 16px 90px 16px;
+    background-color: #080d1a; /* Deep dark blue background matching screenshot */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     -webkit-overflow-scrolling: touch;
 }
 
-.contact-card {
-    width: 100%;
-    max-width: 400px;
-    background-color: #161616;
-    border: 1px solid #262626;
-    border-radius: 20px;
-    padding: 24px 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Profile Header */
-.profile-header {
+/* Header & Avatar */
+.contact-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 420px;
 }
 
-.profile-avatar {
-    width: 70px;
-    height: 70px;
+.profile-avatar-wrapper {
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ffd700, #b8860b);
-    color: #000000;
-    font-size: 2rem;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    padding: 4px;
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+    margin-bottom: 14px;
 }
 
-.profile-name {
-    font-size: 1.4rem;
+.profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #121a2d;
+}
+
+.profile-title {
+    font-size: 1.6rem;
     font-weight: 800;
     color: #ffffff;
+    letter-spacing: 1px;
     margin-bottom: 4px;
 }
 
-.profile-tagline {
-    font-size: 0.85rem;
-    color: #ffd700;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-/* Section Titles */
-.section-title {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #888888;
-    margin-bottom: 10px;
+.profile-subtitle {
+    font-size: 0.9rem;
+    color: #00d2ff;
     font-weight: 700;
+    margin-bottom: 12px;
 }
 
-/* About Text */
-.about-text {
-    font-size: 0.88rem;
-    color: #cccccc;
+.profile-bio {
+    font-size: 0.85rem;
+    color: #8c9ba5;
     line-height: 1.5;
-    background: #1f1f1f;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid #2a2a2a;
+    max-width: 340px;
 }
 
-/* Action Buttons */
-.contact-details {
+/* Link Cards Container */
+.cards-list {
+    width: 100%;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-.contact-item {
+.link-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
     padding: 14px 16px;
-    background-color: #1f1f1f;
-    border: 1px solid #2a2a2a;
-    border-radius: 14px;
     text-decoration: none;
     transition: all 0.2s ease;
 }
 
-.contact-item:active {
-    transform: scale(0.97);
+.link-card:active {
+    transform: scale(0.98);
+    background-color: #1e293b;
 }
 
-.item-icon {
-    font-size: 1.2rem;
-    width: 38px;
-    height: 38px;
-    background: #2a2a2a;
-    border-radius: 10px;
+/* Custom Colored Badge Icons */
+.badge-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
     flex-shrink: 0;
 }
 
-.item-text {
+.badge-email {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    box-shadow: 0 4px 12px rgba(255, 65, 108, 0.3);
+}
+
+.badge-whatsapp {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
+}
+
+.badge-tiktok {
+    background: #000000;
+    border: 1px solid #333333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.badge-phone {
+    background: linear-gradient(135deg, #ff9900, #ff5500);
+    box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+}
+
+/* Card Text Details */
+.card-details {
     display: flex;
     flex-direction: column;
+    margin-left: 14px;
     flex-grow: 1;
-    margin-left: 12px;
 }
 
-.item-label {
-    font-size: 0.7rem;
-    color: #888888;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.item-value {
+.card-title {
     font-size: 0.95rem;
-    color: #ffffff;
     font-weight: 700;
+    color: #ffffff;
+}
+
+.card-value {
+    font-size: 0.8rem;
+    color: #94a3b8;
     margin-top: 2px;
 }
 
-.action-arrow {
-    color: #666666;
-    font-size: 1.1rem;
-    font-weight: bold;
+.chevron-arrow {
+    font-size: 1.6rem;
+    color: #38bdf8;
+    font-weight: 300;
+    margin-left: 8px;
 }
 
-/* Custom Platform Accents */
-.whatsapp-btn {
-    border-color: rgba(37, 211, 102, 0.4);
-    background: linear-gradient(90deg, #1f1f1f 70%, rgba(37, 211, 102, 0.12) 100%);
+/* Embedded Google Map Section */
+.map-card-wrapper {
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    padding: 16px;
+    margin-top: 6px;
 }
 
-.tiktok-btn {
-    border-color: rgba(254, 44, 85, 0.4);
-    background: linear-gradient(90deg, #1f1f1f 70%, rgba(254, 44, 85, 0.12) 100%);
+.map-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-.location-btn {
-    border-color: rgba(234, 67, 53, 0.4);
-    background: linear-gradient(90deg, #1f1f1f 70%, rgba(234, 67, 53, 0.12) 100%);
+.map-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.map-container iframe {
+    pointer-events: none; /* Allows click through to container trigger */
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 8px;
+    text-align: center;
+    color: #38bdf8;
+    font-size: 0.75rem;
+    font-weight: 700;
 }
