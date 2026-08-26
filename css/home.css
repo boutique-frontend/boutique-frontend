@@ -1,56 +1,96 @@
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile for a boutique look */
-    gap: 12px;
-    padding: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 16px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .product-card {
     background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden; /* Clips the top of the image to match rounded card corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
+    border: 1px solid #f0f0f0;
 }
 
 .product-card img {
     width: 100%;
-    height: 190px;
+    height: 200px;
     object-fit: cover;
-    display: block; /* Removes unwanted gap beneath the image */
+    display: block;
 }
 
 .product-details {
-    padding: 10px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    justify-content: space-between;
+}
+
+.category-tag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888888;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .product-title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 4px;
-    color: #222222;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.product-description {
+    font-size: 0.75rem;
+    color: #666666;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-sizes {
+    font-size: 0.7rem;
+    color: #444444;
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 8px;
 }
 
 .product-price {
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
     color: #000000;
+    margin-top: auto;
 }
 
 .whatsapp-btn {
-    display: block;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     background-color: #25D366;
     color: #ffffff;
     text-decoration: none;
-    padding: 8px 0;
-    border-radius: 6px;
+    padding: 9px 0;
+    border-radius: 8px;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.whatsapp-btn:active {
+    background-color: #1da851;
 }
