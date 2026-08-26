@@ -1,42 +1,42 @@
-/* Bottom Navbar */
-.bottom-nav {
+.navbar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background: #ffffff;
-    border-top: 1px solid #e0e0e0;
+    background-color: #121212;
+    border-top: 1px solid #222222;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
-.nav-btn {
-    background: none;
-    border: none;
+.nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #666666;
+    color: #888888;
+    text-decoration: none;
     font-size: 0.75rem;
-    cursor: pointer;
+    font-weight: 600;
 }
 
-.nav-icon {
-    font-size: 1.2rem;
-}
-
-.plus-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #000000;
+.nav-item.active {
     color: #ffffff;
-    font-size: 26px;
-    border: none;
-    margin-top: -20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+}
+
+.add-btn {
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
