@@ -6,23 +6,31 @@
 }
 
 body {
-    background-color: #f9f9f9;
-    padding-bottom: 80px;
-    color: #111111;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Dark Header */
 .header {
-    text-align: center;
-    padding: 1rem;
-    background: #ffffff;
-    border-bottom: 1px solid #eeeeee;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    height: 50px;
+    background-color: #121212;
+    border-bottom: 1px solid #222222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header h1 {
-    font-size: 1.5rem;
-    letter-spacing: 2px;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #ffffff;
     text-transform: uppercase;
+    font-weight: 800;
 }
+
+#app-content {
+    height: calc(100vh - 110px);
+    overflow: hidden;
+    }
