@@ -1,6 +1,10 @@
 const Helpers = {
-    createWhatsAppLink(title, price) {
-        const message = `Hi! I want to order ${title} (${price})`;
-        return `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    formatPrice(amount) {
+        return `${CONFIG.CURRENCY_SYMBOL} ${Number(amount).toLocaleString()}`;
+    },
+
+    createWhatsAppLink(title, price, sizes) {
+        const msg = `Hi SAnA! I want to order "${title}" (${this.formatPrice(price)}) ${sizes ? `in Size: ${sizes}` : ''}. Is it available?`;
+        return `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     }
 };
