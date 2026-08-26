@@ -1,5 +1,5 @@
 .product-feed {
-    height: 100%;
+    height: calc(100vh - 110px); /* Adjusts height to fit 50px header + 60px navbar */
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     -webkit-overflow-scrolling: touch;
@@ -42,7 +42,7 @@
     letter-spacing: 1.5px;
     color: #ffd700; /* Bright gold accent */
     font-weight: 800;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .product-title {
