@@ -11,9 +11,9 @@ const CONFIG = {
     
     // Contact Info
     EMAIL: "contact@sanaboutique.com",
-    WHATSAPP_NUMBER: "923001234567", 
-    PHONE_NUMBER: "033106301",
-    TIKTOK_USERNAME: "nasheedvibez",
+    WHATSAPP_NUMBER: "+92 310 0559630", 
+    PHONE_NUMBER: "+92 310 0559630",
+    TIKTOK_USERNAME: "Sana chubby example",
     
     // Location & Maps
     LOCATION_NAME: "Main Market, Lahore, Pakistan",
