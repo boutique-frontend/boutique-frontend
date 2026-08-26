@@ -1,27 +1,39 @@
 const HomePage = {
-    sampleItems: [
-        { 
-            id: 1, 
-            title: "Lawn 3-Piece Suit", 
-            price: "4500", 
-            category: "Unstitched",
-            description: "Printed lawn shirt with embroidered neckline and chiffon dupatta.",
-            sizes: "Unstitched",
-            image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&q=80" 
-        },
-        { 
-            id: 2, 
-            title: "Velvet Kurti", 
-            price: "3200", 
-            category: "Ready-to-Wear",
-            description: "Premium black velvet kurti with gold zari detailing.",
-            sizes: "S, M, L",
-            image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80" 
-        }
-    ],
-    
     render() {
-        const items = this.sampleItems.map(item => PostCardComponent.render(item)).join('');
-        return `<div class="product-feed">${items}</div>`;
+        // Automatically fetch posts after container renders to the DOM
+        setTimeout(() => this.loadPosts(), 0);
+
+        return `
+            <div id="product-feed" class="product-feed">
+                <p class="loading-text">Loading catalog...</p>
+            </div>
+        `;
+    },
+
+    async loadPosts() {
+        const feedContainer = document.getElementById('product-feed');
+        if (!feedContainer) return;
+
+        try {
+            const response = await fetch(CONFIG.API_URL);
+            const posts = await response.json();
+
+            if (!posts || posts.length === 0) {
+                feedContainer.innerHTML = `<p class="empty-msg">No products uploaded yet.</p>`;
+                return;
+            }
+
+            // Maps backend data into PostCardComponent
+            feedContainer.innerHTML = posts.map(post => {
+                const itemData = {
+                    ...post,
+                    image: post.image_url || post.image
+                };
+                return PostCardComponent.render(itemData);
+            }).join('');
+        } catch (error) {
+            console.error("Error fetching items:", error);
+            feedContainer.innerHTML = `<p class="error-msg">Failed to load posts. Check your connection.</p>`;
+        }
     }
 };
