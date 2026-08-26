@@ -2,6 +2,10 @@ const CONFIG = {
     APP_NAME: "SAnA Boutique",
     CURRENCY_SYMBOL: "Rs.",
     
+    // Live Backend API
+    API_URL: "https://boutique-backend-6fcr.onrender.com/api/posts",
+    ADMIN_PASSCODE: "1234", // Set your preferred passcode here
+    
     // Path to your uploaded profile image
     PROFILE_IMAGE: "assets/logo.jpg", 
     
