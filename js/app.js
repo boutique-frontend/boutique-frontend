@@ -8,6 +8,7 @@ const App = {
         const container = document.getElementById('app-content');
         if (page === 'home') container.innerHTML = HomePage.render();
         if (page === 'contact') container.innerHTML = ContactPage.render();
+        if (page === 'profile') container.innerHTML = ProfilePage.render();
         if (page === 'post') container.innerHTML = PostPage.render();
     },
 
