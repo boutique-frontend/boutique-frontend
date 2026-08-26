@@ -1,14 +1,29 @@
 const App = {
     init() {
-        document.getElementById('navbar-container').innerHTML = NavbarComponent.render();
+        const navbarContainer = document.getElementById('navbar-container');
+        if (navbarContainer && typeof NavbarComponent !== 'undefined') {
+            navbarContainer.innerHTML = NavbarComponent.render();
+        }
         this.navigate('home');
     },
 
     navigate(page) {
         const container = document.getElementById('app-content');
-        if (page === 'home') container.innerHTML = HomePage.render();
-        if (page === 'contact') container.innerHTML = ContactPage.render();
-        if (page === 'post') container.innerHTML = PostPage.render();
+        if (!container) return;
+
+        // Reset scroll position on page change
+        window.scrollTo(0, 0);
+
+        if (page === 'home') {
+            container.innerHTML = HomePage.render();
+            if (HomePage.loadPosts) {
+                HomePage.loadPosts();
+            }
+        } else if (page === 'contact') {
+            container.innerHTML = typeof ContactPage !== 'undefined' ? ContactPage.render() : '';
+        } else if (page === 'post') {
+            container.innerHTML = typeof PostPage !== 'undefined' ? PostPage.render() : '';
+        }
     },
 
     handleCreatePost() {
