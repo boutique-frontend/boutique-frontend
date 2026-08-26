@@ -1,16 +1,20 @@
 const NavbarComponent = {
     render() {
         return `
-            <nav class="bottom-nav">
-                <button onclick="App.navigate('home')" class="nav-btn">
-                    <span class="nav-icon">🏠</span>
-                    <span>Home</span>
-                </button>
-                <button onclick="App.handleCreatePost()" class="plus-btn">+</button>
-                <button onclick="App.navigate('contact')" class="nav-btn">
-                    <span class="nav-icon">📞</span>
-                    <span>Contact</span>
-                </button>
+            <nav class="navbar">
+                <a href="javascript:void(0)" onclick="App.navigate('home')" class="nav-item">
+                    <span style="font-size: 1.2rem; margin-bottom: 2px;">🏠</span>
+                    Home
+                </a>
+                
+                <a href="javascript:void(0)" onclick="App.navigate('post')" class="add-btn">
+                    +
+                </a>
+                
+                <a href="javascript:void(0)" onclick="App.navigate('contact')" class="nav-item">
+                    <span style="font-size: 1.2rem; margin-bottom: 2px;">📞</span>
+                    Contact
+                </a>
             </nav>
         `;
     }
