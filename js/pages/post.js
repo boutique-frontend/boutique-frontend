@@ -50,7 +50,8 @@ const PostPage = {
 
     handleSubmit(e) {
         e.preventDefault();
-        alert("Published! (Will link to backend storage next)");
+        alert("Backend not connected yet!");
+        e.target.reset();
         App.navigate('home');
     }
 };
