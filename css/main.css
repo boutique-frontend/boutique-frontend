@@ -15,6 +15,12 @@ html, body {
     flex-direction: column; 
 }
 
+/* Global Image Reset */
+img {
+    max-width: 100%;
+    display: block;
+}
+
 .header {
     flex: 0 0 50px; 
     background-color: #121212;
@@ -38,11 +44,12 @@ html, body {
     position: relative;
     overflow: hidden;
     width: 100%;
+    height: calc(100dvh - 110px); /* Locks exact height between 50px header and 60px nav */
 }
 
 #navbar-container {
     flex: 0 0 60px; 
     position: relative;
     z-index: 1000;
-    background-color: #ffffff; /* Sets the exact background behind the navbar to white */
+    background-color: #ffffff; 
 }
