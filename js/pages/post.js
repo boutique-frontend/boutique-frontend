@@ -1,4 +1,8 @@
-const PostPage = {
+import { CONFIG } from '../config.js';
+import { HomePage } from './home.js';
+import { App } from '../app.js';
+
+export const PostPage = {
     selectedSizes: [],
 
     render() {
@@ -48,7 +52,7 @@ const PostPage = {
                     </div>
 
                     <div class="form-group">
-                        <label>Price (${CONFIG.CURRENCY_SYMBOL})</label>
+                        <label>Price (${CONFIG.CURRENCY_SYMBOL || 'Rs.'})</label>
                         <input type="number" id="postPrice" placeholder="e.g. 3500" required>
                     </div>
 
@@ -97,7 +101,7 @@ const PostPage = {
     },
 
     removeImage(e) {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         const fileInput = document.getElementById('postImage');
         const placeholder = document.getElementById('uploadPlaceholder');
         const previewContainer = document.getElementById('previewContainer');
@@ -155,11 +159,15 @@ const PostPage = {
                 e.target.reset();
 
                 // Clear memory cache to trigger automatic refresh on Home feed
-                if (typeof HomePage !== 'undefined') {
+                if (typeof HomePage !== 'undefined' && HomePage) {
                     HomePage.cachedPosts = null;
                 }
 
-                App.navigate('home');
+                if (typeof App !== 'undefined' && App.navigate) {
+                    App.navigate('home');
+                } else {
+                    window.location.hash = '#home';
+                }
             } else {
                 const errData = await response.json();
                 alert("Publish failed: " + (errData.error || "Unknown error"));
@@ -175,3 +183,7 @@ const PostPage = {
         }
     }
 };
+
+// Bind to window object for inline HTML event handler accessibility
+window.PostPage = PostPage;
+                
