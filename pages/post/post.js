@@ -88,40 +88,18 @@ export const PostPage = {
         }
     },
 
-    // Convert Image File to Base64 Data URL
-    fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    },
-
     async handleSubmit(e) {
         e.preventDefault();
 
         const submitBtn = document.getElementById('submitBtn');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerText = "Publishing...";
+            submitBtn.innerText = "Publishing to Supabase...";
         }
 
         const imageFile = document.getElementById('postImage').files[0];
-        let imageBase64 = "";
 
-        if (imageFile) {
-            try {
-                imageBase64 = await this.fileToBase64(imageFile);
-            } catch (err) {
-                alert("Failed to process selected image.");
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "Publish to SAnA";
-                }
-                return;
-            }
-        } else {
+        if (!imageFile) {
             alert("Please select a product image before publishing.");
             if (submitBtn) {
                 submitBtn.disabled = false;
@@ -130,29 +108,24 @@ export const PostPage = {
             return;
         }
 
-        // Standardized Payload structure mapping both image_url & image fields
-        const payload = {
-            title: document.getElementById('postTitle').value,
-            category: document.getElementById('postCategory').value,
-            price: document.getElementById('postPrice').value,
-            sizes: document.getElementById('postSizes').value || '',
-            description: document.getElementById('postDescription').value || '',
-            image: imageBase64,
-            image_url: imageBase64
-        };
+        // Build FormData to match Flask request.files and request.form requirements
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        formData.append('title', document.getElementById('postTitle').value);
+        formData.append('category', document.getElementById('postCategory').value);
+        formData.append('price', document.getElementById('postPrice').value);
+        formData.append('sizes', document.getElementById('postSizes').value || '');
+        formData.append('description', document.getElementById('postDescription').value || '');
 
         try {
+            // Send multi-part payload to Flask endpoint (do not manually set Content-Type header)
             const response = await fetch(CONFIG.API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                body: formData
             });
 
             if (response.ok || response.status === 201) {
-                alert("Product published successfully!");
+                alert("Product published successfully to SAnA Boutique!");
                 e.target.reset();
                 this.removeImage();
 
@@ -171,7 +144,7 @@ export const PostPage = {
             }
         } catch (error) {
             console.error("Error publishing post:", error);
-            alert("Network error: Could not reach the server.");
+            alert("Network error: Could not reach the backend server.");
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
