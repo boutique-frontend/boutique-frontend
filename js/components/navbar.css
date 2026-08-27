@@ -1,37 +1,63 @@
-/* Central Gold Action Button */
-.post-btn-wrapper {
-    position: relative;
-    top: -22px; /* Pushes the button higher up out of the nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 68px;
+    background: rgba(15, 20, 28, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: #8c9ba5;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: color 0.2s ease, transform 0.2s ease;
+    flex: 1;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.nav-item.active {
+    color: #d4af37;
+}
+
+.nav-item:active {
+    transform: scale(0.92);
+}
+
+/* Central Gold Action Button */
+.post-btn-wrapper {
+    position: relative;
+    top: -12px;
 }
 
 .post-circle-btn {
-    width: 62px;
-    height: 62px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #e6c670 0%, #d4af37 50%, #b88a0b 100%);
+    background: linear-gradient(135deg, #f3e0aa 0%, #d4af37 50%, #997409 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
     color: #000000;
-    font-size: 2rem; /* Larger '+' icon */
-    font-weight: 300; 
-    
-    /* 1. Creates the thick dark gap */
-    border: 5px solid #0f141c; 
-    
-    /* 2. Creates the thin outer gold ring AND the soft glow */
-    box-shadow: 0 0 0 1.5px #d4af37, 0 8px 16px rgba(212, 175, 55, 0.25);
-    
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease;
-    z-index: 10;
+    font-size: 1.6rem;
+    font-weight: bold;
 }
-
-/* Tap Animation */
-.post-circle-btn:active {
-    transform: scale(0.92) translateY(2px);
-    box-shadow: 0 0 0 1.5px #d4af37, 0 4px 8px rgba(212, 175, 55, 0.15);
-}
+I want the button to look like the one in the image
