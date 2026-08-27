@@ -1,6 +1,18 @@
 const HomePage = {
+    // Memory cache for fetched posts
+    cachedPosts: null,
+
     render() {
         setTimeout(() => this.loadPosts(), 0);
+
+        // Instant render if cached posts exist
+        if (this.cachedPosts && this.cachedPosts.length > 0) {
+            return `
+                <div id="product-feed" class="product-feed">
+                    ${this.renderFeedHtml(this.cachedPosts)}
+                </div>
+            `;
+        }
 
         return `
             <div id="product-feed" class="product-feed">
@@ -13,11 +25,27 @@ const HomePage = {
         `;
     },
 
-    async loadPosts() {
+    renderFeedHtml(posts) {
+        return posts.map(post => {
+            const itemData = {
+                ...post,
+                image: post.image_url || post.image
+            };
+            return PostCardComponent.render(itemData);
+        }).join('');
+    },
+
+    async loadPosts(forceRefresh = false) {
         const feedContainer = document.getElementById('product-feed');
         if (!feedContainer) return;
 
-        // Timer to update message if Render is taking time to wake up (cold start)
+        // Skip network request if cached data exists and forceRefresh is false
+        if (this.cachedPosts && !forceRefresh) {
+            feedContainer.innerHTML = this.renderFeedHtml(this.cachedPosts);
+            return;
+        }
+
+        // Timer for Render sleep state message
         const wakeUpTimer = setTimeout(() => {
             const titleEl = document.getElementById('loadingTitle');
             const subTitleEl = document.getElementById('loadingSubtitle');
@@ -32,19 +60,16 @@ const HomePage = {
             clearTimeout(wakeUpTimer);
 
             const posts = await response.json();
+            
+            // Save to memory cache
+            this.cachedPosts = posts;
 
             if (!posts || posts.length === 0) {
                 feedContainer.innerHTML = `<p class="empty-msg">No products uploaded yet.</p>`;
                 return;
             }
 
-            feedContainer.innerHTML = posts.map(post => {
-                const itemData = {
-                    ...post,
-                    image: post.image_url || post.image
-                };
-                return PostCardComponent.render(itemData);
-            }).join('');
+            feedContainer.innerHTML = this.renderFeedHtml(posts);
         } catch (error) {
             clearTimeout(wakeUpTimer);
             console.error("Error fetching items:", error);
