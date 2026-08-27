@@ -8,49 +8,51 @@
     --border-gold: rgba(212, 175, 55, 0.25);
     --text-primary: #ffffff;
     --text-muted: #8c9ba5;
-    --nav-height: 70px;
+    --nav-height: 75px;
 }
 
-/* Core Layout & Base Resets */
-* {
+/* Core Layout & Strict Viewport Resets */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
 }
 
-body, html {
+html, body {
     width: 100%;
-    height: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
     background-color: var(--bg-dark);
     color: var(--text-primary);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    position: relative;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* App Viewport Shell */
+/* App Viewport Shell Fix */
 #app {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--bg-dark);
+    overflow-x: hidden;
+    margin: 0 auto;
 }
 
 #page-content {
     flex: 1;
     width: 100%;
-    padding-bottom: var(--nav-height); /* Space for fixed bottom navbar */
+    max-width: 100%;
+    padding-bottom: var(--nav-height);
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-/* ==========================================================================
-   GLOBAL BUTTON STYLES (MATCHING UI SCREENSHOT)
-   ========================================================================== */
-
-/* Primary Gold Solid Button (e.g. SHOP NOW, CHAT NOW) */
+/* Reusable Gold Buttons */
 .btn-gold-primary {
     background: var(--gold-gradient);
     color: #000000;
@@ -69,14 +71,12 @@ body, html {
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
-    transition: all 0.25 ease;
 }
 
 .btn-gold-primary:active {
     transform: scale(0.97);
 }
 
-/* Secondary Gold Outlined Button (e.g. EXPLORE COLLECTION) */
 .btn-gold-outline {
     background: transparent;
     color: var(--gold-primary);
@@ -94,7 +94,6 @@ body, html {
     gap: 6px;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.25s ease;
 }
 
 .btn-gold-outline:active {
@@ -102,10 +101,7 @@ body, html {
     transform: scale(0.97);
 }
 
-/* ==========================================================================
-   WHATSAPP ORDER BANNER CARD (BOTTOM SECTION IN SCREENSHOT)
-   ========================================================================== */
-
+/* WhatsApp Banner Card */
 .whatsapp-order-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-gold);
@@ -116,7 +112,6 @@ body, html {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .whatsapp-left-content {
@@ -173,15 +168,9 @@ body, html {
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-    transition: transform 0.2s ease;
 }
 
-.whatsapp-chat-btn:active {
-    transform: scale(0.95);
-}
-
-/* Global Utility Classes & Helpers */
+/* Scrollbar Hiding Helper */
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -190,7 +179,7 @@ body, html {
     scrollbar-width: none;
 }
 
-/* Reusable Spinner Loader */
+/* Spinner Loader */
 .loader-container {
     min-height: calc(100vh - 250px);
     display: flex;
@@ -213,9 +202,9 @@ body, html {
     100% { transform: rotate(360deg); }
 }
 
-/* Fallback Error Box Styling */
+/* Error Box Styling */
 .error-box {
-    padding: 80px 20px;
+    padding: 60px 20px;
     text-align: center;
     color: var(--text-primary);
     background-color: var(--bg-card);
@@ -229,10 +218,4 @@ body, html {
     color: #f87171;
     margin-bottom: 8px;
     font-size: 1.1rem;
-    letter-spacing: 1px;
-}
-
-.error-box p {
-    color: var(--text-muted);
-    font-size: 0.85rem;
 }
