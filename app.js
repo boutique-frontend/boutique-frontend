@@ -28,32 +28,38 @@ export const App = {
             switch (route) {
                 case 'home':
                     module = await import('./pages/home/home.js?v=1');
+                    window.HomePage = module.HomePage;
                     contentContainer.innerHTML = await module.HomePage.render();
                     if (module.HomePage.init) module.HomePage.init();
                     break;
                 case 'shop':
                     module = await import('./pages/shop/shop.js?v=1');
+                    window.ShopPage = module.ShopPage;
                     contentContainer.innerHTML = await module.ShopPage.render();
                     if (module.ShopPage.init) module.ShopPage.init();
                     break;
                 case 'post':
                     module = await import('./pages/post/post.js?v=1');
+                    // Explicitly bind PostPage globally when imported
+                    window.PostPage = module.PostPage;
                     contentContainer.innerHTML = await module.PostPage.render();
-                    // CRITICAL FIX: Initialize event listeners (form submit, image upload, size chips)
                     if (module.PostPage.init) module.PostPage.init();
                     break;
                 case 'about':
                     module = await import('./pages/about/about.js?v=1');
+                    window.AboutPage = module.AboutPage;
                     contentContainer.innerHTML = await module.AboutPage.render();
                     if (module.AboutPage.init) module.AboutPage.init();
                     break;
                 case 'contact':
                     module = await import('./pages/contact/contact.js?v=1');
+                    window.ContactPage = module.ContactPage;
                     contentContainer.innerHTML = await module.ContactPage.render();
                     if (module.ContactPage.init) module.ContactPage.init();
                     break;
                 default:
                     module = await import('./pages/home/home.js?v=1');
+                    window.HomePage = module.HomePage;
                     contentContainer.innerHTML = await module.HomePage.render();
                     if (module.HomePage.init) module.HomePage.init();
                     break;
