@@ -1,7 +1,7 @@
 <div class="shop-page">
     <!-- Header with Title & Cart -->
     <header class="shop-header">
-        <h1 class="shop-title">Shop</h1>
+        <h1 class="shop-title">SHOP</h1>
         <div class="cart-icon-wrapper">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.8">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
@@ -28,21 +28,23 @@
         </button>
     </div>
 
-    <!-- Category Pills Navigation -->
+    <!-- Category Pills Navigation (Expanded for Pakistani Market) -->
     <div class="category-pills-scroll">
         <button class="pill-btn active" data-category="all">All</button>
         <button class="pill-btn" data-category="unstitched">Unstitched Suits</button>
         <button class="pill-btn" data-category="kurtis">Kurtis</button>
         <button class="pill-btn" data-category="abayas">Abayas</button>
         <button class="pill-btn" data-category="shawls">Shawls</button>
+        <button class="pill-btn" data-category="formals">Formals</button>
+        <button class="pill-btn" data-category="maxi">Maxis</button>
+        <button class="pill-btn" data-category="dupattas">Dupattas</button>
     </div>
 
-    <!-- Main Container: Switches between Category View and Product Grid View -->
+    <!-- Main Container: Dynamically renders Landing View or 2-Column Product Grid -->
     <div id="shop-feed" class="shop-feed-container">
         <div class="loader-container" style="min-height: calc(100vh - 250px); display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <div class="spinner"></div>
             <p class="loading-title" style="color: #d4af37; margin-top: 12px; font-size: 0.9rem;">Curating Catalog...</p>
         </div>
     </div>
-    </div>
-                
+</div>
