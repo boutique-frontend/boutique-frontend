@@ -40,7 +40,6 @@ export const App = {
                     break;
                 case 'post':
                     module = await import('./pages/post/post.js?v=1');
-                    // Explicitly bind PostPage globally when imported
                     window.PostPage = module.PostPage;
                     contentContainer.innerHTML = await module.PostPage.render();
                     if (module.PostPage.init) module.PostPage.init();
