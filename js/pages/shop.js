@@ -17,9 +17,9 @@ export const ShopPage = {
 
         return `
             <div id="shop-feed" class="shop-feed-container">
-                <div class="loader-container">
+                <div class="loader-container" style="min-height: calc(100vh - 130px); display: flex; flex-direction: column; align-items: center; justify-content: center;">
                     <div class="spinner"></div>
-                    <p class="loading-title">Curating Catalog...</p>
+                    <p class="loading-title" style="color: #d4af37; margin-top: 12px; font-size: 0.9rem;">Curating Catalog...</p>
                 </div>
             </div>
         `;
@@ -31,7 +31,12 @@ export const ShopPage = {
                 ...post,
                 image: post.image_url || post.image
             };
-            return PostCardComponent.render(itemData);
+            
+            return `
+                <div class="shop-feed-item">
+                    ${PostCardComponent.render(itemData)}
+                </div>
+            `;
         }).join('');
     },
 
@@ -50,17 +55,24 @@ export const ShopPage = {
             this.cachedPosts = posts;
 
             if (!posts || posts.length === 0) {
-                feedContainer.innerHTML = `<p class="empty-msg">No products available in shop.</p>`;
+                feedContainer.innerHTML = `
+                    <div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
+                        <p class="empty-msg" style="color:#888888; font-size:0.9rem;">No products available in shop.</p>
+                    </div>
+                `;
                 return;
             }
 
             feedContainer.innerHTML = this.renderFeedHtml(posts);
         } catch (error) {
             console.error("Error fetching items:", error);
-            feedContainer.innerHTML = `<p class="error-msg">Failed to load shop products.</p>`;
+            feedContainer.innerHTML = `
+                <div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
+                    <p class="error-msg" style="color:#f87171; font-size:0.9rem;">Failed to load shop products.</p>
+                </div>
+            `;
         }
     }
 };
 
 window.ShopPage = ShopPage;
-      
