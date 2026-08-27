@@ -23,7 +23,6 @@ export const App = {
 
         try {
             let module;
-            // Clean section route extraction
             const route = hash.split('/')[0];
 
             switch (route) {
@@ -40,14 +39,18 @@ export const App = {
                 case 'post':
                     module = await import('./pages/post/post.js?v=1');
                     contentContainer.innerHTML = await module.PostPage.render();
+                    // CRITICAL FIX: Initialize event listeners (form submit, image upload, size chips)
+                    if (module.PostPage.init) module.PostPage.init();
                     break;
                 case 'about':
                     module = await import('./pages/about/about.js?v=1');
                     contentContainer.innerHTML = await module.AboutPage.render();
+                    if (module.AboutPage.init) module.AboutPage.init();
                     break;
                 case 'contact':
                     module = await import('./pages/contact/contact.js?v=1');
                     contentContainer.innerHTML = await module.ContactPage.render();
+                    if (module.ContactPage.init) module.ContactPage.init();
                     break;
                 default:
                     module = await import('./pages/home/home.js?v=1');
