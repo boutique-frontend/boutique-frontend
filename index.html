@@ -2,42 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAnA Boutique</title>
 
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Modular CSS Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/shop.css">
-    <link rel="stylesheet" href="css/post.css">
-    <link rel="stylesheet" href="css/contact.css">
+    <!-- Global Layout Styles -->
+    <link rel="stylesheet" href="./js/components/navbar.css">
+    
+    <!-- Page Module Stylesheets -->
+    <link rel="stylesheet" href="./pages/home/home.css">
+    <link rel="stylesheet" href="./pages/shop/shop.css">
+    <link rel="stylesheet" href="./pages/post/post.css">
+    <link rel="stylesheet" href="./pages/contact/contact.css">
+    <link rel="stylesheet" href="./pages/about/about.css">
+
+    <style>
+        /* Essential base resets to keep luxury dark background rendering */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #06080c;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Top Translucent Header -->
-    <header class="header">
-        <button class="header-action-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-        <h1 class="brand-title">S A N A<span>BOUTIQUE</span></h1>
-        <button class="header-action-btn cart-icon-wrapper" aria-label="Cart">
-            <i class="fa-solid fa-bag-shopping"></i>
-        </button>
-    </header>
+    <div id="app"></div>
 
-    <!-- Dynamic Page View Mount -->
-    <main id="app-content"></main>
+    <!-- Main Entry Module -->
+    <script type="module" src="./app.js"></script>
 
-    <!-- Floating Navigation Bar Mount -->
-    <div id="navbar-container"></div>
-
-    <!-- Fullscreen Lightbox Target -->
-    <div id="image-viewer-container"></div>
-
-    <!-- Central App Controller Module -->
-    <script type="module" src="js/app.js"></script>
 </body>
 </html>
