@@ -1,4 +1,7 @@
-const HomePage = {
+import { PostCardComponent } from '../components/postCard.js';
+import { CONFIG } from '../config.js';
+
+export const HomePage = {
     // Memory cache for fetched posts
     cachedPosts: null,
 
@@ -45,7 +48,7 @@ const HomePage = {
             return;
         }
 
-        // Timer for Render sleep state message
+        // Timer for server cold-start response message
         const wakeUpTimer = setTimeout(() => {
             const titleEl = document.getElementById('loadingTitle');
             const subTitleEl = document.getElementById('loadingSubtitle');
