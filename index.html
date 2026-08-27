@@ -4,63 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SAnA Boutique</title>
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Top Luxury Header -->
     <header class="header">
-        <button class="header-action-btn" aria-label="Open Menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        
-        <h1 class="brand-title">
-            S A N A
-            <span>BOUTIQUE</span>
-        </h1>
-        
-        <button class="header-action-btn cart-icon-wrapper" aria-label="Shopping Cart">
+        <button class="header-action-btn"><i class="fa-solid fa-bars"></i></button>
+        <h1 class="brand-title">S A N A<span>BOUTIQUE</span></h1>
+        <button class="header-action-btn cart-icon-wrapper">
             <i class="fa-solid fa-bag-shopping"></i>
-            <span class="cart-badge">2</span>
         </button>
     </header>
 
-    <!-- App Dynamic Viewport Container -->
-    <main id="app-content">
-        <!-- Views will load here (e.g., Home Page View) -->
-    </main>
+    <!-- Main Viewport Mount Point -->
+    <main id="app-content"></main>
 
-    <!-- Floating Bottom Navigation -->
-    <div class="navbar-wrapper">
-        <nav class="navbar">
-            <a href="#home" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
-                <span>Home</span>
-            </a>
-            <a href="#shop" class="nav-item">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span>Shop</span>
-            </a>
-            <a href="#add" class="add-btn" aria-label="Add Item">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-            <a href="#about" class="nav-item">
-                <i class="fa-solid fa-user"></i>
-                <span>About</span>
-            </a>
-            <a href="#contact" class="nav-item">
-                <i class="fa-solid fa-phone"></i>
-                <span>Contact</span>
-            </a>
-        </nav>
-    </div>
+    <!-- Bottom Floating Navbar Mount Point -->
+    <div id="navbar-container"></div>
 
+    <!-- Global Application Scripts (Loaded in explicit order) -->
+    <script src="js/config.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/components/imageViewer.js"></script>
+    <script src="js/components/postCard.js"></script>
+    <script src="js/components/navbar.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/contact.js"></script>
+    <script src="js/pages/post.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
