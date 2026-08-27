@@ -3,7 +3,7 @@
     width: 100%;
     overflow-y: auto;
     padding: 76px 16px 90px 16px; /* 76px top clears fixed header cleanly */
-    background-color: #080d1a; /* Deep dark blue background */
+    background-color: #06080c; /* Deep luxury dark base */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
 /* Sticky Header & Avatar Container */
 .contact-header {
     position: sticky;
-    top: -20px; /* Sticks neatly near the top header */
+    top: -20px;
     z-index: 20;
     display: flex;
     flex-direction: column;
@@ -23,19 +23,19 @@
     margin-bottom: 16px;
     width: 100%;
     max-width: 420px;
-    background: rgba(8, 13, 26, 0.92); /* Matches page background with blur */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(6, 8, 12, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .profile-avatar-wrapper {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
-    margin-bottom: 10px;
+    padding: 3px;
+    background: linear-gradient(135deg, #f3e0aa 0%, #d4af37 50%, #997409 100%);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+    margin-bottom: 12px;
 }
 
 .profile-avatar-img {
@@ -43,32 +43,36 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #121a2d;
+    background-color: #0f141c;
 }
 
 .profile-title {
-    font-size: 1.5rem;
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 1.4rem;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     margin-bottom: 2px;
 }
 
 .profile-subtitle {
-    font-size: 0.85rem;
-    color: #00d2ff;
+    font-size: 0.8rem;
+    color: #d4af37;
     font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 8px;
 }
 
 .profile-bio {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: #8c9ba5;
     line-height: 1.4;
     max-width: 340px;
 }
 
-/* Link Cards Container (Scrolls under the header) */
+/* Link Cards Container */
 .cards-list {
     width: 100%;
     max-width: 420px;
@@ -82,50 +86,54 @@
 .link-card {
     display: flex;
     align-items: center;
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 18px;
+    background-color: #0f141c;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 16px;
     padding: 14px 16px;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .link-card:active {
     transform: scale(0.98);
-    background-color: #1e293b;
+    border-color: #d4af37;
+    background-color: #151d29;
 }
 
-/* Custom Colored Badge Icons */
+/* Gold Accented Badge Icons */
 .badge-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     flex-shrink: 0;
 }
 
 .badge-email {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-    box-shadow: 0 4px 12px rgba(255, 65, 108, 0.3);
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #d4af37;
 }
 
 .badge-whatsapp {
-    background: linear-gradient(135deg, #11998e, #38ef7d);
-    box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
+    background: rgba(37, 211, 102, 0.12);
+    border: 1px solid rgba(37, 211, 102, 0.3);
+    color: #25d366;
 }
 
 .badge-tiktok {
-    background: #000000;
-    border: 1px solid #333333;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 .badge-phone {
-    background: linear-gradient(135deg, #ff9900, #ff5500);
-    box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #d4af37;
 }
 
 /* Card Text Details */
@@ -137,29 +145,30 @@
 }
 
 .card-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .card-value {
-    font-size: 0.8rem;
-    color: #94a3b8;
+    font-size: 0.78rem;
+    color: #8c9ba5;
     margin-top: 2px;
 }
 
 .chevron-arrow {
-    font-size: 1.6rem;
-    color: #38bdf8;
+    font-size: 1.4rem;
+    color: #d4af37;
     font-weight: 300;
     margin-left: 8px;
 }
 
-/* Embedded Google Map Section */
+/* Embedded Map Section */
 .map-card-wrapper {
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 18px;
+    background-color: #0f141c;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 16px;
     padding: 16px;
     margin-top: 6px;
 }
@@ -167,13 +176,14 @@
 .map-header {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .map-container {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
 }
 
@@ -186,11 +196,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(6, 8, 12, 0.88);
     backdrop-filter: blur(4px);
-    padding: 8px;
+    padding: 10px;
     text-align: center;
-    color: #38bdf8;
+    color: #d4af37;
     font-size: 0.75rem;
     font-weight: 700;
+    letter-spacing: 0.5px;
 }
