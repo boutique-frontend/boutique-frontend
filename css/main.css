@@ -5,30 +5,26 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Force dark background on root html & body */
 html, body {
-    height: 100dvh; 
+    height: 100%;
     width: 100%;
-    background-color: #06080c; /* Deep luxury dark base */
+    background-color: #06080c !important;
     color: #ffffff;
     overflow: hidden;
-    display: flex;
-    flex-direction: column; 
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-/* Global Image Reset */
-img {
-    max-width: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-/* Top Luxury Header Container */
+/* Header Fix */
 .header {
-    flex: 0 0 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 60px;
-    background: rgba(6, 8, 12, 0.85);
+    background: rgba(6, 8, 12, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
@@ -52,26 +48,28 @@ img {
     text-align: center;
 }
 
-/* Scrollable Main Viewport Container */
+/* Viewport Content Container Fix */
 #app-content {
-    flex: 1 1 auto; 
-    position: relative;
+    position: absolute;
+    top: 60px;
+    bottom: 68px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #06080c; /* Fixes white screen wipe */
     overflow-y: auto;
     overflow-x: hidden;
-    width: 100%;
     -webkit-overflow-scrolling: touch;
-    /* Bottom padding prevents floating navbar from covering bottom content */
-    padding-bottom: 80px; 
 }
 
-/* Bottom Floating Navbar Mounting Container */
+/* Floating Bottom Navbar Mounting Fix */
 #navbar-container {
-    flex: 0 0 auto; 
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    height: 68px;
     z-index: 1000;
     background: transparent;
-    pointer-events: none; /* Allows underlying clicks outside navbar wrapper */
+    pointer-events: none;
 }
