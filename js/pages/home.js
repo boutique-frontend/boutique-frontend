@@ -1,86 +1,56 @@
-import { PostCardComponent } from '../components/postCard.js';
 import { CONFIG } from '../config.js';
 
 export const HomePage = {
-    // Memory cache for fetched posts
-    cachedPosts: null,
-
     render() {
-        setTimeout(() => this.loadPosts(), 0);
-
-        // Instant render if cached posts exist
-        if (this.cachedPosts && this.cachedPosts.length > 0) {
-            return `
-                <div id="product-feed" class="product-feed">
-                    ${this.renderFeedHtml(this.cachedPosts)}
-                </div>
-            `;
-        }
-
         return `
-            <div id="product-feed" class="product-feed">
-                <div class="loader-container" id="loaderContainer">
-                    <div class="spinner"></div>
-                    <p class="loading-title" id="loadingTitle">Curating SAnA Collection...</p>
-                    <p class="loading-subtitle" id="loadingSubtitle">Fetching the latest luxury outfits</p>
-                </div>
+            <div class="home-landing-page">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <span class="sub-tagline">Style • Elegance • You</span>
+                        <h1 class="hero-title">ELEGANCE IN EVERY THREAD</h1>
+                        <p class="hero-subtitle">Premium Women's Fashion & Couture</p>
+                        
+                        <div class="hero-cta-buttons">
+                            <a href="#shop" onclick="App.navigate('shop')" class="btn-primary">
+                                <i class="fa-solid fa-bag-shopping"></i> SHOP NOW
+                            </a>
+                            <a href="#about" onclick="App.navigate('about')" class="btn-outline">
+                                <i class="fa-solid fa-sparkles"></i> EXPLORE COLLECTION
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Collections Section -->
+                <section class="collections-section">
+                    <h2 class="section-title"><span>✦</span> OUR COLLECTIONS <span>✦</span></h2>
+                    <div class="collections-grid">
+                        <div class="collection-card" onclick="App.navigate('shop')">
+                            <div class="icon-box"><i class="fa-solid fa-shirt"></i></div>
+                            <h3>UNSTITCHED SUITS</h3>
+                            <span>View All</span>
+                        </div>
+                        <div class="collection-card" onclick="App.navigate('shop')">
+                            <div class="icon-box"><i class="fa-solid fa-user-ninja"></i></div>
+                            <h3>READY TO WEAR</h3>
+                            <span>View All</span>
+                        </div>
+                        <div class="collection-card" onclick="App.navigate('shop')">
+                            <div class="icon-box"><i class="fa-solid fa-vest"></i></div>
+                            <h3>ABAYAS</h3>
+                            <span>View All</span>
+                        </div>
+                        <div class="collection-card" onclick="App.navigate('shop')">
+                            <div class="icon-box"><i class="fa-solid fa-ribbon"></i></div>
+                            <h3>SHAWLS</h3>
+                            <span>View All</span>
+                        </div>
+                    </div>
+                </section>
             </div>
         `;
-    },
-
-    renderFeedHtml(posts) {
-        return posts.map(post => {
-            const itemData = {
-                ...post,
-                image: post.image_url || post.image
-            };
-            return PostCardComponent.render(itemData);
-        }).join('');
-    },
-
-    async loadPosts(forceRefresh = false) {
-        const feedContainer = document.getElementById('product-feed');
-        if (!feedContainer) return;
-
-        // Skip network request if cached data exists and forceRefresh is false
-        if (this.cachedPosts && !forceRefresh) {
-            feedContainer.innerHTML = this.renderFeedHtml(this.cachedPosts);
-            return;
-        }
-
-        // Timer for server cold-start response message
-        const wakeUpTimer = setTimeout(() => {
-            const titleEl = document.getElementById('loadingTitle');
-            const subTitleEl = document.getElementById('loadingSubtitle');
-            if (titleEl && subTitleEl) {
-                titleEl.innerText = "Waking up boutique server...";
-                subTitleEl.innerText = "Please hold tight, preparing your catalog ✨";
-            }
-        }, 4000);
-
-        try {
-            const response = await fetch(CONFIG.API_URL);
-            clearTimeout(wakeUpTimer);
-
-            const posts = await response.json();
-            
-            // Save to memory cache
-            this.cachedPosts = posts;
-
-            if (!posts || posts.length === 0) {
-                feedContainer.innerHTML = `<p class="empty-msg">No products uploaded yet.</p>`;
-                return;
-            }
-
-            feedContainer.innerHTML = this.renderFeedHtml(posts);
-        } catch (error) {
-            clearTimeout(wakeUpTimer);
-            console.error("Error fetching items:", error);
-            feedContainer.innerHTML = `
-                <div class="loader-container">
-                    <p class="error-msg">Unable to connect. Tap home to reload.</p>
-                </div>
-            `;
-        }
     }
 };
+
+window.HomePage = HomePage;
