@@ -16,10 +16,17 @@ export const PostPage = {
         }
     },
 
-    // Attach event listeners after HTML is inserted into the DOM
     init() {
         const fileInput = document.getElementById('postImage');
-        if (fileInput) {
+        const uploadArea = document.getElementById('uploadArea');
+
+        // Trigger hidden file input click when clicking upload area
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener('click', (e) => {
+                if (e.target.id !== 'removeImgBtn') {
+                    fileInput.click();
+                }
+            });
             fileInput.addEventListener('change', (e) => this.handleImageSelect(e));
         }
 
@@ -30,7 +37,8 @@ export const PostPage = {
 
         const sizeChips = document.querySelectorAll('.size-chip');
         sizeChips.forEach(chip => {
-            chip.addEventListener('click', () => {
+            chip.addEventListener('click', (e) => {
+                e.preventDefault();
                 const size = chip.getAttribute('data-size');
                 this.toggleSize(size, chip);
             });
@@ -94,7 +102,7 @@ export const PostPage = {
         const submitBtn = document.getElementById('submitBtn');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerText = "Publishing to Supabase...";
+            submitBtn.innerText = "Publishing to SAnA...";
         }
 
         const imageFile = document.getElementById('postImage').files[0];
@@ -108,7 +116,7 @@ export const PostPage = {
             return;
         }
 
-        // Build FormData to match Flask request.files and request.form requirements
+        // Create Multi-part FormData for Flask backend
         const formData = new FormData();
         formData.append('image', imageFile);
         formData.append('title', document.getElementById('postTitle').value);
@@ -118,7 +126,6 @@ export const PostPage = {
         formData.append('description', document.getElementById('postDescription').value || '');
 
         try {
-            // Send multi-part payload to Flask endpoint (do not manually set Content-Type header)
             const response = await fetch(CONFIG.API_URL, {
                 method: 'POST',
                 body: formData
