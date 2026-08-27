@@ -1,4 +1,6 @@
-const ContactPage = {
+import { CONFIG } from '../config.js';
+
+export const ContactPage = {
     render() {
         return `
             <div class="contact-page">
