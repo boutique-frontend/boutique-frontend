@@ -13,7 +13,7 @@ export const App = {
 
     renderNavbar(activeTab = 'home') {
         const navbarContainer = document.getElementById('navbar-container');
-        if (navbarContainer && typeof NavbarComponent !== 'undefined') {
+        if (navbarContainer && NavbarComponent) {
             navbarContainer.innerHTML = NavbarComponent.render(activeTab);
         }
     },
@@ -31,21 +31,17 @@ export const App = {
         const container = document.getElementById('app-content');
         if (!container) return;
 
-        // Reset scroll position on container on page change
         container.scrollTop = 0;
         window.scrollTo(0, 0);
 
-        // Sync active nav item
         this.renderNavbar(page);
 
         if (page === 'home' || page === 'shop') {
             container.innerHTML = HomePage.render();
-        } else if (page === 'contact') {
+        } else if (page === 'contact' || page === 'about') {
             container.innerHTML = ContactPage.render();
         } else if (page === 'post') {
             container.innerHTML = PostPage.render();
-        } else if (page === 'about') {
-            container.innerHTML = ContactPage.render(); // Maps about tab to Contact/About view
         } else {
             container.innerHTML = HomePage.render();
         }
@@ -61,7 +57,6 @@ export const App = {
     }
 };
 
-// Expose to window scope for global routing access
 window.App = App;
 
 document.addEventListener('DOMContentLoaded', () => App.init());
