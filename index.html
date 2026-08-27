@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Prevents browser status bar white flashes on mobile dark mode -->
-    <meta name="theme-color" content="#0d0d0d">
+    <meta name="theme-color" content="#050505">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SAnA Boutique</title>
     
@@ -16,8 +15,19 @@
 </head>
 <body>
 
-    <header class="header">
-        <h1 class="brand-title">SAnA <span>BOUTIQUE</span></h1>
+    <header class="luxury-header">
+        <button class="icon-btn menu-btn" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="brand-container">
+            <h1 class="brand-title">SAnA</h1>
+            <span class="brand-subtitle">BOUTIQUE</span>
+            <div class="divider-ornament">❖</div>
+        </div>
+        <button class="icon-btn cart-btn" aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-badge">2</span>
+        </button>
     </header>
 
     <main id="app-content">
