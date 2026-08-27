@@ -1,21 +1,54 @@
 <div class="home-page">
+    <!-- Top Luxury Header Bar -->
+    <header class="home-brand-header">
+        <button class="nav-menu-btn" aria-label="Open Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="brand-logo-wrapper">
+            <span class="brand-logo-title">SANA</span>
+            <span class="brand-logo-subtitle">BOUTIQUE</span>
+            <div class="brand-logo-divider">❖</div>
+        </div>
+        <button class="nav-cart-btn" aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-badge">2</span>
+        </button>
+    </header>
+
     <!-- Hero Banner Section -->
     <section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <span class="hero-tagline">Style • Elegance • You</span>
-            <h1 class="hero-title">Elegance in Every Thread</h1>
-            <p class="hero-subtitle">Premium Women's Fashion & Couture</p>
+            <h1 class="hero-title">ELEGANCE<br>IN EVERY<br>THREAD</h1>
+            <div class="hero-gold-ornament">❖</div>
+            <p class="hero-subtitle">Premium Women's<br>Fashion & Couture</p>
+            
             <div class="hero-actions">
-                <a href="#shop" class="btn-gold-primary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                    Shop Now
-                </a>
-                <a href="#shop" class="btn-gold-outline">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    Explore Collection
-                </a>
+                <button id="heroShopNowBtn" class="btn-gold-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    SHOP NOW
+                </button>
+                <button id="heroExploreBtn" class="btn-gold-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    EXPLORE COLLECTION
+                </button>
             </div>
+            
             <div class="hero-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
@@ -28,85 +61,72 @@
     <section class="collections-section">
         <div class="section-header">
             <span class="ornament">☙</span>
-            <h2 class="section-title">Our Collections</h2>
+            <h2 class="section-title">OUR COLLECTIONS</h2>
             <span class="ornament">❧</span>
         </div>
+        
         <div class="collections-grid">
-            <a href="#shop" class="category-card">
+            <div class="collection-card" data-cat="unstitched">
                 <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=400&auto=format&fit=crop" alt="Unstitched Suits">
-                <div class="category-card-overlay"></div>
-                <div class="category-icon-wrapper">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+                <div class="collection-card-overlay"></div>
+                <div class="collection-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <path d="M3 9h18"></path>
+                    </svg>
                 </div>
-                <span class="category-card-title">Unstitched Suits</span>
-                <span class="category-card-link">View All</span>
-            </a>
-            <a href="#shop" class="category-card">
+                <span class="collection-card-title">UNSTITCHED SUITS</span>
+                <span class="collection-card-link">View All</span>
+            </div>
+
+            <div class="collection-card" data-cat="kurtis">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=400&auto=format&fit=crop" alt="Ready to Wear Kurtis">
-                <div class="category-card-overlay"></div>
-                <div class="category-icon-wrapper">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"></path></svg>
+                <div class="collection-card-overlay"></div>
+                <div class="collection-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"></path>
+                    </svg>
                 </div>
-                <span class="category-card-title">Ready To Wear Kurtis</span>
-                <span class="category-card-link">View All</span>
-            </a>
-            <a href="#shop" class="category-card">
+                <span class="collection-card-title">READY TO WEAR KURTIS</span>
+                <span class="collection-card-link">View All</span>
+            </div>
+
+            <div class="collection-card" data-cat="abayas">
                 <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=400&auto=format&fit=crop" alt="Abayas">
-                <div class="category-card-overlay"></div>
-                <div class="category-icon-wrapper">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 0-4 4v16h8V6a4 4 0 0 0-4-4z"></path></svg>
+                <div class="collection-card-overlay"></div>
+                <div class="collection-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2a4 4 0 0 0-4 4v16h8V6a4 4 0 0 0-4-4z"></path>
+                    </svg>
                 </div>
-                <span class="category-card-title">Abayas</span>
-                <span class="category-card-link">View All</span>
-            </a>
-            <a href="#shop" class="category-card">
+                <span class="collection-card-title">ABAYAS</span>
+                <span class="collection-card-link">View All</span>
+            </div>
+
+            <div class="collection-card" data-cat="shawls">
                 <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=400&auto=format&fit=crop" alt="Shawls">
-                <div class="category-card-overlay"></div>
-                <div class="category-icon-wrapper">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <div class="collection-card-overlay"></div>
+                <div class="collection-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                 </div>
-                <span class="category-card-title">Shawls</span>
-                <span class="category-card-link">View All</span>
-            </a>
+                <span class="collection-card-title">SHAWLS</span>
+                <span class="collection-card-link">View All</span>
+            </div>
         </div>
     </section>
 
     <!-- Featured Products Section -->
     <section class="featured-section">
         <div class="section-header section-header-between">
-            <h2 class="section-title">Featured Products</h2>
+            <h2 class="section-title">FEATURED PRODUCTS</h2>
             <a href="#shop" class="view-all-link">View All &#10095;</a>
         </div>
-        <div class="products-scroll-container">
-            <div class="product-item-card">
-                <div class="product-item-image">
-                    <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=400&auto=format&fit=crop" alt="Royal Black Embroidered Suit">
-                    <button class="wishlist-btn" aria-label="Add to Wishlist">&#9825;</button>
-                </div>
-                <div class="product-item-details">
-                    <span class="product-item-name">Royal Black Embroidered Suit</span>
-                    <span class="product-item-price">Rs. 2,850</span>
-                </div>
-            </div>
-            <div class="product-item-card">
-                <div class="product-item-image">
-                    <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=400&auto=format&fit=crop" alt="Luxury Black Kurti">
-                    <button class="wishlist-btn" aria-label="Add to Wishlist">&#9825;</button>
-                </div>
-                <div class="product-item-details">
-                    <span class="product-item-name">Luxury Black Kurti</span>
-                    <span class="product-item-price">Rs. 2,250</span>
-                </div>
-            </div>
-            <div class="product-item-card">
-                <div class="product-item-image">
-                    <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=400&auto=format&fit=crop" alt="Premium Nida Abaya">
-                    <button class="wishlist-btn" aria-label="Add to Wishlist">&#9825;</button>
-                </div>
-                <div class="product-item-details">
-                    <span class="product-item-name">Premium Nida Abaya</span>
-                    <span class="product-item-price">Rs. 3,150</span>
-                </div>
+        <!-- Dynamic Target ID for backend uploads loaded by home.js -->
+        <div class="products-scroll-container" id="featured-products-container">
+            <div style="padding: 20px; text-align: center; width: 100%; color: #8c9ba5; font-size: 0.85rem;">
+                Loading live products...
             </div>
         </div>
     </section>
