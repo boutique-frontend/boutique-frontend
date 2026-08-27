@@ -184,3 +184,53 @@
 .whatsapp-btn:active {
     transform: scale(0.98);
 }
+
+/* Animated Loader & Sleep State Styling */
+.loader-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    background-color: #000000;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid #25D366;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+
+.loading-subtitle {
+    font-size: 0.85rem;
+    color: #aaaaaa;
+    line-height: 1.4;
+}
+
+.empty-msg, .error-msg {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888888;
+    font-size: 0.95rem;
+    }
+    
