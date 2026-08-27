@@ -9,31 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS Modules -->
+    <!-- Modular CSS Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="css/post.css">
     <link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
 
-    <!-- Top Luxury Header -->
+    <!-- Top Translucent Header -->
     <header class="header">
-        <button class="header-action-btn"><i class="fa-solid fa-bars"></i></button>
+        <button class="header-action-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
         <h1 class="brand-title">S A N A<span>BOUTIQUE</span></h1>
-        <button class="header-action-btn cart-icon-wrapper">
+        <button class="header-action-btn cart-icon-wrapper" aria-label="Cart">
             <i class="fa-solid fa-bag-shopping"></i>
         </button>
     </header>
 
-    <!-- Main Viewport Mount Point -->
+    <!-- Dynamic Page View Mount -->
     <main id="app-content"></main>
 
-    <!-- Bottom Floating Navbar Mount Point -->
+    <!-- Floating Navigation Bar Mount -->
     <div id="navbar-container"></div>
 
-    <!-- Single Module Entry Point -->
+    <!-- Fullscreen Lightbox Target -->
+    <div id="image-viewer-container"></div>
+
+    <!-- Central App Controller Module -->
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
