@@ -8,7 +8,7 @@
 html, body {
     height: 100dvh; 
     width: 100%;
-    background-color: #0d0d0d;
+    background-color: #06080c; /* Deep luxury dark base */
     color: #ffffff;
     overflow: hidden;
     display: flex;
@@ -22,21 +22,28 @@ img {
 }
 
 .header {
-    flex: 0 0 50px; 
-    background-color: #121212;
-    border-bottom: 1px solid #222222;
+    flex: 0 0 60px; /* Matched to updated luxury header height */
+    background: rgba(6, 8, 12, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 16px;
     z-index: 1000;
 }
 
 .header h1 {
-    font-size: 1.2rem;
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 1.15rem;
     letter-spacing: 3px;
-    color: #ffffff;
     text-transform: uppercase;
     font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #d4af37 60%, #aa820a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
 }
 
 #app-content {
@@ -44,12 +51,12 @@ img {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: calc(100dvh - 110px); /* Locks exact height between 50px header and 60px nav */
+    height: calc(100dvh - 128px); /* Height locked between 60px header & 68px floating nav */
 }
 
 #navbar-container {
-    flex: 0 0 60px; 
+    flex: 0 0 68px; 
     position: relative;
     z-index: 1000;
-    background-color: #ffffff; 
+    background: transparent;
 }
