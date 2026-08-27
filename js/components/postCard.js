@@ -13,51 +13,42 @@ export const PostCardComponent = {
             : '#';
 
         return `
-            <div class="product-card" id="card-${item.id}">
-                <img src="${imageSrc}" alt="${item.title}" onclick="ImageViewerComponent.open('${imageSrc}')">
-                
-                <!-- Floating Action Button -->
-                <button class="fab-menu-btn" onclick="PostCardComponent.toggleMenu(${item.id}, event)">
-                    ⋮
-                </button>
-
-                <!-- Action Menu Popup -->
-                <div class="card-action-menu" id="menu-${item.id}">
-                    <a href="${waLink}" target="_blank" class="menu-item wa-item">
-                        <span>💬 Order on WhatsApp</span>
-                    </a>
-                    <button class="menu-item share-item" onclick="PostCardComponent.shareItem('${item.title}', ${item.id})">
-                        <span>🔗 Share Item</span>
-                    </button>
-                    <button class="menu-item delete-item" onclick="PostCardComponent.deletePost(${item.id})">
-                        <span>🗑 Delete Post</span>
-                    </button>
+            <div class="post-card" id="card-${item.id}">
+                <!-- Media Container (Prevents Extreme Zooming) -->
+                <div class="post-media-wrapper" onclick="ImageViewerComponent.open('${imageSrc}')">
+                    <img src="${imageSrc}" alt="${item.title || 'Product Image'}">
                 </div>
 
-                <div class="product-overlay">
-                    <span class="category-tag">${item.category || 'Collection'}</span>
-                    <h2 class="product-title">${item.title}</h2>
-                    ${item.description ? `<p class="product-description">${item.description}</p>` : ''}
-                    ${item.sizes ? `<span class="product-sizes">Sizes: ${item.sizes}</span>` : ''}
-                    <div class="product-price">${formattedPrice}</div>
+                <!-- Gradient Overlay for Contrast -->
+                <div class="post-overlay"></div>
+
+                <!-- Product Details & Action Controls -->
+                <div class="post-content">
+                    <span class="post-category-tag">${item.category || 'Unstitched'}</span>
                     
-                    <a href="${waLink}" target="_blank" class="whatsapp-btn">
-                        Order on WhatsApp
-                    </a>
+                    ${item.title ? `<h2 class="post-description" style="font-weight:700;">${item.title}</h2>` : ''}
+                    ${item.description ? `<p class="post-description">${item.description}</p>` : ''}
+                    
+                    <div class="post-meta-info">
+                        ${item.sizes ? `<span class="post-size-badge">Sizes: ${item.sizes}</span>` : ''}
+                        <span class="post-price-tag">${formattedPrice}</span>
+                    </div>
+
+                    <!-- Clean Horizontal Action Bar -->
+                    <div class="post-actions-bar">
+                        <a href="${waLink}" target="_blank" class="btn-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                        <button class="btn-action-light" onclick="PostCardComponent.shareItem('${item.title || 'Product'}', ${item.id})">
+                            <i class="fa-solid fa-link"></i> Share
+                        </button>
+                        <button class="btn-action-danger" onclick="PostCardComponent.deletePost(${item.id})">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
-    },
-
-    toggleMenu(id, event) {
-        if (event) event.stopPropagation();
-        const activeMenu = document.getElementById(`menu-${id}`);
-        document.querySelectorAll('.card-action-menu').forEach(menu => {
-            if (menu !== activeMenu) menu.classList.remove('active');
-        });
-        if (activeMenu) {
-            activeMenu.classList.toggle('active');
-        }
     },
 
     shareItem(title, id) {
@@ -71,7 +62,6 @@ export const PostCardComponent = {
             navigator.clipboard.writeText(window.location.href);
             alert("Link copied to clipboard!");
         }
-        document.querySelectorAll('.card-action-menu').forEach(m => m.classList.remove('active'));
     },
 
     async deletePost(id) {
@@ -96,10 +86,6 @@ export const PostCardComponent = {
     }
 };
 
-// Bind to window so inline HTML onclick handlers inside string templates function properly
+// Bind to window so inline HTML onclick handlers function properly
 window.PostCardComponent = PostCardComponent;
-
-// Close popup menu when tapping anywhere else on screen
-document.addEventListener('click', () => {
-    document.querySelectorAll('.card-action-menu').forEach(menu => menu.classList.remove('active'));
-});
+                                         
