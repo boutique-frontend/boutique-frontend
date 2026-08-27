@@ -4,13 +4,12 @@
         <p>Add an outfit to SAnA Boutique catalog</p>
     </div>
 
-    <form id="createPostForm" onsubmit="PostPage.handleSubmit(event)">
-        
+    <form id="postForm">
         <!-- Live Image Upload & Preview Container -->
         <div class="form-group">
             <label>Product Image</label>
-            <div class="upload-area" id="uploadArea" onclick="document.getElementById('postImage').click()">
-                <input type="file" id="postImage" accept="image/*" required onchange="PostPage.handleImageSelect(event)">
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="postImage" accept="image/*" required>
                 
                 <div class="upload-placeholder" id="uploadPlaceholder">
                     <span class="upload-icon">📷</span>
@@ -20,7 +19,7 @@
 
                 <div class="preview-container" id="previewContainer">
                     <img id="imagePreview" src="" alt="Preview">
-                    <button type="button" class="remove-img-btn" onclick="PostPage.removeImage(event)">✕</button>
+                    <button type="button" class="remove-img-btn" id="removeImgBtn">✕</button>
                 </div>
             </div>
         </div>
@@ -33,11 +32,11 @@
         <div class="form-group">
             <label>Category</label>
             <select id="postCategory" required>
-                <option value="Unstitched">Unstitched</option>
-                <option value="Ready-to-Wear">Ready-to-Wear</option>
-                <option value="Abayas & Hijabs">Abayas & Hijabs</option>
-                <option value="Shawls & Scarves">Shawls & Scarves</option>
-                <option value="Accessories">Accessories</option>
+                <option value="unstitched">Unstitched</option>
+                <option value="kurtis">Ready-to-Wear</option>
+                <option value="abayas">Abayas & Hijabs</option>
+                <option value="shawls">Shawls & Scarves</option>
+                <option value="accessories">Accessories</option>
             </select>
         </div>
 
@@ -50,12 +49,12 @@
         <div class="form-group">
             <label>Available Sizes</label>
             <div class="size-chips-wrapper">
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('XS', this)">XS</button>
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('S', this)">S</button>
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('M', this)">M</button>
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('L', this)">L</button>
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('XL', this)">XL</button>
-                <button type="button" class="size-chip" onclick="PostPage.toggleSize('Free Size', this)">Free Size</button>
+                <button type="button" class="size-chip" data-size="XS">XS</button>
+                <button type="button" class="size-chip" data-size="S">S</button>
+                <button type="button" class="size-chip" data-size="M">M</button>
+                <button type="button" class="size-chip" data-size="L">L</button>
+                <button type="button" class="size-chip" data-size="XL">XL</button>
+                <button type="button" class="size-chip" data-size="Free Size">Free Size</button>
             </div>
             <input type="hidden" id="postSizes">
         </div>
@@ -67,5 +66,4 @@
 
         <button type="submit" id="submitBtn" class="submit-btn">Publish to SAnA</button>
     </form>
-                  </div>
-                  
+</div>
