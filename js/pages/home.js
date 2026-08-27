@@ -1,11 +1,14 @@
 const HomePage = {
     render() {
-        // Automatically fetch posts after container renders to the DOM
         setTimeout(() => this.loadPosts(), 0);
 
         return `
             <div id="product-feed" class="product-feed">
-                <p class="loading-text">Loading catalog...</p>
+                <div class="loader-container" id="loaderContainer">
+                    <div class="spinner"></div>
+                    <p class="loading-title" id="loadingTitle">Curating SAnA Collection...</p>
+                    <p class="loading-subtitle" id="loadingSubtitle">Fetching the latest luxury outfits</p>
+                </div>
             </div>
         `;
     },
@@ -14,8 +17,20 @@ const HomePage = {
         const feedContainer = document.getElementById('product-feed');
         if (!feedContainer) return;
 
+        // Timer to update message if Render is taking time to wake up (cold start)
+        const wakeUpTimer = setTimeout(() => {
+            const titleEl = document.getElementById('loadingTitle');
+            const subTitleEl = document.getElementById('loadingSubtitle');
+            if (titleEl && subTitleEl) {
+                titleEl.innerText = "Waking up boutique server...";
+                subTitleEl.innerText = "Please hold tight, preparing your catalog ✨";
+            }
+        }, 4000);
+
         try {
             const response = await fetch(CONFIG.API_URL);
+            clearTimeout(wakeUpTimer);
+
             const posts = await response.json();
 
             if (!posts || posts.length === 0) {
@@ -23,7 +38,6 @@ const HomePage = {
                 return;
             }
 
-            // Maps backend data into PostCardComponent
             feedContainer.innerHTML = posts.map(post => {
                 const itemData = {
                     ...post,
@@ -32,8 +46,13 @@ const HomePage = {
                 return PostCardComponent.render(itemData);
             }).join('');
         } catch (error) {
+            clearTimeout(wakeUpTimer);
             console.error("Error fetching items:", error);
-            feedContainer.innerHTML = `<p class="error-msg">Failed to load posts. Check your connection.</p>`;
+            feedContainer.innerHTML = `
+                <div class="loader-container">
+                    <p class="error-msg">Unable to connect. Tap home to reload.</p>
+                </div>
+            `;
         }
     }
 };
