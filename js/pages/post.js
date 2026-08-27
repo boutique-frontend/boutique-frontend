@@ -153,6 +153,12 @@ const PostPage = {
             if (response.ok) {
                 alert("Product published successfully!");
                 e.target.reset();
+
+                // Clear memory cache to trigger automatic refresh on Home feed
+                if (typeof HomePage !== 'undefined') {
+                    HomePage.cachedPosts = null;
+                }
+
                 App.navigate('home');
             } else {
                 const errData = await response.json();
@@ -169,4 +175,3 @@ const PostPage = {
         }
     }
 };
-            
