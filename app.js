@@ -23,31 +23,34 @@ export const App = {
 
         try {
             let module;
-            switch (hash) {
+            // Clean section route extraction
+            const route = hash.split('/')[0];
+
+            switch (route) {
                 case 'home':
-                    module = await import('./pages/home/home.js');
+                    module = await import('./pages/home/home.js?v=1');
                     contentContainer.innerHTML = await module.HomePage.render();
                     if (module.HomePage.init) module.HomePage.init();
                     break;
                 case 'shop':
-                    module = await import('./pages/shop/shop.js');
+                    module = await import('./pages/shop/shop.js?v=1');
                     contentContainer.innerHTML = await module.ShopPage.render();
                     if (module.ShopPage.init) module.ShopPage.init();
                     break;
                 case 'post':
-                    module = await import('./pages/post/post.js');
+                    module = await import('./pages/post/post.js?v=1');
                     contentContainer.innerHTML = await module.PostPage.render();
                     break;
                 case 'about':
-                    module = await import('./pages/about/about.js');
+                    module = await import('./pages/about/about.js?v=1');
                     contentContainer.innerHTML = await module.AboutPage.render();
                     break;
                 case 'contact':
-                    module = await import('./pages/contact/contact.js');
+                    module = await import('./pages/contact/contact.js?v=1');
                     contentContainer.innerHTML = await module.ContactPage.render();
                     break;
                 default:
-                    module = await import('./pages/home/home.js');
+                    module = await import('./pages/home/home.js?v=1');
                     contentContainer.innerHTML = await module.HomePage.render();
                     if (module.HomePage.init) module.HomePage.init();
                     break;
