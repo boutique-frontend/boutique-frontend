@@ -166,25 +166,35 @@
 }
 
 /* ==========================================
-   SHOP FEED & POST CARD COMPONENTS (Fix Zoom & Overlay)
+   SHOP FEED & POST CARD COMPONENTS (Anti-Zoom Fix)
    ========================================== */
 
 .shop-feed-container {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 128px);
+    margin-top: 60px;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
-    background-color: #000000;
-    padding-top: 60px;
-    padding-bottom: 70px;
+    background-color: #06080c;
+    -webkit-overflow-scrolling: touch;
+}
+
+.shop-feed-item {
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .post-card {
     position: relative;
     width: 100%;
-    height: calc(100vh - 130px);
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -192,7 +202,7 @@
     overflow: hidden;
 }
 
-/* Product Media & Zoom Fix */
+/* Product Media & Image Aspect Fix */
 .post-media-wrapper {
     position: absolute;
     inset: 0;
@@ -202,13 +212,31 @@
     align-items: center;
     justify-content: center;
     background-color: #06080c;
+    overflow: hidden;
 }
 
 .post-media-wrapper img, 
 .post-media-wrapper video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Prevents awkward extreme zooms */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain !important;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ambient Blur Fill Behind Uncropped Image */
+.post-media-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px) brightness(0.4);
+    transform: scale(1.1);
+    z-index: 1;
 }
 
 /* Dark Gradient Overlay for Readable Text */
@@ -217,17 +245,17 @@
     inset: 0;
     background: linear-gradient(to top, rgba(6, 8, 12, 0.95) 0%, rgba(6, 8, 12, 0.4) 40%, transparent 80%);
     pointer-events: none;
-    z-index: 2;
+    z-index: 3;
 }
 
 /* Details Panel Over Image */
 .post-content {
     position: relative;
-    z-index: 3;
-    padding: 20px 16px;
+    z-index: 4;
+    padding: 20px 16px 24px 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .post-category-tag {
@@ -314,4 +342,5 @@
     border-radius: 8px;
     font-size: 0.78rem;
     cursor: pointer;
-}
+    }
+        
