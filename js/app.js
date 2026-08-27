@@ -7,7 +7,6 @@ import { NavbarComponent } from './components/navbar.js';
 
 export const App = {
     init() {
-        this.renderNavbar('home');
         this.setupRouter();
         this.handleHashChange();
     },
@@ -32,21 +31,31 @@ export const App = {
         const container = document.getElementById('app-content');
         if (!container) return;
 
+        // Reset scroll position on route switch
         container.scrollTop = 0;
         window.scrollTo(0, 0);
 
+        // Update navigation active state
         this.renderNavbar(page);
 
-        if (page === 'home') {
-            container.innerHTML = HomePage.render();
-        } else if (page === 'shop') {
-            container.innerHTML = ShopPage.render();
-        } else if (page === 'contact' || page === 'about') {
-            container.innerHTML = ContactPage.render();
-        } else if (page === 'post') {
-            container.innerHTML = PostPage.render();
-        } else {
-            container.innerHTML = HomePage.render();
+        // Modular view router
+        switch (page) {
+            case 'home':
+                container.innerHTML = HomePage.render();
+                break;
+            case 'shop':
+                container.innerHTML = ShopPage.render();
+                break;
+            case 'contact':
+            case 'about':
+                container.innerHTML = ContactPage.render();
+                break;
+            case 'post':
+                container.innerHTML = PostPage.render();
+                break;
+            default:
+                container.innerHTML = HomePage.render();
+                break;
         }
     },
 
@@ -65,3 +74,4 @@ export const App = {
 window.App = App;
 
 document.addEventListener('DOMContentLoaded', () => App.init());
+        
