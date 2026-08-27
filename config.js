@@ -1,7 +1,9 @@
 export const CONFIG = {
     APP_NAME: "SAnA Boutique",
-    // Replace the URL string below with your exact deployed backend URL (e.g., "https://sana-boutique-api.onrender.com/api/products")
-    API_URL: "https://sana-boutique-api.onrender.com/api/products", 
+    // Ensure the endpoint ends with /api/posts and uses your actual host URL:
+    // For local testing: "http://127.0.0.1:5000/api/posts"
+    // For live server: "https://your-deployed-backend-url.com/api/posts"
+    API_URL: "http://127.0.0.1:5000/api/posts", 
     PROFILE_IMAGE: "./assets/logo.jpg",
     EMAIL: "sanaboutique@gmail.com",
     WHATSAPP_NUMBER: "923001234567",
