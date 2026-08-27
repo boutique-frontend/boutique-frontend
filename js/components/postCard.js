@@ -1,9 +1,13 @@
-const PostCardComponent = {
+import { CONFIG } from '../config.js';
+import { Helpers } from '../utils/helpers.js';
+import { ImageViewerComponent } from './imageViewer.js';
+
+export const PostCardComponent = {
     render(item) {
         const imageSrc = item.image_url || item.image;
         const formattedPrice = typeof Helpers !== 'undefined' && Helpers.formatPrice 
             ? Helpers.formatPrice(item.price) 
-            : `${CONFIG.CURRENCY_SYMBOL} ${item.price}`;
+            : `${CONFIG.CURRENCY_SYMBOL || 'Rs.'} ${item.price}`;
         const waLink = typeof Helpers !== 'undefined' && Helpers.createWhatsAppLink 
             ? Helpers.createWhatsAppLink(item.title, item.price, item.sizes) 
             : '#';
@@ -46,7 +50,7 @@ const PostCardComponent = {
     },
 
     toggleMenu(id, event) {
-        event.stopPropagation();
+        if (event) event.stopPropagation();
         const activeMenu = document.getElementById(`menu-${id}`);
         document.querySelectorAll('.card-action-menu').forEach(menu => {
             if (menu !== activeMenu) menu.classList.remove('active');
@@ -92,8 +96,10 @@ const PostCardComponent = {
     }
 };
 
+// Bind to window so inline HTML onclick handlers inside string templates function properly
+window.PostCardComponent = PostCardComponent;
+
 // Close popup menu when tapping anywhere else on screen
 document.addEventListener('click', () => {
     document.querySelectorAll('.card-action-menu').forEach(menu => menu.classList.remove('active'));
 });
-        
