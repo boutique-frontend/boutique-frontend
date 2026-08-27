@@ -5,19 +5,19 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Force dark background on root html & body */
+/* Force dark luxury background across root elements */
 html, body {
-    height: 100%;
-    width: 100%;
+    height: 100% !important;
+    width: 100% !important;
     background-color: #06080c !important;
     color: #ffffff;
-    overflow: hidden;
+    overflow: hidden !important;
     position: fixed;
     top: 0;
     left: 0;
 }
 
-/* Header Fix */
+/* Base Top Header */
 .header {
     position: fixed;
     top: 0;
@@ -48,28 +48,40 @@ html, body {
     text-align: center;
 }
 
-/* Viewport Content Container Fix */
+/* Universal Content Wrapper (Locks between top header and bottom navbar) */
 #app-content {
-    position: absolute;
-    top: 60px;
-    bottom: 68px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: #06080c; /* Fixes white screen wipe */
-    overflow-y: auto;
-    overflow-x: hidden;
+    position: fixed !important;
+    top: 60px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: calc(100% - 60px) !important;
+    background-color: #06080c !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 90px; /* Provides clearance for floating navbar */
 }
 
-/* Floating Bottom Navbar Mounting Fix */
-#navbar-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 68px;
-    z-index: 1000;
-    background: transparent;
-    pointer-events: none;
+/* Ensure child page views fill the dark container */
+#app-content > div,
+.home-container,
+.contact-page,
+.form-container {
+    background-color: #06080c !important;
+    min-height: 100%;
+}
+
+/* Floating Navigation Wrapper */
+#navbar-container,
+.navbar-wrapper {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 68px !important;
+    z-index: 10000 !important;
+    background: transparent !important;
+    pointer-events: none !important;
 }
