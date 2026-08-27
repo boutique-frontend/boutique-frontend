@@ -1,5 +1,6 @@
 import { CONFIG } from './config.js';
 import { HomePage } from './pages/home.js';
+import { ShopPage } from './pages/shop.js';
 import { ContactPage } from './pages/contact.js';
 import { PostPage } from './pages/post.js';
 import { NavbarComponent } from './components/navbar.js';
@@ -13,7 +14,7 @@ export const App = {
 
     renderNavbar(activeTab = 'home') {
         const navbarContainer = document.getElementById('navbar-container');
-        if (navbarContainer && NavbarComponent) {
+        if (navbarContainer && typeof NavbarComponent !== 'undefined') {
             navbarContainer.innerHTML = NavbarComponent.render(activeTab);
         }
     },
@@ -36,8 +37,10 @@ export const App = {
 
         this.renderNavbar(page);
 
-        if (page === 'home' || page === 'shop') {
+        if (page === 'home') {
             container.innerHTML = HomePage.render();
+        } else if (page === 'shop') {
+            container.innerHTML = ShopPage.render();
         } else if (page === 'contact' || page === 'about') {
             container.innerHTML = ContactPage.render();
         } else if (page === 'post') {
