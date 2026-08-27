@@ -1,55 +1,41 @@
-/* =========================================
-   Custom Gold Buttons (Shop & Explore)
-   ========================================= */
+/* Core Layout & Base Resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Solid Gold Button (e.g. SHOP NOW) */
-.btn-gold-primary {
-    background: linear-gradient(135deg, #e6c670 0%, #c59b27 100%);
-    color: #000000;
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #06080c;
+    color: #ffffff;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    border-radius: 30px;
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
-    transition: transform 0.2s ease;
+    overflow-x: hidden;
 }
 
-.btn-gold-primary:active {
-    transform: scale(0.97);
+#app {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Outlined Gold Button (e.g. EXPLORE COLLECTION) */
-.btn-gold-outline {
-    background: transparent;
-    color: #d4af37;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    border-radius: 30px;
-    border: 1px solid #d4af37;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease;
+#page-content {
+    flex: 1;
+    width: 100%;
+    padding-bottom: 70px; /* Space for fixed bottom navbar */
 }
 
-.btn-gold-outline:active {
-    background: rgba(212, 175, 55, 0.1);
-    transform: scale(0.97);
+/* Fallback Error Styling */
+.error-box {
+    padding: 80px 20px;
+    text-align: center;
+    color: #ffffff;
 }
+
+.error-box h3 {
+    color: #f87171;
+    margin-bottom: 8px;
+}
+Update this main css to match with them
