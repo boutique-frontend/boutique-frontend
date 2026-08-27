@@ -164,3 +164,154 @@
     transform: translateY(-12px) scale(0.94);
     box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
 }
+
+/* ==========================================
+   SHOP FEED & POST CARD COMPONENTS (Fix Zoom & Overlay)
+   ========================================== */
+
+.shop-feed-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    background-color: #000000;
+    padding-top: 60px;
+    padding-bottom: 70px;
+}
+
+.post-card {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 130px);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: #06080c;
+    overflow: hidden;
+}
+
+/* Product Media & Zoom Fix */
+.post-media-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #06080c;
+}
+
+.post-media-wrapper img, 
+.post-media-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Prevents awkward extreme zooms */
+}
+
+/* Dark Gradient Overlay for Readable Text */
+.post-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6, 8, 12, 0.95) 0%, rgba(6, 8, 12, 0.4) 40%, transparent 80%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Details Panel Over Image */
+.post-content {
+    position: relative;
+    z-index: 3;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-category-tag {
+    font-size: 0.75rem;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.post-description {
+    font-size: 0.95rem;
+    color: #ffffff;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.post-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.post-size-badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #cccccc;
+}
+
+.post-price-tag {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #d4af37;
+}
+
+/* Action Button Bar Fix (WhatsApp, Share, Delete) */
+.post-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #25d366;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.btn-action-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.btn-action-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #f87171;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
