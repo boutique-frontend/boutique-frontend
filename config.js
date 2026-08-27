@@ -1,9 +1,7 @@
 export const CONFIG = {
     APP_NAME: "SAnA Boutique",
-    // Ensure the endpoint ends with /api/posts and uses your actual host URL:
-    // For local testing: "http://127.0.0.1:5000/api/posts"
-    // For live server: "https://your-deployed-backend-url.com/api/posts"
-    API_URL: "http://127.0.0.1:5000/api/posts", 
+    // Live Render Flask + Supabase API Endpoint
+    API_URL: "https://boutique-backend-6fcr.onrender.com/api/posts", 
     PROFILE_IMAGE: "./assets/logo.jpg",
     EMAIL: "sanaboutique@gmail.com",
     WHATSAPP_NUMBER: "923001234567",
