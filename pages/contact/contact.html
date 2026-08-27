@@ -1,0 +1,80 @@
+<div class="contact-page">
+    <!-- Glowing Profile Header -->
+    <div class="contact-header">
+        <div class="profile-avatar-wrapper">
+            <img id="profileAvatarImg" src="" alt="SAnA Boutique" class="profile-avatar-img" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=SAnA+Boutique&background=ffd700&color=000000&size=128';">
+        </div>
+        <h2 class="profile-title" id="appNameTitle">SAnA Boutique</h2>
+        <p class="profile-subtitle">Premium Women's Fashion & Couture</p>
+        <p class="profile-bio">
+            Welcome to SAnA! We specialize in exclusive unstitched suits, ready-to-wear luxury kurtis, abayas, and elegant shawls.
+        </p>
+    </div>
+
+    <!-- Action Cards List -->
+    <div class="cards-list">
+        
+        <!-- Email Card -->
+        <a id="emailLink" href="#" class="link-card">
+            <div class="badge-icon badge-email">
+                <span>✉️</span>
+            </div>
+            <div class="card-details">
+                <span class="card-title">Email</span>
+                <span class="card-value" id="emailVal"></span>
+            </div>
+            <span class="chevron-arrow">›</span>
+        </a>
+
+        <!-- WhatsApp Card -->
+        <a id="whatsappLink" href="#" target="_blank" class="link-card">
+            <div class="badge-icon badge-whatsapp">
+                <span>💬</span>
+            </div>
+            <div class="card-details">
+                <span class="card-title">WhatsApp</span>
+                <span class="card-value" id="whatsappVal">Message Us</span>
+            </div>
+            <span class="chevron-arrow">›</span>
+        </a>
+
+        <!-- TikTok Card -->
+        <a id="tiktokLink" href="#" target="_blank" class="link-card">
+            <div class="badge-icon badge-tiktok">
+                <span>🎵</span>
+            </div>
+            <div class="card-details">
+                <span class="card-title">TikTok</span>
+                <span class="card-value" id="tiktokVal"></span>
+            </div>
+            <span class="chevron-arrow">›</span>
+        </a>
+
+        <!-- Phone Card -->
+        <a id="phoneLink" href="#" class="link-card">
+            <div class="badge-icon badge-phone">
+                <span>📞</span>
+            </div>
+            <div class="card-details">
+                <span class="card-title">Contact Number</span>
+                <span class="card-value" id="phoneVal"></span>
+            </div>
+            <span class="chevron-arrow">›</span>
+        </a>
+
+        <!-- Live Google Map Card -->
+        <div class="map-card-wrapper">
+            <div class="map-header">
+                <span class="card-title">Our Location</span>
+                <span class="card-value" id="locationVal"></span>
+            </div>
+            <div class="map-container" id="mapContainer">
+                <iframe id="mapFrame" src="" width="100%" height="160" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="map-overlay">
+                    <span>Tap to open Google Maps 📍</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
