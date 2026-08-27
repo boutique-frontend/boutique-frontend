@@ -49,7 +49,9 @@ export const App = {
 
     handleCreatePost() {
         const pass = prompt("Enter SAnA Admin Passcode:");
-        if (pass === CONFIG.ADMIN_PASSCODE) {
+        const passcode = (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSCODE) ? CONFIG.ADMIN_PASSCODE : "1234";
+        
+        if (pass === passcode) {
             window.location.hash = '#post';
         } else if (pass !== null) {
             alert("Incorrect passcode!");
