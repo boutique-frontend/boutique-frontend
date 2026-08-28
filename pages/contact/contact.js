@@ -11,28 +11,43 @@ export const ContactPage = {
 
             const html = await response.text();
 
-            // Bind configuration after the HTML has been inserted into the page
-            setTimeout(() => this.bindData(), 0);
+            // Wait until the router has inserted the returned HTML
+            // before trying to bind CONFIG data.
+            setTimeout(() => this.bindData(), 50);
 
             return html;
+
         } catch (error) {
             console.error('Error loading contact template:', error);
 
             return `
-                <div class="contact-page-wrapper contact-error-page">
-                    <div class="contact-error-card">
-                        <h2>Unable to Load Contact Page</h2>
-                        <p>Please try again later.</p>
-                    </div>
+                <div class="contact-page-wrapper contact-error">
+                    <p>Failed to load contact information.</p>
                 </div>
             `;
         }
     },
 
     bindData() {
-        /* =====================================================
-           ELEMENTS
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * CONFIG DATA
+         * -----------------------------------------
+         */
+
+        const getConfig = (key, fallback = '') => {
+            return CONFIG[key] !== undefined &&
+                   CONFIG[key] !== null &&
+                   CONFIG[key] !== ''
+                ? CONFIG[key]
+                : fallback;
+        };
+
+        /*
+         * -----------------------------------------
+         * ELEMENTS
+         * -----------------------------------------
+         */
 
         const avatar = document.getElementById('profileAvatarImg');
         const appTitle = document.getElementById('appNameTitle');
@@ -52,158 +67,218 @@ export const ContactPage = {
         const instagramLink = document.getElementById('instagramLink');
         const instagramVal = document.getElementById('instagramVal');
 
-        const locationLink = document.getElementById('locationLink');
         const locationVal = document.getElementById('locationVal');
-
         const mapDirectionsBtn = document.getElementById('mapDirectionsBtn');
         const mapFrame = document.getElementById('mapFrame');
 
-        /* =====================================================
-           APP / PROFILE
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * PROFILE
+         * -----------------------------------------
+         */
 
-        if (avatar && CONFIG.PROFILE_IMAGE) {
-            avatar.src = CONFIG.PROFILE_IMAGE;
+        if (avatar) {
+            const profileImage = getConfig('PROFILE_IMAGE');
+
+            if (profileImage) {
+                avatar.src = profileImage;
+            }
         }
 
         if (appTitle) {
-            appTitle.textContent = CONFIG.APP_NAME || 'SAnA Boutique';
+            appTitle.textContent = getConfig(
+                'APP_NAME',
+                'SAnA Boutique'
+            );
         }
 
-        /* =====================================================
-           EMAIL
-           Uses CONFIG.EMAIL
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * EMAIL
+         * -----------------------------------------
+         */
 
-        if (emailLink && CONFIG.EMAIL) {
-            emailLink.href = `mailto:${CONFIG.EMAIL}`;
+        const email = getConfig('EMAIL');
+
+        if (emailLink) {
+            emailLink.href = email
+                ? `mailto:${email}`
+                : '#';
         }
 
         if (emailVal) {
-            emailVal.textContent = CONFIG.EMAIL || '';
+            emailVal.textContent = email || 'Email unavailable';
         }
 
-        /* =====================================================
-           WHATSAPP
-           Uses CONFIG.WHATSAPP_NUMBER
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * WHATSAPP
+         * -----------------------------------------
+         */
 
-        if (whatsappLink && CONFIG.WHATSAPP_NUMBER) {
-            const cleanWhatsapp = String(CONFIG.WHATSAPP_NUMBER).replace(/\D/g, '');
+        const whatsappNumber = getConfig('WHATSAPP_NUMBER');
 
-            whatsappLink.href = `https://wa.me/${cleanWhatsapp}`;
+        if (whatsappNumber) {
+            const cleanWhatsapp = String(whatsappNumber)
+                .replace(/\D/g, '');
+
+            if (whatsappLink) {
+                whatsappLink.href = `https://wa.me/${cleanWhatsapp}`;
+            }
+
+            if (whatsappVal) {
+                whatsappVal.textContent = `+${cleanWhatsapp}`;
+            }
+        } else {
+            if (whatsappLink) {
+                whatsappLink.href = '#';
+            }
+
+            if (whatsappVal) {
+                whatsappVal.textContent = 'WhatsApp unavailable';
+            }
         }
 
-        if (whatsappVal) {
-            const cleanWhatsapp = String(
-                CONFIG.WHATSAPP_NUMBER || ''
-            ).replace(/\D/g, '');
+        /*
+         * -----------------------------------------
+         * PHONE
+         * -----------------------------------------
+         */
 
-            whatsappVal.textContent = cleanWhatsapp
-                ? `+${cleanWhatsapp}`
-                : '';
-        }
+        const phone = getConfig('PHONE_NUMBER');
 
-        /* =====================================================
-           PHONE
-           Uses CONFIG.PHONE_NUMBER
-           ===================================================== */
-
-        if (phoneLink && CONFIG.PHONE_NUMBER) {
-            const cleanPhone = String(CONFIG.PHONE_NUMBER)
-                .replace(/[^\d+]/g, '');
-
-            phoneLink.href = `tel:${cleanPhone}`;
+        if (phoneLink) {
+            phoneLink.href = phone
+                ? `tel:${String(phone).replace(/\s+/g, '')}`
+                : '#';
         }
 
         if (phoneVal) {
-            phoneVal.textContent = CONFIG.PHONE_NUMBER || '';
+            phoneVal.textContent = phone || 'Phone unavailable';
         }
 
-        /* =====================================================
-           TIKTOK
-           Uses CONFIG.TIKTOK_USERNAME
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * TIKTOK
+         * -----------------------------------------
+         */
 
-        if (tiktokLink && CONFIG.TIKTOK_USERNAME) {
-            const username = String(CONFIG.TIKTOK_USERNAME)
-                .replace(/^@/, '')
-                .trim();
+        const tiktokUsername = getConfig('TIKTOK_USERNAME');
 
-            tiktokLink.href = `https://www.tiktok.com/@${username}`;
+        if (tiktokUsername) {
+            const cleanTikTok = String(tiktokUsername)
+                .replace(/^@/, '');
+
+            if (tiktokLink) {
+                tiktokLink.href =
+                    `https://www.tiktok.com/@${cleanTikTok}`;
+            }
 
             if (tiktokVal) {
-                tiktokVal.textContent = `@${username}`;
+                tiktokVal.textContent = `@${cleanTikTok}`;
+            }
+        } else {
+            if (tiktokLink) {
+                tiktokLink.href = '#';
+            }
+
+            if (tiktokVal) {
+                tiktokVal.textContent = 'TikTok unavailable';
             }
         }
 
-        /* =====================================================
-           INSTAGRAM
-           
-           If CONFIG.INSTAGRAM_USERNAME exists, use it.
-           Otherwise use the existing Instagram value if added
-           to CONFIG later.
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * INSTAGRAM
+         * -----------------------------------------
+         *
+         * IMPORTANT:
+         * The old code incorrectly used
+         * CONFIG.TIKTOK_USERNAME here.
+         *
+         * This now correctly uses
+         * CONFIG.INSTAGRAM_USERNAME.
+         */
 
-        if (instagramLink) {
-            const instagramUsername =
-                CONFIG.INSTAGRAM_USERNAME ||
-                CONFIG.INSTAGRAM ||
-                '';
+        const instagramUsername = getConfig('INSTAGRAM_USERNAME');
 
+        if (instagramUsername) {
             const cleanInstagram = String(instagramUsername)
-                .replace(/^@/, '')
-                .trim();
+                .replace(/^@/, '');
 
-            if (cleanInstagram) {
+            if (instagramLink) {
                 instagramLink.href =
-                    `https://www.instagram.com/${cleanInstagram}/`;
+                    `https://www.instagram.com/${cleanInstagram}`;
 
-                if (instagramVal) {
-                    instagramVal.textContent = `@${cleanInstagram}`;
-                }
+                instagramLink.target = '_blank';
+                instagramLink.rel = 'noopener noreferrer';
+            }
+
+            if (instagramVal) {
+                instagramVal.textContent = `@${cleanInstagram}`;
+            }
+        } else {
+            if (instagramLink) {
+                instagramLink.href = '#';
+            }
+
+            if (instagramVal) {
+                instagramVal.textContent = 'Instagram unavailable';
             }
         }
 
-        /* =====================================================
-           LOCATION
-           Uses CONFIG.LOCATION_NAME
-           Uses CONFIG.MAPS_REDIRECT_URL when tapped
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * LOCATION
+         * -----------------------------------------
+         */
 
         if (locationVal) {
-            locationVal.textContent =
-                CONFIG.LOCATION_NAME || '';
+            locationVal.textContent = getConfig(
+                'LOCATION_NAME',
+                'Location unavailable'
+            );
         }
 
-        if (locationLink && CONFIG.MAPS_REDIRECT_URL) {
-            locationLink.href = CONFIG.MAPS_REDIRECT_URL;
+        /*
+         * -----------------------------------------
+         * GOOGLE MAP
+         * -----------------------------------------
+         */
+
+        if (mapDirectionsBtn) {
+            mapDirectionsBtn.href = getConfig(
+                'MAPS_REDIRECT_URL',
+                '#'
+            );
         }
 
-        if (mapDirectionsBtn && CONFIG.MAPS_REDIRECT_URL) {
-            mapDirectionsBtn.href = CONFIG.MAPS_REDIRECT_URL;
+        if (mapFrame) {
+            const mapUrl = getConfig('MAPS_EMBED_URL');
+
+            if (mapUrl) {
+                mapFrame.src = mapUrl;
+            }
         }
 
-        /* =====================================================
-           LIVE GOOGLE MAP
-           Uses CONFIG.MAPS_EMBED_URL
-           ===================================================== */
-
-        if (mapFrame && CONFIG.MAPS_EMBED_URL) {
-            mapFrame.src = CONFIG.MAPS_EMBED_URL;
-        }
-
-        /* =====================================================
-           EXTERNAL LINKS
-           
-           Prevent the application's hash router from treating
-           external links as internal navigation.
-           ===================================================== */
+        /*
+         * -----------------------------------------
+         * EXTERNAL LINKS
+         * -----------------------------------------
+         */
 
         document
             .querySelectorAll('.external-link')
-            .forEach((link) => {
-                link.addEventListener('click', (event) => {
+            .forEach(link => {
+
+                // Avoid attaching the same listener multiple times.
+                if (link.dataset.contactBound === 'true') {
+                    return;
+                }
+
+                link.dataset.contactBound = 'true';
+
+                link.addEventListener('click', event => {
                     event.stopPropagation();
                 });
             });
