@@ -4,9 +4,9 @@ export const CONFIG = {
     API_URL: "https://boutique-backend-6fcr.onrender.com/api/posts", 
     PROFILE_IMAGE: "./assets/logo.jpg",
     EMAIL: "sanaboutique@gmail.com",
-    WHATSAPP_NUMBER: "923001234567",
+    WHATSAPP_NUMBER: "+92 310 0559630",
     TIKTOK_USERNAME: "sanaboutique",
-    PHONE_NUMBER: "+92 300 1234567",
+    PHONE_NUMBER: "+92 310 0559630",
     LOCATION_NAME: "SAnA Boutique, Main Boulevard, Lahore",
     MAPS_REDIRECT_URL: "https://maps.google.com",
     MAPS_EMBED_URL: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.523!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMxJzEzLjQiTiA3NMKwMjEnMzEuMyJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s"
