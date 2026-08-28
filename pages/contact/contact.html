@@ -1,80 +1,100 @@
-<div class="contact-page">
-    <!-- Glowing Profile Header -->
-    <div class="contact-header">
-        <div class="profile-avatar-wrapper">
-            <img id="profileAvatarImg" src="" alt="SAnA Boutique" class="profile-avatar-img" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=SAnA+Boutique&background=ffd700&color=000000&size=128';">
+<div class="contact-page-wrapper">
+    
+    <!-- FIXED HEADER -->
+    <div class="contact-header-fixed">
+        <div class="profile-image-container">
+            <!-- Your JS binds the config image here -->
+            <img id="profileAvatarImg" src="" alt="SB" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <!-- Fallback if no image exists -->
+            <div class="profile-avatar-fallback" style="display:none;">SB</div>
         </div>
-        <h2 class="profile-title" id="appNameTitle">SAnA Boutique</h2>
-        <p class="profile-subtitle">Premium Women's Fashion & Couture</p>
-        <p class="profile-bio">
+        <h1 id="appNameTitle" class="brand-title">SANA BOUTIQUE</h1>
+        <p class="brand-subtitle">PREMIUM WOMEN'S FASHION & COUTURE</p>
+        <p class="brand-desc">
             Welcome to SAnA! We specialize in exclusive unstitched suits, ready-to-wear luxury kurtis, abayas, and elegant shawls.
         </p>
     </div>
 
-    <!-- Action Cards List -->
-    <div class="cards-list">
+    <!-- SCROLLABLE BODY -->
+    <div class="contact-body-scroll">
         
-        <!-- Email Card -->
-        <a id="emailLink" href="#" class="link-card">
-            <div class="badge-icon badge-email">
-                <span>✉️</span>
+        <!-- Email -->
+        <a id="emailLink" href="#" class="contact-card">
+            <div class="card-icon icon-email"><i class="fa-solid fa-envelope"></i></div>
+            <div class="card-info">
+                <h3>Email</h3>
+                <p id="emailVal">Loading...</p>
+                <small>We reply within 24 hours</small>
             </div>
-            <div class="card-details">
-                <span class="card-title">Email</span>
-                <span class="card-value" id="emailVal"></span>
-            </div>
-            <span class="chevron-arrow">›</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- WhatsApp Card -->
-        <a id="whatsappLink" href="#" target="_blank" class="link-card">
-            <div class="badge-icon badge-whatsapp">
-                <span>💬</span>
+        <!-- WhatsApp -->
+        <a id="whatsappLink" href="#" class="contact-card whatsapp-card">
+            <div class="card-icon icon-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="card-info">
+                <h3>WhatsApp</h3>
+                <p id="whatsappVal">Loading...</p>
+                <small>Message Us</small>
             </div>
-            <div class="card-details">
-                <span class="card-title">WhatsApp</span>
-                <span class="card-value" id="whatsappVal">Message Us</span>
-            </div>
-            <span class="chevron-arrow">›</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- TikTok Card -->
-        <a id="tiktokLink" href="#" target="_blank" class="link-card">
-            <div class="badge-icon badge-tiktok">
-                <span>🎵</span>
+        <!-- Phone Number -->
+        <a id="phoneLink" href="#" class="contact-card">
+            <div class="card-icon icon-phone"><i class="fa-solid fa-phone"></i></div>
+            <div class="card-info">
+                <h3>Phone Number</h3>
+                <p id="phoneVal">Loading...</p>
+                <small>Mon - Sat | 10AM - 8PM</small>
             </div>
-            <div class="card-details">
-                <span class="card-title">TikTok</span>
-                <span class="card-value" id="tiktokVal"></span>
-            </div>
-            <span class="chevron-arrow">›</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- Phone Card -->
-        <a id="phoneLink" href="#" class="link-card">
-            <div class="badge-icon badge-phone">
-                <span>📞</span>
+        <!-- Address -->
+        <div id="mapContainer" class="contact-card" style="cursor: pointer;">
+            <div class="card-icon icon-location"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="card-info">
+                <h3>Address</h3>
+                <p id="locationVal">Loading...</p>
             </div>
-            <div class="card-details">
-                <span class="card-title">Contact Number</span>
-                <span class="card-value" id="phoneVal"></span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </div>
+
+        <!-- TikTok -->
+        <a id="tiktokLink" href="#" class="contact-card">
+            <div class="card-icon icon-tiktok"><i class="fa-brands fa-tiktok"></i></div>
+            <div class="card-info">
+                <h3>TikTok</h3>
+                <p id="tiktokVal">Loading...</p>
+                <small>Follow us for latest updates</small>
             </div>
-            <span class="chevron-arrow">›</span>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- Live Google Map Card -->
-        <div class="map-card-wrapper">
+        <!-- Instagram (Static Fallback) -->
+        <a href="https://instagram.com/sanaboutique.official" class="contact-card">
+            <div class="card-icon icon-instagram"><i class="fa-brands fa-instagram"></i></div>
+            <div class="card-info">
+                <h3>Instagram</h3>
+                <p>@sanaboutique.official</p>
+                <small>See our new collections</small>
+            </div>
+            <i class="fa-solid fa-chevron-right arrow-icon"></i>
+        </a>
+
+        <!-- Map Embed Card -->
+        <div class="map-card-container">
             <div class="map-header">
-                <span class="card-title">Our Location</span>
-                <span class="card-value" id="locationVal"></span>
-            </div>
-            <div class="map-container" id="mapContainer">
-                <iframe id="mapFrame" src="" width="100%" height="160" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                <div class="map-overlay">
-                    <span>Tap to open Google Maps 📍</span>
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <h3>Our Location</h3>
+                    <p>Find us on the map</p>
                 </div>
             </div>
+            <iframe id="mapFrame" class="map-iframe" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
-</div>
+                                                                                         </div>
+                                                                                         
