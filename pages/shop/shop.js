@@ -50,7 +50,6 @@ export const ShopPage = {
     },
 
     bindEvents() {
-        // Horizontal Pill Click Navigation
         const pills = document.querySelectorAll('.pill-btn');
         pills.forEach(pill => {
             pill.addEventListener('click', (e) => {
@@ -62,7 +61,6 @@ export const ShopPage = {
             });
         });
 
-        // Search Filter
         const searchInput = document.getElementById('shop-search-input');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
@@ -100,18 +98,19 @@ export const ShopPage = {
 
         let filtered = this.cachedPosts || this.defaultProducts;
 
-        // Apply Search Filter
         if (this.searchQuery) {
             filtered = filtered.filter(p => 
-                (p.title || p.name || '').toLowerCase().includes(this.searchQuery) ||
+                (p.title || p.name || p.text || '').toLowerCase().includes(this.searchQuery) ||
                 (p.category || '').toLowerCase().includes(this.searchQuery)
             );
         }
 
-        // 1. Render Landing View (If 'all' category is selected & search is empty)
+        // 1. Render Landing View (Passes all products to render at the bottom)
         if (this.activeCategory === 'all' && !this.searchQuery) {
-            feedContainer.innerHTML = this.renderLandingHtml();
+            feedContainer.innerHTML = this.renderLandingHtml(filtered);
             this.bindLandingCategoryClicks();
+            this.bindProductCardClicks(); // Crucial: Binds clicks for the new "All Collections" grid
+            this.bindWishlistBtns();
             return;
         }
 
@@ -148,7 +147,19 @@ export const ShopPage = {
         this.bindWishlistBtns();
     },
 
-    renderLandingHtml() {
+    renderLandingHtml(filteredProducts) {
+        // Generates the grid for ALL products to sit under the categories
+        const allProductsGrid = `
+            <div class="section-header" style="margin-top: 32px;">
+                <span class="ornament">☙</span>
+                <h2 class="section-title">ALL COLLECTIONS</h2>
+                <span class="ornament">❧</span>
+            </div>
+            <div class="shop-products-grid" style="margin-bottom: 24px;">
+                ${(filteredProducts || []).map(product => this.renderProductCard(product)).join('')}
+            </div>
+        `;
+
         return `
             <!-- Landing Hero Card -->
             <div class="shop-landing-hero" style="background-image: url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop');">
@@ -196,13 +207,17 @@ export const ShopPage = {
                     <span class="category-card-link">Explore Collection &#10095;</span>
                 </div>
             </div>
+
+            ${allProductsGrid} 
         `;
     },
 
     renderProductCard(product) {
         const fallbackImg = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop';
-        const imgSrc = product.image_url || product.image || fallbackImg;
-        const title = product.title || product.name || 'Embroidered Suit';
+        // Broadened to catch img, photo, and url so custom posts show up
+        const imgSrc = product.image_url || product.image || product.img || product.photo || product.url || fallbackImg;
+        // Broadened to catch text or caption if no formal title exists
+        const title = product.title || product.name || product.caption || product.text || 'Premium Item';
         const price = product.price ? (product.price.toString().includes('Rs') ? product.price : `Rs. ${product.price}`) : 'Rs. 2,850';
 
         return `
@@ -261,16 +276,16 @@ export const ShopPage = {
         });
     },
 
-    // Full-Screen modern popup modal to view product detail & order
     openProductModal(product) {
         const existingModal = document.getElementById('product-detail-modal');
         if (existingModal) existingModal.remove();
 
         const fallbackImg = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop';
-        const imgSrc = product.image_url || product.image || fallbackImg;
+        const imgSrc = product.image_url || product.image || product.img || product.photo || product.url || fallbackImg;
+        const title = product.title || product.name || product.caption || product.text || 'Premium Item';
         const price = product.price ? (product.price.toString().includes('Rs') ? product.price : `Rs. ${product.price}`) : 'Rs. 2,850';
         const phone = CONFIG.WHATSAPP_NUMBER || '923001234567';
-        const waMessage = encodeURIComponent(`Hi SAnA Boutique! I want to order/inquire about: ${product.title} (${price})`);
+        const waMessage = encodeURIComponent(`Hi SAnA Boutique! I want to order/inquire about: ${title} (${price})`);
 
         const modalHtml = `
             <div id="product-detail-modal" class="product-modal-backdrop full-screen-mode">
@@ -278,13 +293,13 @@ export const ShopPage = {
                     <button class="product-modal-close" id="closeModalBtn">✕</button>
                     
                     <div class="product-modal-hero-image">
-                        <img src="${imgSrc}" alt="${product.title}" onerror="this.onerror=null; this.src='${fallbackImg}';">
+                        <img src="${imgSrc}" alt="${title}" onerror="this.onerror=null; this.src='${fallbackImg}';">
                     </div>
                     
                     <div class="product-modal-scroll-details">
                         <div class="product-modal-header">
                             <span class="product-modal-category">${this.getCategoryDisplayName(product.category || 'unstitched')}</span>
-                            <h2 class="product-modal-title">${product.title}</h2>
+                            <h2 class="product-modal-title">${title}</h2>
                             <span class="product-modal-price">${price}</span>
                         </div>
                         
@@ -330,4 +345,4 @@ export const ShopPage = {
 };
 
 window.ShopPage = ShopPage;
-    
+            
