@@ -2,6 +2,7 @@ import { CONFIG } from '../../config.js';
 
 export const ContactPage = {
     async render() {
+        // Delay binding until after the HTML is injected into the DOM
         setTimeout(() => this.bindData(), 0);
 
         try {
@@ -9,7 +10,12 @@ export const ContactPage = {
             return await response.text();
         } catch (error) {
             console.error("Error loading contact template:", error);
-            return `<div class="contact-page"><p style="color:#f87171;">Failed to load contact information.</p></div>`;
+            // Updated fallback to match the new dark theme wrapper
+            return `
+                <div class="contact-page-wrapper" style="justify-content: center; align-items: center;">
+                    <p style="color:#f87171; font-family: 'Plus Jakarta Sans', sans-serif;">Failed to load contact information.</p>
+                </div>
+            `;
         }
     },
 
@@ -38,7 +44,7 @@ export const ContactPage = {
 
         if (whatsappLink && whatsappVal) {
             whatsappLink.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}`;
-            whatsappVal.textContent = `Message ${CONFIG.APP_NAME}`;
+            whatsappVal.textContent = `Message Us`; 
         }
 
         if (tiktokLink && tiktokVal) {
@@ -64,4 +70,4 @@ export const ContactPage = {
 };
 
 window.ContactPage = ContactPage;
-          
+    
