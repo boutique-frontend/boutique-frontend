@@ -1,89 +1,919 @@
+/* =========================================================
+   SAnA Boutique — About Page
+   Mobile-first luxury black & gold design
+   ========================================================= */
+
 .about-page {
+    width: 100%;
+    min-height: 100%;
     height: 100%;
-    width: 100%;
     overflow-y: auto;
-    padding: 76px 16px 90px 16px;
-    background-color: #06080c;
-    display: flex;
-    justify-content: center;
+    overflow-x: hidden;
+
+    padding: 84px 14px 108px;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(212, 175, 55, 0.055),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #050505 0%,
+            #080808 45%,
+            #050505 100%
+        );
+
+    color: #ffffff;
+
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.45) transparent;
 }
 
-.about-card {
+.about-page::-webkit-scrollbar {
+    width: 3px;
+}
+
+.about-page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.about-page::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.45);
+    border-radius: 999px;
+}
+
+/* ---------------------------------------------------------
+   Sections
+   --------------------------------------------------------- */
+
+.about-section {
     width: 100%;
-    max-width: 480px;
-    background-color: #0f141c;
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 16px;
-    padding: 24px 20px;
-    height: fit-content;
+    max-width: 520px;
+    margin: 0 auto 34px;
 }
 
-.about-header {
+.about-section:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   Section headings
+   --------------------------------------------------------- */
+
+.about-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    gap: 10px;
+
+    margin: 0 0 16px;
     text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.about-title {
-    font-family: 'Cinzel', 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #ffffff;
+.about-section-heading h1,
+.about-section-heading h2 {
+    margin: 0;
+
+    color: #e5bd55;
+
+    font-family:
+        "Cinzel",
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-weight: 700;
     letter-spacing: 1.5px;
+    line-height: 1.15;
     text-transform: uppercase;
+
+    text-shadow:
+        0 1px 8px rgba(212, 175, 55, 0.08);
 }
 
-.about-subtitle {
-    font-size: 0.78rem;
+.about-section-heading h1 {
+    font-size: clamp(1.45rem, 6vw, 1.9rem);
+}
+
+.about-section-heading h2 {
+    font-size: clamp(1.12rem, 5vw, 1.55rem);
+}
+
+.heading-decoration {
+    flex: 0 0 auto;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
     color: #d4af37;
-    margin-top: 4px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+
+    font-size: 1.05rem;
+    line-height: 1;
 }
 
-.about-description {
-    font-size: 0.85rem;
-    color: #8c9ba5;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: center;
+.heading-decoration::after {
+    content: "";
+
+    display: block;
+
+    width: 30px;
+    height: 1px;
+
+    margin-left: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(212, 175, 55, 0),
+            rgba(212, 175, 55, 0.85)
+        );
 }
 
-.about-description strong {
-    color: #ffffff;
+.heading-decoration-right {
+    transform: scaleX(-1);
 }
 
-.about-highlights {
+.heading-decoration-right::after {
+    transform: scaleX(-1);
+}
+
+/* ---------------------------------------------------------
+   Hero
+   --------------------------------------------------------- */
+
+.about-hero-section {
+    margin-bottom: 30px;
+}
+
+.about-hero-card {
+    position: relative;
+
+    width: 100%;
+    min-height: 365px;
+
+    display: flex;
+    overflow: hidden;
+
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #090909 0%,
+            #0d0d0d 44%,
+            rgba(9, 9, 9, 0.72) 65%,
+            rgba(0, 0, 0, 0.25) 100%
+        );
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+
+    isolation: isolate;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 3;
+
+    width: 61%;
+
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: center;
+
+    padding: 27px 12px 27px 21px;
 }
 
-.highlight-item {
+.about-hero-small {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #d4af37;
+
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    opacity: 0.9;
+}
+
+.about-hero-content h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: clamp(1.58rem, 7vw, 2.15rem);
+    font-weight: 500;
+    line-height: 1.17;
+    letter-spacing: -0.2px;
+}
+
+.about-hero-content h2 em {
+    color: #e0b943;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 3px 15px rgba(212, 175, 55, 0.16);
+}
+
+.about-hero-content p {
+    max-width: 190px;
+
+    margin: 13px 0 0;
+
+    color: rgba(255, 255, 255, 0.88);
+
+    font-size: 0.77rem;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.about-hero-image {
+    position: absolute;
+    z-index: 1;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 66%;
+
+    overflow: hidden;
+}
+
+.about-hero-image::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #090909 0%,
+            rgba(9, 9, 9, 0.92) 19%,
+            rgba(9, 9, 9, 0.38) 48%,
+            rgba(9, 9, 9, 0.08) 100%
+        );
+}
+
+.about-hero-image::after {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.16),
+            transparent 35%,
+            rgba(0, 0, 0, 0.22)
+        );
+}
+
+.about-hero-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center center;
+
+    filter:
+        brightness(0.82)
+        contrast(1.05)
+        saturate(0.82);
+
+    transform: scale(1.02);
+}
+
+/* ---------------------------------------------------------
+   Decorative divider
+   --------------------------------------------------------- */
+
+.gold-divider {
+    position: relative;
+
+    width: 68px;
+    height: 8px;
+
+    margin: 12px 0 0;
+}
+
+.gold-divider::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    transform: translateY(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, 0.9),
+            transparent
+        );
+}
+
+.gold-divider::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    padding: 0 5px;
+
+    color: #d4af37;
+
+    font-size: 0.55rem;
+
+    background: #080808;
+}
+
+.gold-divider-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------------------------------------------------------
+   Story card
+   --------------------------------------------------------- */
+
+.about-text-card {
+    position: relative;
+
+    width: 100%;
+
+    padding: 20px 20px 18px;
+
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 25, 25, 0.9),
+            rgba(11, 11, 11, 0.96)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.015);
+}
+
+.about-text-card p {
+    margin: 0 0 13px;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 0.88rem;
+    line-height: 1.68;
+}
+
+.about-text-card p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   Offer cards
+   --------------------------------------------------------- */
+
+.offer-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 5px;
+
+    width: 100%;
+}
+
+.offer-card {
+    min-width: 0;
+    min-height: 164px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 12px 7px 11px;
+
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24, 24, 24, 0.95),
+            rgba(10, 10, 10, 0.96)
+        );
+
+    text-align: center;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.offer-card:active {
+    transform: translateY(1px);
+}
+
+.offer-icon {
+    height: 33px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 7px;
+
+    color: #e6bb49;
+
+    font-size: 1.7rem;
+    line-height: 1;
+
+    text-shadow:
+        0 3px 10px rgba(212, 175, 55, 0.13);
+}
+
+.offer-card h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.offer-card p {
+    margin: 8px 0 0;
+
+    color: rgba(255, 255, 255, 0.67);
+
+    font-size: 0.62rem;
+    line-height: 1.48;
+}
+
+/* ---------------------------------------------------------
+   General image cards
+   --------------------------------------------------------- */
+
+.about-image-card {
+    width: 100%;
+    height: 195px;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(212, 175, 55, 0.24);
+    border-radius: 16px;
+
+    background: #111111;
+}
+
+.about-image-card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    filter:
+        brightness(0.82)
+        contrast(1.06)
+        saturate(0.82);
+
+    transition:
+        transform 0.5s ease;
+}
+
+.about-image-card:active img {
+    transform: scale(1.025);
+}
+
+/* ---------------------------------------------------------
+   Mission
+   --------------------------------------------------------- */
+
+.mission-card {
+    position: relative;
+
+    width: 100%;
+
+    padding: 28px 22px 20px;
+
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 17px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(212, 175, 55, 0.045),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #111111,
+            #0a0a0a
+        );
+
+    text-align: center;
+}
+
+.quote-mark {
+    height: 27px;
+
+    color: #e4b944;
+
+    font-family: Georgia, serif;
+    font-size: 3.1rem;
+    font-weight: 700;
+    line-height: 0.8;
+
+    text-shadow:
+        0 3px 14px rgba(212, 175, 55, 0.14);
+}
+
+.mission-card p {
+    margin: 7px auto 0;
+
+    max-width: 420px;
+
+    color: rgba(255, 255, 255, 0.94);
+
+    font-size: 0.91rem;
+    line-height: 1.65;
+}
+
+/* ---------------------------------------------------------
+   Values
+   --------------------------------------------------------- */
+
+.values-card {
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(20, 20, 20, 0.96),
+            rgba(9, 9, 9, 0.98)
+        );
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+
+    min-height: 89px;
+
+    padding: 11px 11px;
+
+    border-bottom: 1px solid rgba(212, 175, 55, 0.17);
+}
+
+.value-item:last-child {
+    border-bottom: 0;
+}
+
+.value-icon {
+    flex: 0 0 56px;
+
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 12px;
+
+    border: 1px solid rgba(212, 175, 55, 0.26);
+    border-radius: 50%;
+
+    color: #e1b73f;
+
+    font-size: 1.65rem;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 55, 0.04),
+            rgba(0, 0, 0, 0.35)
+        );
+}
+
+.value-content {
+    min-width: 0;
+}
+
+.value-content h3 {
+    margin: 0 0 3px;
+
+    color: #ffffff;
+
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.value-content p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.73);
+
+    font-size: 0.72rem;
+    line-height: 1.42;
+}
+
+/* ---------------------------------------------------------
+   Why Choose SANA
+   --------------------------------------------------------- */
+
+.why-choose-section {
+    padding-bottom: 10px;
+}
+
+.why-choose-card {
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111111,
+            #090909
+        );
+}
+
+.why-list {
+    width: 100%;
+
+    padding: 15px 15px 9px;
+}
+
+.why-item {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    background: rgba(6, 8, 12, 0.5);
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    gap: 9px;
+
+    margin-bottom: 12px;
 }
 
-.highlight-icon {
-    font-size: 1.4rem;
+.why-item:last-child {
+    margin-bottom: 3px;
 }
 
-.highlight-item h4 {
-    font-size: 0.85rem;
-    color: #ffffff;
-    font-weight: 700;
-    margin-bottom: 2px;
+.why-check {
+    flex: 0 0 19px;
+
+    width: 19px;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1px;
+
+    border: 1.5px solid #e2b839;
+    border-radius: 50%;
+
+    color: #e2b839;
+
+    font-size: 0.69rem;
+    font-weight: 800;
 }
 
-.highlight-item p {
-    font-size: 0.75rem;
-    color: #8c9ba5;
-    line-height: 1.3;
-  }
+.why-item p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 0.76rem;
+    line-height: 1.45;
+}
+
+.why-image-card {
+    width: 100%;
+    height: 190px;
+
+    overflow: hidden;
+
+    border-top: 1px solid rgba(212, 175, 55, 0.18);
+
+    background: #111111;
+}
+
+.why-image-card img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    filter:
+        brightness(0.74)
+        contrast(1.08)
+        saturate(0.82);
+}
+
+/* ---------------------------------------------------------
+   Small mobile screens
+   --------------------------------------------------------- */
+
+@media (max-width: 360px) {
+    .about-page {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .about-section-heading {
+        gap: 7px;
+    }
+
+    .heading-decoration::after {
+        width: 21px;
+        margin-left: 4px;
+    }
+
+    .about-section-heading h1 {
+        font-size: 1.28rem;
+    }
+
+    .about-section-heading h2 {
+        font-size: 1rem;
+    }
+
+    .about-hero-card {
+        min-height: 340px;
+    }
+
+    .about-hero-content {
+        width: 64%;
+        padding-left: 17px;
+        padding-right: 8px;
+    }
+
+    .about-hero-content h2 {
+        font-size: 1.43rem;
+    }
+
+    .about-hero-content p {
+        max-width: 160px;
+
+        font-size: 0.71rem;
+    }
+
+    .offer-grid {
+        gap: 4px;
+    }
+
+    .offer-card {
+        min-height: 151px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .offer-icon {
+        font-size: 1.5rem;
+    }
+
+    .offer-card h3 {
+        font-size: 0.66rem;
+    }
+
+    .offer-card p {
+        font-size: 0.57rem;
+    }
+
+    .value-icon {
+        flex-basis: 51px;
+
+        width: 51px;
+        height: 51px;
+
+        margin-right: 9px;
+    }
+
+    .value-content h3 {
+        font-size: 0.8rem;
+    }
+
+    .value-content p {
+        font-size: 0.67rem;
+    }
+}
+
+/* ---------------------------------------------------------
+   Larger phones / small tablets
+   --------------------------------------------------------- */
+
+@media (min-width: 480px) {
+    .about-page {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .about-hero-card {
+        min-height: 410px;
+    }
+
+    .about-hero-content {
+        padding-left: 29px;
+        padding-right: 16px;
+    }
+
+    .about-hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .about-hero-content p {
+        max-width: 210px;
+
+        font-size: 0.83rem;
+    }
+
+    .about-text-card {
+        padding: 24px 25px 20px;
+    }
+
+    .mission-card {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .why-list {
+        padding: 18px 19px 11px;
+    }
+
+    .why-item p {
+        font-size: 0.81rem;
+    }
+}
+
+/* ---------------------------------------------------------
+   Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .about-page {
+        scroll-behavior: auto;
+    }
+
+    .offer-card,
+    .about-image-card img {
+        transition: none;
+    }
+}
