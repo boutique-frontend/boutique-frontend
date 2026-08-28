@@ -14,6 +14,7 @@ export const AboutPage = {
             }
 
             return await response.text();
+
         } catch (error) {
             console.error('Error loading About page template:', error);
 
@@ -33,56 +34,14 @@ export const AboutPage = {
 
     init() {
         this.bindData();
-        this.bindInteractions();
     },
 
     bindData() {
         const titleEl = document.getElementById('aboutTitle');
 
-        if (titleEl && CONFIG.APP_NAME) {
+        if (titleEl) {
             titleEl.textContent = 'ABOUT US';
         }
-    },
-
-    bindInteractions() {
-        const aboutPage = document.querySelector('.about-page');
-
-        if (!aboutPage) {
-            return;
-        }
-
-        if (aboutPage.dataset.initialized === 'true') {
-            return;
-        }
-
-        aboutPage.dataset.initialized = 'true';
-
-        aboutPage.addEventListener('click', (event) => {
-            const link = event.target.closest('a[href^="#about-"]');
-
-            if (!link) {
-                return;
-            }
-
-            const targetId = link.getAttribute('href');
-
-            if (!targetId) {
-                return;
-            }
-
-            const target = aboutPage.querySelector(targetId);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        });
     }
 };
 
