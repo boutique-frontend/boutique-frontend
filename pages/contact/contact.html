@@ -1,94 +1,404 @@
 <div class="contact-page-wrapper">
-    
-    <!-- FIXED TOP PROFILE HEADER -->
-    <div class="contact-header-fixed">
-        <div class="profile-image-container">
-            <img id="profileAvatarImg" src="" alt="SAnA Boutique" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="profile-avatar-fallback" style="display:none;">SB</div>
+
+    <!-- =====================================================
+         CONTACT HERO
+         ===================================================== -->
+
+    <section class="contact-hero">
+
+        <div class="contact-hero-content">
+
+            <h1 class="contact-heading">
+                Contact Us
+            </h1>
+
+            <div class="contact-heading-divider"></div>
+
+            <p class="contact-hero-text">
+                We are here to assist you with your orders,
+                collections, and any questions you may have.
+            </p>
+
         </div>
-        <h1 id="appNameTitle" class="brand-title">SAnA Boutique</h1>
-        <p class="brand-subtitle">PREMIUM WOMEN'S FASHION & COUTURE</p>
-        <p class="brand-desc">
-            Welcome to SAnA! We specialize in exclusive unstitched suits, ready-to-wear luxury kurtis, abayas, and elegant shawls.
-        </p>
-    </div>
 
-    <!-- SCROLLABLE BODY CONTAINER -->
-    <div class="contact-body-scroll">
-        
-        <!-- Email -->
-        <a id="emailLink" href="#" class="contact-card external-link">
-            <div class="card-icon icon-email"><i class="fa-solid fa-envelope"></i></div>
-            <div class="card-info">
-                <h3>Email</h3>
-                <p id="emailVal">Loading...</p>
-                <small>We reply within 24 hours</small>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </a>
+        <div class="contact-hero-image">
+            <img
+                id="profileAvatarImg"
+                src=""
+                alt="SAnA Boutique"
+                onerror="this.style.display='none';"
+            >
+        </div>
 
-        <!-- WhatsApp -->
-        <a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp-card external-link">
-            <div class="card-icon icon-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
-            <div class="card-info">
-                <h3>WhatsApp</h3>
-                <p id="whatsappVal">Loading...</p>
-                <small>Message Us Directly</small>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </a>
+    </section>
 
-        <!-- Phone Number -->
-        <a id="phoneLink" href="#" class="contact-card external-link">
-            <div class="card-icon icon-phone"><i class="fa-solid fa-phone"></i></div>
-            <div class="card-info">
-                <h3>Phone Number</h3>
-                <p id="phoneVal">Loading...</p>
-                <small>Mon - Sat | 10AM - 8PM</small>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </a>
 
-        <!-- TikTok -->
-        <a id="tiktokLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card external-link">
-            <div class="card-icon icon-tiktok"><i class="fa-brands fa-tiktok"></i></div>
-            <div class="card-info">
-                <h3>TikTok</h3>
-                <p id="tiktokVal">Loading...</p>
-                <small>Follow us for latest updates</small>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </a>
+    <!-- =====================================================
+         MAIN CONTACT CONTENT
+         ===================================================== -->
 
-        <!-- Instagram -->
-        <a id="instagramLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card external-link">
-            <div class="card-icon icon-instagram"><i class="fa-brands fa-instagram"></i></div>
-            <div class="card-info">
-                <h3>Instagram</h3>
-                <p id="instagramVal">Loading...</p>
-                <small>See our new collections</small>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </a>
+    <section class="contact-main-grid">
 
-        <!-- BIG LIVE GOOGLE MAP CARD -->
-        <div class="big-map-card">
-            <div class="map-card-header">
-                <div class="map-header-text">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <div>
-                        <h3>Our Location</h3>
-                        <p id="locationVal">Loading location...</p>
-                    </div>
+        <!-- =================================================
+             CONTACT INFORMATION
+             ================================================= -->
+
+        <div class="contact-info-column">
+
+            <!-- Email -->
+            <a
+                id="emailLink"
+                href="#"
+                class="contact-card external-link"
+            >
+                <div class="card-icon icon-email">
+                    <i class="fa-solid fa-envelope"></i>
                 </div>
-                <a id="mapDirectionsBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-directions external-link">
-                    Directions <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-            </div>
-            <div class="map-frame-wrapper">
-                <iframe id="mapFrame" class="live-map-iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+
+                <div class="card-info">
+                    <h3>Email</h3>
+
+                    <p id="emailVal">
+                        Loading...
+                    </p>
+
+                    <small>
+                        We reply within 24 hours
+                    </small>
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+
+            <!-- WhatsApp -->
+            <a
+                id="whatsappLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card whatsapp-card external-link"
+            >
+                <div class="card-icon icon-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+
+                <div class="card-info">
+                    <h3>WhatsApp</h3>
+
+                    <p id="whatsappVal">
+                        Loading...
+                    </p>
+
+                    <small>
+                        Message Us Directly
+                    </small>
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+
+            <!-- Phone -->
+            <a
+                id="phoneLink"
+                href="#"
+                class="contact-card external-link"
+            >
+                <div class="card-icon icon-phone">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+
+                <div class="card-info">
+                    <h3>Phone Number</h3>
+
+                    <p id="phoneVal">
+                        Loading...
+                    </p>
+
+                    <small>
+                        Mon - Sat | 10AM - 8PM
+                    </small>
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+
+            <!-- TikTok -->
+            <a
+                id="tiktokLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card external-link"
+            >
+                <div class="card-icon icon-tiktok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+
+                <div class="card-info">
+                    <h3>TikTok</h3>
+
+                    <p id="tiktokVal">
+                        Loading...
+                    </p>
+
+                    <small>
+                        Follow us for latest updates
+                    </small>
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
+
+            <!-- Instagram -->
+            <a
+                id="instagramLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card external-link"
+            >
+                <div class="card-icon icon-instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+
+                <div class="card-info">
+                    <h3>Instagram</h3>
+
+                    <p id="instagramVal">
+                        Loading...
+                    </p>
+
+                    <small>
+                        See our new collections
+                    </small>
+                </div>
+
+                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            </a>
+
         </div>
 
-    </div>
+
+        <!-- =================================================
+             BUSINESS HOURS / VALUE
+             ================================================= -->
+
+        <div class="business-hours-card">
+
+            <h2 class="business-hours-heading">
+                <i class="fa-regular fa-clock"></i>
+                Business Hours
+            </h2>
+
+            <ul class="business-hours-list">
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Monday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Tuesday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Wednesday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Thursday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Friday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Saturday
+                    </span>
+
+                    <span class="business-hours-time">
+                        10:00 AM - 8:00 PM
+                    </span>
+                </li>
+
+                <li class="business-hours-row">
+                    <span class="business-hours-day">
+                        Sunday
+                    </span>
+
+                    <span class="business-hours-time">
+                        Closed
+                    </span>
+                </li>
+
+            </ul>
+
+
+            <!-- Decorative Divider -->
+            <div class="value-divider"></div>
+
+
+            <!-- We Value You -->
+            <h2 class="value-heading">
+                <i class="fa-solid fa-gem"></i>
+                We Value You
+            </h2>
+
+            <p class="value-message">
+                Your satisfaction means everything to us.
+                Thank you for choosing SAnA Boutique and
+                allowing us to be part of your style journey.
+            </p>
+
+            <span class="value-heart">
+                ♥
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LOCATION
+         ===================================================== -->
+
+    <section class="contact-location-section">
+
+        <div class="location-card">
+
+            <!-- Live Map Background -->
+            <div class="location-map-background">
+
+                <iframe
+                    id="mapFrame"
+                    class="location-map-iframe"
+                    src=""
+                    title="SAnA Boutique Location"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+
+            </div>
+
+
+            <!-- Location Content -->
+            <div class="location-content">
+
+                <div class="location-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="location-text">
+
+                    <h2>
+                        Our Location
+                    </h2>
+
+                    <p id="locationVal">
+                        Loading location...
+                    </p>
+
+                </div>
+
+
+                <a
+                    id="mapDirectionsBtn"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="location-directions external-link"
+                >
+                    Directions
+
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NEED HELP
+         ===================================================== -->
+
+    <section class="help-section">
+
+        <div class="help-card">
+
+            <div class="help-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+
+            <div class="help-content">
+
+                <h2>
+                    Need Help?
+                </h2>
+
+                <p>
+                    Have a question about an order, product,
+                    or our collections? We're always happy
+                    to help.
+                </p>
+
+            </div>
+
+
+            <a
+                id="helpWhatsAppButton"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="help-button external-link"
+            >
+                Chat With Us
+
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+        </div>
+
+    </section>
+
 </div>
