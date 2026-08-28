@@ -1,25 +1,23 @@
 <div class="contact-page-wrapper">
     
-    <!-- FIXED HEADER -->
+    <!-- FIXED TOP PROFILE HEADER -->
     <div class="contact-header-fixed">
         <div class="profile-image-container">
-            <!-- Your JS binds the config image here -->
-            <img id="profileAvatarImg" src="" alt="SB" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <!-- Fallback if no image exists -->
+            <img id="profileAvatarImg" src="" alt="SAnA Boutique" class="profile-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="profile-avatar-fallback" style="display:none;">SB</div>
         </div>
-        <h1 id="appNameTitle" class="brand-title">SANA BOUTIQUE</h1>
+        <h1 id="appNameTitle" class="brand-title">SAnA Boutique</h1>
         <p class="brand-subtitle">PREMIUM WOMEN'S FASHION & COUTURE</p>
         <p class="brand-desc">
             Welcome to SAnA! We specialize in exclusive unstitched suits, ready-to-wear luxury kurtis, abayas, and elegant shawls.
         </p>
     </div>
 
-    <!-- SCROLLABLE BODY -->
+    <!-- SCROLLABLE BODY CONTAINER -->
     <div class="contact-body-scroll">
         
         <!-- Email -->
-        <a id="emailLink" href="#" class="contact-card">
+        <a id="emailLink" href="#" class="contact-card external-link">
             <div class="card-icon icon-email"><i class="fa-solid fa-envelope"></i></div>
             <div class="card-info">
                 <h3>Email</h3>
@@ -30,18 +28,18 @@
         </a>
 
         <!-- WhatsApp -->
-        <a id="whatsappLink" href="#" class="contact-card whatsapp-card">
+        <a id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp-card external-link">
             <div class="card-icon icon-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
             <div class="card-info">
                 <h3>WhatsApp</h3>
                 <p id="whatsappVal">Loading...</p>
-                <small>Message Us</small>
+                <small>Message Us Directly</small>
             </div>
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
         <!-- Phone Number -->
-        <a id="phoneLink" href="#" class="contact-card">
+        <a id="phoneLink" href="#" class="contact-card external-link">
             <div class="card-icon icon-phone"><i class="fa-solid fa-phone"></i></div>
             <div class="card-info">
                 <h3>Phone Number</h3>
@@ -51,18 +49,8 @@
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- Address -->
-        <div id="mapContainer" class="contact-card" style="cursor: pointer;">
-            <div class="card-icon icon-location"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="card-info">
-                <h3>Address</h3>
-                <p id="locationVal">Loading...</p>
-            </div>
-            <i class="fa-solid fa-chevron-right arrow-icon"></i>
-        </div>
-
         <!-- TikTok -->
-        <a id="tiktokLink" href="#" class="contact-card">
+        <a id="tiktokLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card external-link">
             <div class="card-icon icon-tiktok"><i class="fa-brands fa-tiktok"></i></div>
             <div class="card-info">
                 <h3>TikTok</h3>
@@ -72,29 +60,35 @@
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- Instagram (Static Fallback) -->
-        <a href="https://instagram.com/sanaboutique.official" class="contact-card">
+        <!-- Instagram -->
+        <a id="instagramLink" href="#" target="_blank" rel="noopener noreferrer" class="contact-card external-link">
             <div class="card-icon icon-instagram"><i class="fa-brands fa-instagram"></i></div>
             <div class="card-info">
                 <h3>Instagram</h3>
-                <p>@sanaboutique.official</p>
+                <p id="instagramVal">Loading...</p>
                 <small>See our new collections</small>
             </div>
             <i class="fa-solid fa-chevron-right arrow-icon"></i>
         </a>
 
-        <!-- Map Embed Card -->
-        <div class="map-card-container">
-            <div class="map-header">
-                <i class="fa-solid fa-location-dot"></i>
-                <div>
-                    <h3>Our Location</h3>
-                    <p>Find us on the map</p>
+        <!-- BIG LIVE GOOGLE MAP CARD -->
+        <div class="big-map-card">
+            <div class="map-card-header">
+                <div class="map-header-text">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h3>Our Location</h3>
+                        <p id="locationVal">Loading location...</p>
+                    </div>
                 </div>
+                <a id="mapDirectionsBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-directions external-link">
+                    Directions <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
             </div>
-            <iframe id="mapFrame" class="map-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="map-frame-wrapper">
+                <iframe id="mapFrame" class="live-map-iframe" src="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
 
     </div>
-                                                                                         </div>
-                                                                                         
+</div>
