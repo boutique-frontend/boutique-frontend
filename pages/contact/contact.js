@@ -1,7 +1,6 @@
 import { CONFIG } from '../../config.js';
 
 export const ContactPage = {
-
     async render() {
         try {
             const response = await fetch('./pages/contact/contact.html');
@@ -12,19 +11,12 @@ export const ContactPage = {
 
             const html = await response.text();
 
-            /*
-             * The HTML is returned first.
-             * bindData() runs after the template has had time
-             * to enter the DOM.
-             */
-            setTimeout(() => {
-                this.bindData();
-            }, 0);
+            // Bind configuration after the HTML has been inserted into the page
+            setTimeout(() => this.bindData(), 0);
 
             return html;
-
         } catch (error) {
-            console.error("Error loading contact template:", error);
+            console.error('Error loading contact template:', error);
 
             return `
                 <div class="contact-page-wrapper contact-error-page">
@@ -38,324 +30,183 @@ export const ContactPage = {
     },
 
     bindData() {
-
         /* =====================================================
-           CONFIG VALUES
+           ELEMENTS
            ===================================================== */
 
-        const email = CONFIG.EMAIL || '';
-        const phone = CONFIG.PHONE_NUMBER || '';
-        const whatsapp = CONFIG.WHATSAPP_NUMBER || '';
-        const tiktok = CONFIG.TIKTOK_USERNAME || '';
-        const location = CONFIG.LOCATION_NAME || '';
-        const mapsUrl = CONFIG.MAPS_REDIRECT_URL || '';
-        const mapsEmbed = CONFIG.MAPS_EMBED_URL || '';
-        const appName = CONFIG.APP_NAME || 'SAnA Boutique';
-
-        /*
-         * Instagram is supported if you add:
-         *
-         * INSTAGRAM_USERNAME: "sanaboutique.official"
-         *
-         * to config.js.
-         *
-         * Until then, the page will use the existing
-         * Instagram username if available.
-         */
-        const instagram =
-            CONFIG.INSTAGRAM_USERNAME ||
-            CONFIG.INSTAGRAM_USERNAME ||
-            '';
-
-        /* =====================================================
-           HELPERS
-           ===================================================== */
-
-        const cleanPhone = String(phone).replace(/[^\d+]/g, '');
-
-        const cleanWhatsapp = String(whatsapp).replace(/\D/g, '');
-
-        const cleanTikTok = String(tiktok)
-            .replace(/^@/, '')
-            .trim();
-
-        const cleanInstagram = String(instagram)
-            .replace(/^@/, '')
-            .trim();
-
-        /* =====================================================
-           BRAND NAME
-           ===================================================== */
-
-        document.querySelectorAll('[data-config="APP_NAME"]').forEach(element => {
-            element.textContent = appName;
-        });
-
+        const avatar = document.getElementById('profileAvatarImg');
         const appTitle = document.getElementById('appNameTitle');
 
+        const emailLink = document.getElementById('emailLink');
+        const emailVal = document.getElementById('emailVal');
+
+        const whatsappLink = document.getElementById('whatsappLink');
+        const whatsappVal = document.getElementById('whatsappVal');
+
+        const phoneLink = document.getElementById('phoneLink');
+        const phoneVal = document.getElementById('phoneVal');
+
+        const tiktokLink = document.getElementById('tiktokLink');
+        const tiktokVal = document.getElementById('tiktokVal');
+
+        const instagramLink = document.getElementById('instagramLink');
+        const instagramVal = document.getElementById('instagramVal');
+
+        const locationLink = document.getElementById('locationLink');
+        const locationVal = document.getElementById('locationVal');
+
+        const mapDirectionsBtn = document.getElementById('mapDirectionsBtn');
+        const mapFrame = document.getElementById('mapFrame');
+
+        /* =====================================================
+           APP / PROFILE
+           ===================================================== */
+
+        if (avatar && CONFIG.PROFILE_IMAGE) {
+            avatar.src = CONFIG.PROFILE_IMAGE;
+        }
+
         if (appTitle) {
-            appTitle.textContent = appName;
+            appTitle.textContent = CONFIG.APP_NAME || 'SAnA Boutique';
         }
 
         /* =====================================================
            EMAIL
+           Uses CONFIG.EMAIL
            ===================================================== */
 
-        const emailLinks = document.querySelectorAll(
-            '#emailLink, [data-contact="email"]'
-        );
+        if (emailLink && CONFIG.EMAIL) {
+            emailLink.href = `mailto:${CONFIG.EMAIL}`;
+        }
 
-        emailLinks.forEach(link => {
-            if (!email) return;
-
-            link.href = `mailto:${email}`;
-
-            link.setAttribute('aria-label', `Email ${email}`);
-            link.classList.add('external-link');
-        });
-
-        document.querySelectorAll('#emailVal, [data-value="email"]').forEach(element => {
-            element.textContent = email;
-        });
-
-        /* =====================================================
-           PHONE
-           ===================================================== */
-
-        const phoneLinks = document.querySelectorAll(
-            '#phoneLink, [data-contact="phone"]'
-        );
-
-        phoneLinks.forEach(link => {
-            if (!cleanPhone) return;
-
-            link.href = `tel:${cleanPhone}`;
-
-            link.setAttribute('aria-label', `Call ${phone}`);
-            link.classList.add('external-link');
-        });
-
-        document.querySelectorAll('#phoneVal, [data-value="phone"]').forEach(element => {
-            element.textContent = phone;
-        });
+        if (emailVal) {
+            emailVal.textContent = CONFIG.EMAIL || '';
+        }
 
         /* =====================================================
            WHATSAPP
+           Uses CONFIG.WHATSAPP_NUMBER
            ===================================================== */
 
-        const whatsappLinks = document.querySelectorAll(
-            '#whatsappLink, [data-contact="whatsapp"]'
-        );
+        if (whatsappLink && CONFIG.WHATSAPP_NUMBER) {
+            const cleanWhatsapp = String(CONFIG.WHATSAPP_NUMBER).replace(/\D/g, '');
 
-        whatsappLinks.forEach(link => {
-            if (!cleanWhatsapp) return;
+            whatsappLink.href = `https://wa.me/${cleanWhatsapp}`;
+        }
 
-            link.href = `https://wa.me/${cleanWhatsapp}`;
+        if (whatsappVal) {
+            const cleanWhatsapp = String(
+                CONFIG.WHATSAPP_NUMBER || ''
+            ).replace(/\D/g, '');
 
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
+            whatsappVal.textContent = cleanWhatsapp
+                ? `+${cleanWhatsapp}`
+                : '';
+        }
 
-            link.setAttribute(
-                'aria-label',
-                `Contact ${appName} on WhatsApp`
-            );
+        /* =====================================================
+           PHONE
+           Uses CONFIG.PHONE_NUMBER
+           ===================================================== */
 
-            link.classList.add('external-link');
-        });
+        if (phoneLink && CONFIG.PHONE_NUMBER) {
+            const cleanPhone = String(CONFIG.PHONE_NUMBER)
+                .replace(/[^\d+]/g, '');
 
-        document.querySelectorAll(
-            '#whatsappVal, [data-value="whatsapp"]'
-        ).forEach(element => {
-            element.textContent = `+${cleanWhatsapp}`;
-        });
+            phoneLink.href = `tel:${cleanPhone}`;
+        }
+
+        if (phoneVal) {
+            phoneVal.textContent = CONFIG.PHONE_NUMBER || '';
+        }
 
         /* =====================================================
            TIKTOK
+           Uses CONFIG.TIKTOK_USERNAME
            ===================================================== */
 
-        const tiktokLinks = document.querySelectorAll(
-            '#tiktokLink, [data-contact="tiktok"]'
-        );
+        if (tiktokLink && CONFIG.TIKTOK_USERNAME) {
+            const username = String(CONFIG.TIKTOK_USERNAME)
+                .replace(/^@/, '')
+                .trim();
 
-        tiktokLinks.forEach(link => {
-            if (!cleanTikTok) return;
+            tiktokLink.href = `https://www.tiktok.com/@${username}`;
 
-            link.href = `https://www.tiktok.com/@${cleanTikTok}`;
-
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-
-            link.setAttribute(
-                'aria-label',
-                `Visit ${appName} on TikTok`
-            );
-
-            link.classList.add('external-link');
-        });
-
-        document.querySelectorAll(
-            '#tiktokVal, [data-value="tiktok"]'
-        ).forEach(element => {
-            element.textContent = `@${cleanTikTok}`;
-        });
+            if (tiktokVal) {
+                tiktokVal.textContent = `@${username}`;
+            }
+        }
 
         /* =====================================================
            INSTAGRAM
+           
+           If CONFIG.INSTAGRAM_USERNAME exists, use it.
+           Otherwise use the existing Instagram value if added
+           to CONFIG later.
            ===================================================== */
 
-        const instagramLinks = document.querySelectorAll(
-            '#instagramLink, [data-contact="instagram"]'
-        );
+        if (instagramLink) {
+            const instagramUsername =
+                CONFIG.INSTAGRAM_USERNAME ||
+                CONFIG.INSTAGRAM ||
+                '';
 
-        instagramLinks.forEach(link => {
+            const cleanInstagram = String(instagramUsername)
+                .replace(/^@/, '')
+                .trim();
 
-            if (!cleanInstagram) {
-                link.removeAttribute('href');
-                return;
+            if (cleanInstagram) {
+                instagramLink.href =
+                    `https://www.instagram.com/${cleanInstagram}/`;
+
+                if (instagramVal) {
+                    instagramVal.textContent = `@${cleanInstagram}`;
+                }
             }
-
-            link.href = `https://www.instagram.com/${cleanInstagram}`;
-
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-
-            link.setAttribute(
-                'aria-label',
-                `Visit ${appName} on Instagram`
-            );
-
-            link.classList.add('external-link');
-        });
-
-        document.querySelectorAll(
-            '#instagramVal, [data-value="instagram"]'
-        ).forEach(element => {
-
-            element.textContent = cleanInstagram
-                ? `@${cleanInstagram}`
-                : 'Instagram';
-        });
+        }
 
         /* =====================================================
            LOCATION
+           Uses CONFIG.LOCATION_NAME
+           Uses CONFIG.MAPS_REDIRECT_URL when tapped
            ===================================================== */
 
-        document.querySelectorAll(
-            '#locationVal, [data-value="location"]'
-        ).forEach(element => {
-            element.textContent = location;
-        });
+        if (locationVal) {
+            locationVal.textContent =
+                CONFIG.LOCATION_NAME || '';
+        }
 
-        const locationLinks = document.querySelectorAll(
-            '#locationLink, [data-contact="location"]'
-        );
+        if (locationLink && CONFIG.MAPS_REDIRECT_URL) {
+            locationLink.href = CONFIG.MAPS_REDIRECT_URL;
+        }
 
-        locationLinks.forEach(link => {
-            if (!mapsUrl) return;
-
-            link.href = mapsUrl;
-
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-
-            link.setAttribute(
-                'aria-label',
-                `Open ${location} in Google Maps`
-            );
-
-            link.classList.add('external-link');
-        });
+        if (mapDirectionsBtn && CONFIG.MAPS_REDIRECT_URL) {
+            mapDirectionsBtn.href = CONFIG.MAPS_REDIRECT_URL;
+        }
 
         /* =====================================================
-           GOOGLE MAP — LIVE EMBED
+           LIVE GOOGLE MAP
+           Uses CONFIG.MAPS_EMBED_URL
            ===================================================== */
 
-        const mapFrames = document.querySelectorAll(
-            '#mapFrame, #locationMapFrame, [data-map="embed"]'
-        );
-
-        mapFrames.forEach(frame => {
-
-            if (!mapsEmbed) return;
-
-            frame.src = mapsEmbed;
-
-            frame.setAttribute('loading', 'lazy');
-            frame.setAttribute('allowfullscreen', '');
-            frame.setAttribute(
-                'referrerpolicy',
-                'no-referrer-when-downgrade'
-            );
-        });
+        if (mapFrame && CONFIG.MAPS_EMBED_URL) {
+            mapFrame.src = CONFIG.MAPS_EMBED_URL;
+        }
 
         /* =====================================================
-           GOOGLE MAP DIRECTIONS
+           EXTERNAL LINKS
+           
+           Prevent the application's hash router from treating
+           external links as internal navigation.
            ===================================================== */
 
-        const directionButtons = document.querySelectorAll(
-            '#mapDirectionsBtn, #directionsBtn, [data-contact="directions"]'
-        );
-
-        directionButtons.forEach(button => {
-
-            if (!mapsUrl) return;
-
-            button.href = mapsUrl;
-
-            button.target = '_blank';
-            button.rel = 'noopener noreferrer';
-
-            button.classList.add('external-link');
-        });
-
-        /* =====================================================
-           SUPPORT / SEND MESSAGE
-           ===================================================== */
-
-        const messageLinks = document.querySelectorAll(
-            '#sendMessageBtn, [data-contact="message"]'
-        );
-
-        messageLinks.forEach(link => {
-
-            if (!email) return;
-
-            link.href = `mailto:${email}`;
-
-            link.classList.add('external-link');
-        });
-
-        /* =====================================================
-           PREVENT INTERNAL HASH ROUTER FROM
-           INTERCEPTING EXTERNAL CONTACT LINKS
-           ===================================================== */
-
-        document.querySelectorAll('.external-link').forEach(link => {
-
-            if (link.dataset.contactBound === 'true') {
-                return;
-            }
-
-            link.dataset.contactBound = 'true';
-
-            link.addEventListener('click', event => {
-                event.stopPropagation();
+        document
+            .querySelectorAll('.external-link')
+            .forEach((link) => {
+                link.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
             });
-        });
-
-        /* =====================================================
-           LOG CONFIG CONNECTION
-           ===================================================== */
-
-        console.log('SAnA Contact Page connected to CONFIG:', {
-            email,
-            phone,
-            whatsapp,
-            tiktok,
-            location,
-            mapsUrl,
-            mapsEmbed
-        });
     }
 };
 
