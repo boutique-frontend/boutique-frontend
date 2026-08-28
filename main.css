@@ -1,30 +1,65 @@
-/* Core Layout & Base Resets */
-* {
+/* Core Layout & Mobile App Viewport Resets */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Removes mobile tap blue flash */
+    -webkit-touch-callout: none; /* Prevents long-press callout menus */
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
+/* Lock Document Body (Native App Shell) */
+html, body {
+    width: 100vw;
+    height: 100vh;
+    height: -webkit-fill-available; /* Handles mobile browser dynamic address bars */
     background-color: #06080c;
     color: #ffffff;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    overflow-x: hidden;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: hidden; /* Locks body overflow completely */
+    position: fixed; /* Prevents iOS rubber-band bounce */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    user-select: none; /* Makes UI text feel like a native app */
+    -webkit-user-select: none;
 }
 
+/* Fixed App Shell Wrapper */
 #app {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Scrollable Inner Viewport Container */
 #page-content {
     flex: 1;
     width: 100%;
-    padding-bottom: 70px; /* Space for fixed bottom navbar */
+    height: 100%;
+    overflow-y: auto; /* Handles page scrolling inside the app frame */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Enables native iOS momentum scrolling */
+    padding-bottom: 75px; /* Space reserved for fixed bottom navigation bar */
+    box-sizing: border-box;
+}
+
+/* Hide scrollbars globally for seamless app UI */
+#page-content::-webkit-scrollbar {
+    display: none;
+}
+#page-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Reusable Button Tap Animation */
+button, .nav-item, a {
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* Fallback Error Styling */
@@ -37,5 +72,5 @@ body, html {
 .error-box h3 {
     color: #f87171;
     margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
 }
-Update this main css to match with them
