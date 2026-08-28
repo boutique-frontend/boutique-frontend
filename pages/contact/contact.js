@@ -1,6 +1,7 @@
 import { CONFIG } from '../../config.js';
 
 export const ContactPage = {
+
     async render() {
         try {
             const response = await fetch('./pages/contact/contact.html');
@@ -11,16 +12,11 @@ export const ContactPage = {
 
             const html = await response.text();
 
-            /*
-             * Bind configuration only after the HTML has been
-             * inserted into the page.
-             */
-            setTimeout(() => {
-                this.bindData();
-                this.scrollToTop();
-            }, 0);
+            // Wait until the returned HTML has been inserted into the DOM
+            setTimeout(() => this.bindData(), 0);
 
             return html;
+
         } catch (error) {
             console.error('Error loading contact template:', error);
 
@@ -35,98 +31,44 @@ export const ContactPage = {
         }
     },
 
-    /* =========================================================
-       ALWAYS START CONTACT PAGE AT THE TOP
-       ========================================================= */
+    bindData() {
 
-    scrollToTop() {
-        /*
-         * Scroll the Contact page itself.
-         */
-        const contactPage =
-            document.querySelector('.contact-page-wrapper');
+        /* =====================================================
+           ALWAYS START CONTACT PAGE FROM THE TOP
+           ===================================================== */
+
+        const contactPage = document.querySelector('.contact-page-wrapper');
 
         if (contactPage) {
-            contactPage.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'auto'
-            });
+            contactPage.scrollTop = 0;
         }
 
-        /*
-         * Also reset the old scrollable contact body if present.
-         */
-        const contactBody =
-            document.querySelector('.contact-body-scroll');
+        window.scrollTo(0, 0);
 
-        if (contactBody) {
-            contactBody.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'auto'
-            });
-        }
 
-        /*
-         * Reset common application/page scroll containers.
-         */
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'auto'
-        });
-
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    },
-
-    bindData() {
         /* =====================================================
            ELEMENTS
            ===================================================== */
 
-        const avatar =
-            document.getElementById('profileAvatarImg');
+        const avatar = document.getElementById('profileAvatarImg');
+        const appTitle = document.getElementById('appNameTitle');
 
-        const appTitle =
-            document.getElementById('appNameTitle');
+        const emailLink = document.getElementById('emailLink');
+        const emailVal = document.getElementById('emailVal');
 
-        const emailLink =
-            document.getElementById('emailLink');
+        const whatsappLink = document.getElementById('whatsappLink');
+        const whatsappVal = document.getElementById('whatsappVal');
 
-        const emailVal =
-            document.getElementById('emailVal');
+        const phoneLink = document.getElementById('phoneLink');
+        const phoneVal = document.getElementById('phoneVal');
 
-        const whatsappLink =
-            document.getElementById('whatsappLink');
+        const tiktokLink = document.getElementById('tiktokLink');
+        const tiktokVal = document.getElementById('tiktokVal');
 
-        const whatsappVal =
-            document.getElementById('whatsappVal');
+        const instagramLink = document.getElementById('instagramLink');
+        const instagramVal = document.getElementById('instagramVal');
 
-        const phoneLink =
-            document.getElementById('phoneLink');
-
-        const phoneVal =
-            document.getElementById('phoneVal');
-
-        const tiktokLink =
-            document.getElementById('tiktokLink');
-
-        const tiktokVal =
-            document.getElementById('tiktokVal');
-
-        const instagramLink =
-            document.getElementById('instagramLink');
-
-        const instagramVal =
-            document.getElementById('instagramVal');
-
-        const locationLink =
-            document.getElementById('locationLink');
-
-        const locationVal =
-            document.getElementById('locationVal');
+        const locationVal = document.getElementById('locationVal');
 
         const mapDirectionsBtn =
             document.getElementById('mapDirectionsBtn');
@@ -134,13 +76,9 @@ export const ContactPage = {
         const mapFrame =
             document.getElementById('mapFrame');
 
-        /*
-         * Chat With Us button.
-         *
-         * This ID will be added to the updated contact.html.
-         */
-        const chatWithUsLink =
-            document.getElementById('chatWithUsLink');
+        const helpWhatsAppButton =
+            document.getElementById('helpWhatsAppButton');
+
 
         /* =====================================================
            APP / PROFILE
@@ -155,14 +93,13 @@ export const ContactPage = {
                 CONFIG.APP_NAME || 'SAnA Boutique';
         }
 
+
         /* =====================================================
            EMAIL
-           Uses CONFIG.EMAIL
            ===================================================== */
 
         if (emailLink && CONFIG.EMAIL) {
-            emailLink.href =
-                `mailto:${CONFIG.EMAIL}`;
+            emailLink.href = `mailto:${CONFIG.EMAIL}`;
         }
 
         if (emailVal) {
@@ -170,117 +107,110 @@ export const ContactPage = {
                 CONFIG.EMAIL || '';
         }
 
+
         /* =====================================================
            WHATSAPP
-           Uses CONFIG.WHATSAPP_NUMBER
+           EVERYTHING USES CONFIG.WHATSAPP_NUMBER
            ===================================================== */
 
-        const cleanWhatsapp =
-            String(CONFIG.WHATSAPP_NUMBER || '')
-                .replace(/\D/g, '');
+        const cleanWhatsapp = String(
+            CONFIG.WHATSAPP_NUMBER || ''
+        ).replace(/\D/g, '');
 
-        if (whatsappLink && cleanWhatsapp) {
-            whatsappLink.href =
-                `https://wa.me/${cleanWhatsapp}`;
+        const whatsappUrl = cleanWhatsapp
+            ? `https://wa.me/${cleanWhatsapp}`
+            : '#';
+
+
+        // WhatsApp contact card
+        if (whatsappLink) {
+            whatsappLink.href = whatsappUrl;
         }
 
         if (whatsappVal) {
-            whatsappVal.textContent =
-                cleanWhatsapp
-                    ? `+${cleanWhatsapp}`
-                    : '';
+            whatsappVal.textContent = cleanWhatsapp
+                ? `+${cleanWhatsapp}`
+                : '';
         }
 
-        /* =====================================================
-           CHAT WITH US
-           
-           Uses the SAME CONFIG.WHATSAPP_NUMBER.
-           
-           Nothing is hardcoded here.
-           ===================================================== */
 
-        if (chatWithUsLink && cleanWhatsapp) {
-            chatWithUsLink.href =
-                `https://wa.me/${cleanWhatsapp}`;
-
-            chatWithUsLink.target = '_blank';
-            chatWithUsLink.rel =
-                'noopener noreferrer';
+        // "Chat With Us" button
+        if (helpWhatsAppButton) {
+            helpWhatsAppButton.href = whatsappUrl;
         }
+
 
         /* =====================================================
            PHONE
-           Uses CONFIG.PHONE_NUMBER
+           USES CONFIG.PHONE_NUMBER
            ===================================================== */
 
-        const phoneNumber =
-            String(CONFIG.PHONE_NUMBER || '');
+        const cleanPhone = String(
+            CONFIG.PHONE_NUMBER || ''
+        ).replace(/[^\d+]/g, '');
 
-        const cleanPhone =
-            phoneNumber.replace(/[^\d+]/g, '');
-
-        if (phoneLink && cleanPhone) {
-            phoneLink.href =
-                `tel:${cleanPhone}`;
+        if (phoneLink) {
+            phoneLink.href = cleanPhone
+                ? `tel:${cleanPhone}`
+                : '#';
         }
 
         if (phoneVal) {
             phoneVal.textContent =
-                phoneNumber;
+                CONFIG.PHONE_NUMBER || '';
         }
+
 
         /* =====================================================
            TIKTOK
-           Uses CONFIG.TIKTOK_USERNAME
+           USES CONFIG.TIKTOK_USERNAME
            ===================================================== */
 
-        if (tiktokLink && CONFIG.TIKTOK_USERNAME) {
-            const username =
-                String(CONFIG.TIKTOK_USERNAME)
-                    .replace(/^@/, '')
-                    .trim();
+        const tiktokUsername = String(
+            CONFIG.TIKTOK_USERNAME || ''
+        )
+            .replace(/^@/, '')
+            .trim();
 
-            if (username) {
-                tiktokLink.href =
-                    `https://www.tiktok.com/@${username}`;
-
-                if (tiktokVal) {
-                    tiktokVal.textContent =
-                        `@${username}`;
-                }
-            }
+        if (tiktokLink && tiktokUsername) {
+            tiktokLink.href =
+                `https://www.tiktok.com/@${tiktokUsername}`;
         }
+
+        if (tiktokVal) {
+            tiktokVal.textContent =
+                tiktokUsername
+                    ? `@${tiktokUsername}`
+                    : '';
+        }
+
 
         /* =====================================================
            INSTAGRAM
-           Uses CONFIG.INSTAGRAM_USERNAME
+           USES CONFIG.INSTAGRAM_USERNAME
            ===================================================== */
 
-        if (instagramLink) {
-            const instagramUsername =
-                CONFIG.INSTAGRAM_USERNAME ||
-                CONFIG.INSTAGRAM ||
-                '';
+        const instagramUsername = String(
+            CONFIG.INSTAGRAM_USERNAME || ''
+        )
+            .replace(/^@/, '')
+            .trim();
 
-            const cleanInstagram =
-                String(instagramUsername)
-                    .replace(/^@/, '')
-                    .trim();
-
-            if (cleanInstagram) {
-                instagramLink.href =
-                    `https://www.instagram.com/${cleanInstagram}/`;
-
-                if (instagramVal) {
-                    instagramVal.textContent =
-                        `@${cleanInstagram}`;
-                }
-            }
+        if (instagramLink && instagramUsername) {
+            instagramLink.href =
+                `https://www.instagram.com/${instagramUsername}/`;
         }
+
+        if (instagramVal) {
+            instagramVal.textContent =
+                instagramUsername
+                    ? `@${instagramUsername}`
+                    : '';
+        }
+
 
         /* =====================================================
            LOCATION
-           Uses CONFIG.LOCATION_NAME
            ===================================================== */
 
         if (locationVal) {
@@ -288,62 +218,53 @@ export const ContactPage = {
                 CONFIG.LOCATION_NAME || '';
         }
 
-        if (locationLink &&
-            CONFIG.MAPS_REDIRECT_URL) {
 
-            locationLink.href =
-                CONFIG.MAPS_REDIRECT_URL;
-        }
+        /* =====================================================
+           GOOGLE MAP DIRECTIONS
+           ===================================================== */
 
-        if (mapDirectionsBtn &&
-            CONFIG.MAPS_REDIRECT_URL) {
-
+        if (
+            mapDirectionsBtn &&
+            CONFIG.MAPS_REDIRECT_URL
+        ) {
             mapDirectionsBtn.href =
                 CONFIG.MAPS_REDIRECT_URL;
         }
 
+
         /* =====================================================
            LIVE GOOGLE MAP
-           Uses CONFIG.MAPS_EMBED_URL
            ===================================================== */
 
-        if (mapFrame &&
-            CONFIG.MAPS_EMBED_URL) {
-
+        if (
+            mapFrame &&
+            CONFIG.MAPS_EMBED_URL
+        ) {
             mapFrame.src =
                 CONFIG.MAPS_EMBED_URL;
         }
 
+
         /* =====================================================
            EXTERNAL LINKS
-           
-           Prevent the application's hash router from treating
-           external links as internal navigation.
+           PREVENT HASH ROUTER INTERFERENCE
            ===================================================== */
 
         document
             .querySelectorAll('.external-link')
             .forEach((link) => {
 
-                /*
-                 * Prevent duplicate listeners when Contact
-                 * is opened more than once.
-                 */
-                if (link.dataset.routerProtected === 'true') {
+                // Avoid attaching the same listener multiple times
+                if (link.dataset.externalBound === 'true') {
                     return;
                 }
 
-                link.dataset.routerProtected = 'true';
+                link.dataset.externalBound = 'true';
 
                 link.addEventListener('click', (event) => {
                     event.stopPropagation();
                 });
             });
-
-        /*
-         * Final scroll reset after all data has been bound.
-         */
-        this.scrollToTop();
     }
 };
 
