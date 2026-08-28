@@ -200,14 +200,15 @@ export const ShopPage = {
     },
 
     renderProductCard(product) {
-        const imgSrc = product.image_url || product.image || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop';
+        const fallbackImg = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop';
+        const imgSrc = product.image_url || product.image || fallbackImg;
         const title = product.title || product.name || 'Embroidered Suit';
         const price = product.price ? (product.price.toString().includes('Rs') ? product.price : `Rs. ${product.price}`) : 'Rs. 2,850';
 
         return `
             <div class="shop-product-card" data-id="${product.id}">
                 <div class="shop-product-image">
-                    <img src="${imgSrc}" alt="${title}">
+                    <img src="${imgSrc}" alt="${title}" onerror="this.onerror=null; this.src='${fallbackImg}';">
                     <button class="shop-wishlist-btn" aria-label="Add to Wishlist">&#9825;</button>
                 </div>
                 <div class="shop-product-info">
@@ -260,46 +261,65 @@ export const ShopPage = {
         });
     },
 
-    // Modal popup to view product detail with full description & order action
+    // Full-Screen modern popup modal to view product detail & order
     openProductModal(product) {
         const existingModal = document.getElementById('product-detail-modal');
         if (existingModal) existingModal.remove();
 
-        const imgSrc = product.image_url || product.image;
+        const fallbackImg = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=600&auto=format&fit=crop';
+        const imgSrc = product.image_url || product.image || fallbackImg;
         const price = product.price ? (product.price.toString().includes('Rs') ? product.price : `Rs. ${product.price}`) : 'Rs. 2,850';
         const phone = CONFIG.WHATSAPP_NUMBER || '923001234567';
         const waMessage = encodeURIComponent(`Hi SAnA Boutique! I want to order/inquire about: ${product.title} (${price})`);
 
         const modalHtml = `
-            <div id="product-detail-modal" class="product-modal-backdrop">
+            <div id="product-detail-modal" class="product-modal-backdrop full-screen-mode">
                 <div class="product-modal-content">
                     <button class="product-modal-close" id="closeModalBtn">✕</button>
                     
-                    <div class="product-modal-image-box">
-                        <img src="${imgSrc}" alt="${product.title}">
+                    <div class="product-modal-hero-image">
+                        <img src="${imgSrc}" alt="${product.title}" onerror="this.onerror=null; this.src='${fallbackImg}';">
                     </div>
                     
-                    <div class="product-modal-details">
-                        <span class="product-modal-category">${this.getCategoryDisplayName(product.category || 'unstitched')}</span>
-                        <h2 class="product-modal-title">${product.title}</h2>
-                        <span class="product-modal-price">${price}</span>
+                    <div class="product-modal-scroll-details">
+                        <div class="product-modal-header">
+                            <span class="product-modal-category">${this.getCategoryDisplayName(product.category || 'unstitched')}</span>
+                            <h2 class="product-modal-title">${product.title}</h2>
+                            <span class="product-modal-price">${price}</span>
+                        </div>
                         
                         ${product.sizes ? `<div class="product-modal-sizes"><strong>Available Sizes:</strong> ${product.sizes}</div>` : ''}
                         
+                        <div class="product-modal-divider"></div>
+                        
                         <p class="product-modal-desc">${product.description || 'Premium designer fabric crafted with elegance.'}</p>
                         
-                        <a href="https://wa.me/${phone}?text=${waMessage}" target="_blank" class="product-modal-order-btn">
-                            ORDER ON WHATSAPP
-                        </a>
+                        <div class="product-modal-action-bar">
+                            <a href="https://wa.me/${phone}?text=${waMessage}" target="_blank" class="product-modal-order-btn">
+                                ORDER ON WHATSAPP
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.body.style.overflow = 'hidden';
 
-        document.getElementById('closeModalBtn').addEventListener('click', () => {
-            document.getElementById('product-detail-modal').remove();
+        const closeModal = () => {
+            const modal = document.getElementById('product-detail-modal');
+            if (modal) modal.remove();
+            document.body.style.overflow = '';
+        };
+
+        document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+
+        const modalBackdrop = document.getElementById('product-detail-modal');
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                closeModal();
+            }
         });
     },
 
@@ -310,4 +330,4 @@ export const ShopPage = {
 };
 
 window.ShopPage = ShopPage;
-            
+    
