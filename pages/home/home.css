@@ -1,115 +1,242 @@
-/* Core Page Layout */
+/* =========================================================
+   SANA BOUTIQUE — HOME PAGE
+   Mobile-first luxury layout
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL HOME SCROLL FIX
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #06080c;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/*
+ * IMPORTANT:
+ * Home must NOT become its own nested scroll box.
+ * The browser handles the main page scrolling.
+ */
 .home-page {
+    position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: #06080c;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(212, 175, 55, 0.06),
+            transparent 35%
+        ),
+        #06080c;
     color: #ffffff;
-    overflow-y: auto;
-    padding-bottom: 90px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-bottom: 125px;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Luxury Brand Header Bar */
+/* Prevent accidental horizontal scrolling */
+.home-page *,
+.home-page *::before,
+.home-page *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LUXURY BRAND HEADER
+   ========================================================= */
+
 .home-brand-header {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    z-index: 10;
+    height: 72px;
+    z-index: 50;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 16px;
-    background: linear-gradient(to bottom, rgba(6, 8, 12, 0.9) 0%, rgba(6, 8, 12, 0) 100%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(4, 6, 9, 0.94) 0%,
+            rgba(4, 6, 9, 0.55) 55%,
+            transparent 100%
+        );
+
+    pointer-events: none;
+}
+
+.home-brand-header > * {
+    pointer-events: auto;
 }
 
 .nav-menu-btn,
 .nav-cart-btn {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    position: relative;
+    width: 44px;
+    height: 44px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+
+    color: #ffffff;
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.nav-menu-btn:active,
+.nav-cart-btn:active {
+    transform: scale(0.92);
+}
+
+.nav-menu-btn:hover,
+.nav-cart-btn:hover {
+    border-color: rgba(212, 175, 55, 0.7);
+    background: rgba(212, 175, 55, 0.08);
 }
 
 .cart-badge {
     position: absolute;
-    top: -4px;
-    right: -6px;
-    background-color: #d4af37;
-    color: #000000;
-    font-size: 0.65rem;
-    font-weight: 800;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
+    top: -3px;
+    right: -3px;
+
+    width: 19px;
+    height: 19px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #d4af37;
+    color: #050505;
+
+    font-size: 0.65rem;
+    font-weight: 900;
+
+    border-radius: 50%;
+    border: 2px solid #06080c;
+
+    box-shadow:
+        0 2px 8px rgba(212, 175, 55, 0.45);
 }
 
 .brand-logo-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     line-height: 1;
+    user-select: none;
 }
 
 .brand-logo-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 800;
+
     letter-spacing: 4px;
     color: #ffffff;
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, 0.8);
 }
 
 .brand-logo-subtitle {
-    font-size: 0.55rem;
-    letter-spacing: 3px;
+    margin-top: 5px;
+
+    font-size: 0.56rem;
+    letter-spacing: 4px;
+
     color: #d4af37;
-    margin-top: 2px;
 }
 
 .brand-logo-divider {
+    margin-top: 5px;
+
     color: #d4af37;
-    font-size: 0.5rem;
-    margin-top: 2px;
+    font-size: 0.55rem;
+
+    text-shadow:
+        0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-/* Luxury Hero Banner Section */
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .hero-section {
     position: relative;
+
     width: 100%;
     height: 72vh;
-    min-height: 480px;
+    min-height: 500px;
+
     background-size: cover;
     background-position: center center;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding: 70px 20px 24px 20px;
+
+    padding:
+        80px 20px
+        30px;
+
     text-align: center;
-    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(6, 8, 12, 0.4) 0%, rgba(6, 8, 12, 0.6) 60%, #06080c 100%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(6, 8, 12, 0.38) 0%,
+            rgba(6, 8, 12, 0.32) 35%,
+            rgba(6, 8, 12, 0.72) 68%,
+            #06080c 100%
+        );
+
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
+
     width: 100%;
-    max-width: 340px;
+    max-width: 380px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,134 +245,199 @@
 .hero-tagline {
     font-family: 'Cinzel', serif;
     font-style: italic;
+
     font-size: 0.82rem;
+    letter-spacing: 2px;
+
     color: #d4af37;
-    letter-spacing: 1.5px;
-    margin-bottom: 6px;
+
+    margin-bottom: 8px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .hero-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.85rem;
+
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
     font-weight: 700;
+
     line-height: 1.15;
-    letter-spacing: 2.5px;
+    letter-spacing: 3px;
+
     text-transform: uppercase;
+
     color: #ffffff;
-    margin-bottom: 6px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+
+    margin: 0 0 8px;
+
+    text-shadow:
+        0 3px 18px rgba(0, 0, 0, 0.95);
 }
 
 .hero-gold-ornament {
     color: #d4af37;
-    font-size: 0.75rem;
-    margin-bottom: 8px;
+
+    font-size: 0.8rem;
+
+    margin-bottom: 9px;
+
+    text-shadow:
+        0 0 12px rgba(212, 175, 55, 0.6);
 }
 
 .hero-subtitle {
+    max-width: 330px;
+
     font-size: 0.82rem;
-    color: #cccccc;
-    line-height: 1.4;
-    margin-bottom: 20px;
+    line-height: 1.5;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    margin: 0 0 20px;
 }
 
-/* Hero CTA Buttons */
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
 .hero-actions {
     display: flex;
     flex-direction: column;
+
     gap: 10px;
+
     width: 100%;
+}
+
+.btn-gold-primary,
+.btn-gold-outline {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    font-size: 0.78rem;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .btn-gold-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 13px 20px;
-    background: linear-gradient(135deg, #e6c670 0%, #c59b27 100%);
-    color: #000000;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(197, 155, 39, 0.35);
-    transition: transform 0.2s ease;
-}
+    background:
+        linear-gradient(
+            135deg,
+            #f1d681 0%,
+            #d4af37 45%,
+            #a77d16 100%
+        );
 
-.btn-gold-primary:active {
-    transform: scale(0.98);
+    color: #050505;
+
+    border: 1px solid rgba(255, 225, 130, 0.7);
+
+    box-shadow:
+        0 6px 22px rgba(212, 175, 55, 0.28);
 }
 
 .btn-gold-outline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 12px 20px;
-    background: rgba(6, 8, 12, 0.5);
-    border: 1px solid rgba(212, 175, 55, 0.8);
+    background: rgba(5, 7, 10, 0.48);
+
     color: #ffffff;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border-radius: 8px;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: transform 0.2s ease;
+
+    border: 1px solid rgba(212, 175, 55, 0.7);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
+.btn-gold-primary:active,
 .btn-gold-outline:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 .hero-dots {
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 8px;
+
     margin-top: 18px;
 }
 
 .dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
+
+    background: rgba(255, 255, 255, 0.25);
+
+    transition:
+        width 0.2s ease,
+        background 0.2s ease;
 }
 
 .dot.active {
-    background-color: #d4af37;
-    box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+    width: 20px;
+
+    border-radius: 10px;
+
+    background: #d4af37;
+
+    box-shadow:
+        0 0 10px rgba(212, 175, 55, 0.7);
 }
 
-/* Section Header Layout */
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
 .section-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin: 28px 0 16px 0;
+
+    gap: 9px;
+
+    margin: 30px 0 17px;
+
     padding: 0 16px;
 }
 
 .section-title {
     font-family: 'Cinzel', serif;
+
     font-size: 1.05rem;
+
     letter-spacing: 2px;
     text-transform: uppercase;
+
     color: #ffffff;
 }
 
 .ornament {
     color: #d4af37;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .section-header-between {
@@ -254,178 +446,1159 @@
 
 .view-all-link {
     color: #d4af37;
-    font-size: 0.78rem;
-    font-weight: 600;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
     text-decoration: none;
+
+    transition: opacity 0.2s ease;
 }
 
-/* Category Grid Layout */
+.view-all-link:hover {
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   COLLECTIONS
+   ========================================================= */
+
 .collections-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 0 16px;
-    margin-bottom: 24px;
-}
 
-@media (min-width: 600px) {
-    .collections-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 11px;
+
+    padding: 0 16px;
+
+    margin-bottom: 28px;
 }
 
 .collection-card {
     position: relative;
+
     height: 180px;
-    border-radius: 12px;
+
+    border-radius: 14px;
+
     overflow: hidden;
-    background-color: #0f141c;
-    border: 1px solid rgba(212, 175, 55, 0.25);
+
+    background: #0d1218;
+
+    border: 1px solid rgba(212, 175, 55, 0.24);
+
     display: flex;
     flex-direction: column;
+
     justify-content: flex-end;
     align-items: center;
+
     padding: 14px 8px;
+
     text-align: center;
+
     cursor: pointer;
-    box-sizing: border-box;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .collection-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(212, 175, 55, 0.6);
+
+    border-color:
+        rgba(212, 175, 55, 0.65);
+}
+
+.collection-card:active {
+    transform: scale(0.98);
 }
 
 .collection-card img {
     position: absolute;
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
+
+    transition:
+        transform 0.45s ease;
+}
+
+.collection-card:hover img {
+    transform: scale(1.05);
 }
 
 .collection-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(6, 8, 12, 0.95) 30%, rgba(6, 8, 12, 0.25) 75%, transparent 100%);
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(4, 6, 9, 0.96) 15%,
+            rgba(4, 6, 9, 0.52) 55%,
+            rgba(4, 6, 9, 0.12) 100%
+        );
+
     z-index: 1;
 }
 
 .collection-icon-wrapper {
     position: relative;
     z-index: 2;
-    width: 32px;
-    height: 32px;
+
+    width: 34px;
+    height: 34px;
+
     border-radius: 50%;
+
     border: 1px solid #d4af37;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     color: #d4af37;
-    margin-bottom: 6px;
-    background: rgba(6, 8, 12, 0.6);
+
+    margin-bottom: 7px;
+
+    background: rgba(5, 7, 10, 0.6);
+
+    backdrop-filter: blur(6px);
 }
 
 .collection-card-title {
     position: relative;
     z-index: 2;
+
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
     text-transform: uppercase;
+
     color: #ffffff;
-    margin-bottom: 2px;
-    line-height: 1.15;
+
+    margin-bottom: 3px;
+
+    line-height: 1.2;
 }
 
 .collection-card-link {
     position: relative;
     z-index: 2;
-    font-size: 0.65rem;
+
+    font-size: 0.64rem;
+
     color: #d4af37;
-    text-decoration: underline;
+
+    text-decoration: none;
 }
 
-/* Vertical Feed Section */
+
+/* =========================================================
+   FEATURED PRODUCTS
+   ========================================================= */
+
 .featured-section {
+    width: 100%;
+
     padding: 0 16px;
+
+    margin-bottom: 20px;
 }
 
+/*
+ * No height restriction.
+ * No overflow-y:auto.
+ * No nested scroll.
+ */
+.featured-products-feed,
 .tiktok-feed-wrapper {
     display: flex;
+
     flex-direction: column;
-    gap: 24px;
+
+    gap: 22px;
+
     width: 100%;
-    padding: 4px 0 24px 0;
+
+    padding: 4px 0 30px;
 }
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
 
 .tiktok-feed-card {
     position: relative;
+
     width: 100%;
-    height: 60vh; 
-    min-height: 400px;
-    background-color: #0b0f12;
-    border-radius: 16px;
+
+    height: min(72vh, 650px);
+
+    min-height: 430px;
+
+    background: #0b0f12;
+
+    border-radius: 18px;
+
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+
+    border: 1px solid rgba(212, 175, 55, 0.28);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.58);
+
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
     cursor: pointer;
-    transition: border-color 0.2s ease;
+
+    isolation: isolate;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
 .tiktok-feed-card:hover {
-    border-color: rgba(212, 175, 55, 0.5);
+    border-color:
+        rgba(212, 175, 55, 0.62);
+
+    box-shadow:
+        0 16px 42px rgba(0, 0, 0, 0.68);
 }
 
-/* Image aspect ratio and framing fix */
-.tiktok-feed-card img {
+.tiktok-feed-card:active {
+    transform: scale(0.992);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+.product-image-wrapper {
     position: absolute;
+
     inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    background: #050607;
+}
+
+.product-feed-image {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     object-position: center;
-    z-index: 0;
+
+    display: block;
+
+    transition:
+        transform 0.5s ease;
 }
 
-/* Ensure text and details stay readable on top of images */
-.tiktok-feed-card-content {
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(to top, rgba(6, 8, 12, 0.95) 0%, rgba(6, 8, 12, 0.4) 60%, transparent 100%);
-    padding: 20px 16px;
-    width: 100%;
-    box-sizing: border-box;
+.tiktok-feed-card:hover .product-feed-image {
+    transform: scale(1.025);
 }
+
+.product-image-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(2, 3, 5, 0.98) 0%,
+            rgba(2, 3, 5, 0.78) 26%,
+            rgba(2, 3, 5, 0.24) 62%,
+            rgba(2, 3, 5, 0.08) 100%
+        );
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   WISHLIST
+   ========================================================= */
 
 .wishlist-btn {
     position: absolute;
+
     top: 16px;
     right: 16px;
-    z-index: 3;
-    background: rgba(6, 8, 12, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-size: 1.3rem;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+
+    z-index: 5;
+
+    width: 46px;
+    height: 46px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background:
+        rgba(3, 5, 8, 0.58);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    color: #ffffff;
+
+    font-size: 1.55rem;
+    line-height: 1;
+
+    border-radius: 50%;
+
     cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: transform 0.2s ease;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
 }
 
 .wishlist-btn:active {
-    transform: scale(0.9);
+    transform: scale(0.86);
 }
 
 .wishlist-btn.active {
-    color: #e53e3e;
+    color: #ff5570;
+
+    border-color:
+        rgba(255, 85, 112, 0.45);
+
+    background:
+        rgba(255, 50, 80, 0.12);
+
+    text-shadow:
+        0 0 12px rgba(255, 70, 95, 0.5);
+}
+
+
+/* =========================================================
+   PRODUCT CONTENT
+   ========================================================= */
+
+.product-feed-content {
+    position: relative;
+
+    z-index: 3;
+
+    width: 100%;
+
+    padding:
+        80px 18px
+        18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+.product-feed-title {
+    width: 100%;
+
+    color: #ffffff;
+
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+
+    font-weight: 800;
+
+    line-height: 1.15;
+
+    margin-bottom: 8px;
+
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.9);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+.product-feed-price {
+    color: #e0bd4c;
+
+    font-size: 1.18rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    margin-bottom: 14px;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
+   VIEW DETAILS BUTTON
+   ========================================================= */
+
+.view-details-btn {
+    width: 100%;
+
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 11px 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(212, 175, 55, 0.18),
+            rgba(212, 175, 55, 0.07)
+        );
+
+    border:
+        1px solid rgba(212, 175, 55, 0.52);
+
+    border-radius: 12px;
+
+    color: #e4c45b;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.view-details-btn:hover {
+    background:
+        rgba(212, 175, 55, 0.24);
+
+    border-color:
+        rgba(212, 175, 55, 0.8);
+}
+
+.view-details-btn:active {
+    transform: scale(0.97);
+}
+
+.view-arrow {
+    font-size: 1.1rem;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.view-details-btn:hover .view-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   PRODUCT MODAL / IMAGE VIEWER
+   ========================================================= */
+
+.product-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px;
+
+    animation:
+        modalFadeIn 0.2s ease forwards;
+}
+
+.product-modal.closing {
+    animation:
+        modalFadeOut 0.18s ease forwards;
+}
+
+.product-modal-backdrop {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.88);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* =========================================================
+   MODAL PANEL
+   ========================================================= */
+
+.product-modal-panel {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    max-width: 500px;
+
+    max-height: calc(100vh - 24px);
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            145deg,
+            #14191e 0%,
+            #0b0f13 100%
+        );
+
+    border:
+        1px solid rgba(212, 175, 55, 0.38);
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.8);
+
+    animation:
+        modalPanelIn 0.24s ease forwards;
+}
+
+.product-modal.closing .product-modal-panel {
+    animation:
+        modalPanelOut 0.18s ease forwards;
+}
+
+
+/* =========================================================
+   MODAL CLOSE BUTTON
+   ========================================================= */
+
+.product-modal-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 20;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0, 0, 0, 0.62);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+    color: #ffffff;
+
+    font-size: 1.7rem;
+    font-weight: 300;
+
+    line-height: 1;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.product-modal-close:hover {
+    background:
+        rgba(212, 175, 55, 0.18);
+
+    border-color:
+        rgba(212, 175, 55, 0.7);
+}
+
+.product-modal-close:active {
+    transform: scale(0.88);
+}
+
+
+/* =========================================================
+   MODAL IMAGE
+   ========================================================= */
+
+.product-modal-image-section {
+    position: relative;
+
+    width: 100%;
+
+    height: min(55vh, 440px);
+
+    min-height: 260px;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+.product-modal-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.image-view-badge {
+    position: absolute;
+
+    left: 14px;
+    bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.62);
+
+    border:
+        1px solid rgba(212, 175, 55, 0.35);
+
+    color: #d4af37;
+
+    font-size: 0.6rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+   ========================================================= */
+
+.product-modal-content {
+    padding: 20px;
+
+    overflow-y: auto;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-modal-label {
+    color: #d4af37;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 7px;
+}
+
+.product-modal-title {
+    color: #ffffff;
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.35rem;
+
+    line-height: 1.25;
+
+    margin: 0 0 8px;
+}
+
+.product-modal-price {
+    color: #e0bd4c;
+
+    font-size: 1.35rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+}
+
+.product-modal-divider {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 15px 0;
+
+    background:
+        linear-gradient(
+            to right,
+            rgba(212, 175, 55, 0.65),
+            rgba(212, 175, 55, 0.08),
+            transparent
+        );
+}
+
+.product-modal-description {
+    color: #aeb8c0;
+
+    font-size: 0.88rem;
+
+    line-height: 1.6;
+
+    margin: 0 0 17px;
+}
+
+
+/* =========================================================
+   WHATSAPP BUTTON
+   ========================================================= */
+
+.whatsapp-order-btn {
+    width: 100%;
+
+    min-height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 13px 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #31dc70,
+            #19ad54
+        );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+
+    box-shadow:
+        0 7px 20px rgba(37, 211, 102, 0.22);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.whatsapp-order-btn:active {
+    transform: scale(0.97);
+
+    box-shadow:
+        0 4px 12px rgba(37, 211, 102, 0.18);
+}
+
+.whatsapp-icon {
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   BEAUTIFUL DELETE BUTTON
+   ========================================================= */
+
+.delete-post-btn {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 11px;
+
+    padding: 13px 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 72, 92, 0.13),
+            rgba(150, 20, 40, 0.08)
+        );
+
+    color: #ff7181;
+
+    border:
+        1px solid rgba(255, 82, 102, 0.4);
+
+    border-radius: 12px;
+
+    font-size: 0.76rem;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.delete-post-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.07),
+            transparent
+        );
+
+    transition:
+        left 0.5s ease;
+}
+
+.delete-post-btn:hover::before {
+    left: 100%;
+}
+
+.delete-post-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 72, 92, 0.22),
+            rgba(150, 20, 40, 0.12)
+        );
+
+    border-color:
+        rgba(255, 82, 102, 0.7);
+
+    box-shadow:
+        0 6px 22px rgba(255, 50, 70, 0.12);
+}
+
+.delete-post-btn:active {
+    transform: scale(0.97);
+}
+
+.delete-icon {
+    font-size: 1.1rem;
+
+    line-height: 1;
+}
+
+.delete-text {
+    flex: 1;
+
+    text-align: center;
+}
+
+.delete-arrow {
+    font-size: 1.05rem;
+
+    opacity: 0.65;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.delete-post-btn:hover .delete-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.home-empty-state,
+.home-error-state {
+    width: 100%;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #89949d;
+}
+
+.empty-icon,
+.home-error-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(212, 175, 55, 0.35);
+
+    color: #d4af37;
+
+    font-size: 1.4rem;
+
+    background:
+        rgba(212, 175, 55, 0.05);
+}
+
+.home-empty-state h3,
+.home-error-state h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 1rem;
+}
+
+.home-empty-state p,
+.home-error-state p {
+    margin: 0;
+
+    color: #89949d;
+
+    font-size: 0.8rem;
+}
+
+.home-error-state .home-error-icon {
+    color: #f87171;
+
+    border-color:
+        rgba(248, 113, 113, 0.3);
+}
+
+
+/* =========================================================
+   MODAL ANIMATIONS
+   ========================================================= */
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalPanelOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+}
+
+
+/* =========================================================
+   LOCK BACKGROUND WHEN PRODUCT VIEWER IS OPEN
+   ========================================================= */
+
+body.modal-open {
+    overflow: hidden;
+    touch-action: none;
+}
+
+body.modal-open .product-modal-content {
+    touch-action: pan-y;
+}
+
+
+/* =========================================================
+   TABLET / DESKTOP
+   ========================================================= */
+
+@media (min-width: 600px) {
+
+    .hero-section {
+        min-height: 560px;
+    }
+
+    .collections-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+    .collection-card {
+        height: 200px;
+    }
+
+    .featured-section {
+        max-width: 900px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tiktok-feed-card {
+        height: 650px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .home-brand-header {
+        padding: 0 11px;
+    }
+
+    .brand-logo-title {
+        font-size: 1.05rem;
+        letter-spacing: 3px;
+    }
+
+    .hero-title {
+        font-size: 1.55rem;
+    }
+
+    .hero-section {
+        min-height: 470px;
+    }
+
+    .collection-card {
+        height: 160px;
+    }
+
+    .tiktok-feed-card {
+        min-height: 400px;
+    }
+
+    .product-feed-content {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .product-modal-content {
+        padding: 16px;
+    }
 }
