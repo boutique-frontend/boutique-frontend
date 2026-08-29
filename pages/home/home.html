@@ -85,6 +85,8 @@
 
     <!-- =====================================================
          HERO SECTION
+         (id="homeHero" is what home.js targets to swap this
+         background image in via JS — see setHeroImage())
          ===================================================== -->
     <section
         class="hero-section"
@@ -240,6 +242,10 @@
 
     <!-- =====================================================
          COLLECTIONS
+         Each <img> keeps its real src as a first-paint fallback;
+         home.js re-applies the same path via setCollectionImages()
+         and adds an onerror handler. The inline onerror below is a
+         second safety net in case JS fails to load at all.
          ===================================================== -->
     <section
         class="collections-section"
@@ -288,8 +294,11 @@
                 <img
                     src="/boutique-frontend/assets/images/categories/unstitched.jpg"
                     alt="Unstitched Suits"
+                    width="400"
+                    height="220"
                     loading="lazy"
                     decoding="async"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop';"
                 >
 
                 <div class="collection-card-overlay"></div>
@@ -346,8 +355,11 @@
                 <img
                     src="/boutique-frontend/assets/images/categories/kurtis.jpg"
                     alt="Ready to Wear Kurtis"
+                    width="400"
+                    height="220"
                     loading="lazy"
                     decoding="async"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop';"
                 >
 
                 <div class="collection-card-overlay"></div>
@@ -401,8 +413,11 @@
                 <img
                     src="/boutique-frontend/assets/images/categories/abayas.jpg"
                     alt="Abayas"
+                    width="400"
+                    height="220"
                     loading="lazy"
                     decoding="async"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop';"
                 >
 
                 <div class="collection-card-overlay"></div>
@@ -453,8 +468,11 @@
                 <img
                     src="/boutique-frontend/assets/images/categories/shawls.jpg"
                     alt="Shawls"
+                    width="400"
+                    height="220"
                     loading="lazy"
                     decoding="async"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop';"
                 >
 
                 <div class="collection-card-overlay"></div>
@@ -572,6 +590,7 @@
 
         <div class="signature-line"></div>
 
-    </div>
+    </div> 
     
 </div>
+                
