@@ -347,7 +347,7 @@
     text-decoration: underline;
 }
 
-/* TikTok Vertical Snap Feed Section */
+/* Vertical Feed Section */
 .featured-section {
     padding: 0 16px;
 }
@@ -355,28 +355,16 @@
 .tiktok-feed-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    max-height: 80vh;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 16px;
-    padding: 4px 0 20px 0;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.tiktok-feed-wrapper::-webkit-scrollbar {
-    width: 0;
-    display: none;
+    gap: 24px;
+    width: 100%;
+    padding: 4px 0 24px 0;
 }
 
 .tiktok-feed-card {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     position: relative;
     width: 100%;
-    min-height: 70vh;
+    height: 60vh; 
+    min-height: 400px;
     background-color: #0b0f12;
     border-radius: 16px;
     overflow: hidden;
@@ -393,11 +381,32 @@
     border-color: rgba(212, 175, 55, 0.5);
 }
 
+/* Image aspect ratio and framing fix */
+.tiktok-feed-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+/* Ensure text and details stay readable on top of images */
+.tiktok-feed-card-content {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(6, 8, 12, 0.95) 0%, rgba(6, 8, 12, 0.4) 60%, transparent 100%);
+    padding: 20px 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .wishlist-btn {
     position: absolute;
     top: 16px;
     right: 16px;
-    z-index: 2;
+    z-index: 3;
     background: rgba(6, 8, 12, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
