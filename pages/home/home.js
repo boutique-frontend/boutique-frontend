@@ -9,6 +9,24 @@ export const HomePage = {
     adminPassword: '5090',
 
     // =========================================================
+    // STATIC IMAGES (hero + the 4 collection cards)
+    // Change a path here and it updates everywhere — no need to
+    // touch the HTML. Keys under "collections" must match each
+    // card's data-cat attribute in home.html.
+    // =========================================================
+    images: {
+        hero: '/boutique-frontend/assets/images/hero/hero-bg-1.jpg',
+        collections: {
+            unstitched: '/boutique-frontend/assets/images/categories/unstitched.jpg',
+            kurtis: '/boutique-frontend/assets/images/categories/kurtis.jpg',
+            abayas: '/boutique-frontend/assets/images/categories/abayas.jpg',
+            shawls: '/boutique-frontend/assets/images/categories/shawls.jpg'
+        },
+        fallback:
+            'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop'
+    },
+
+    // =========================================================
     // RENDER HOME PAGE
     // =========================================================
     async render() {
@@ -39,6 +57,7 @@ export const HomePage = {
     // =========================================================
     async init() {
         this.bindEvents();
+        this.applyStaticImages();
         await this.loadFeaturedProducts();
     },
 
@@ -80,6 +99,59 @@ export const HomePage = {
 
                 dot.classList.add('active');
             });
+        });
+    },
+
+    // =========================================================
+    // STATIC IMAGES: HERO + 4 COLLECTION CARDS
+    // =========================================================
+    applyStaticImages() {
+        this.setHeroImage(this.images.hero);
+        this.setCollectionImages();
+    },
+
+    setHeroImage(src) {
+        const heroEl = document.getElementById('homeHero');
+
+        if (!heroEl) return;
+
+        // Preload first so a broken path never leaves the hero
+        // section with a blank/black background — it swaps to the
+        // fallback instead, the same way the product feed does.
+        const preload = new Image();
+
+        preload.onload = () => {
+            heroEl.style.backgroundImage = `url('${src}')`;
+        };
+
+        preload.onerror = () => {
+            console.warn(
+                `Hero image failed to load (${src}), using fallback.`
+            );
+            heroEl.style.backgroundImage =
+                `url('${this.images.fallback}')`;
+        };
+
+        preload.src = src;
+    },
+
+    setCollectionImages() {
+        document.querySelectorAll('.collection-card').forEach(card => {
+            const category = card.getAttribute('data-cat');
+            const img = card.querySelector('img');
+
+            if (!img || !category) return;
+
+            const src = this.images.collections[category];
+
+            if (!src) return;
+
+            img.src = src;
+
+            img.onerror = () => {
+                img.onerror = null;
+                img.src = this.images.fallback;
+            };
         });
     },
 
