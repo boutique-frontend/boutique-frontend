@@ -63,6 +63,10 @@ export const App = {
                     if (module.HomePage.init) module.HomePage.init();
                     break;
             }
+
+            // Every route swap lands here — reset scroll back to top
+            // no matter which page just loaded.
+            this.resetScroll(contentContainer);
         } catch (err) {
             console.error("Routing error:", err);
             contentContainer.innerHTML = `
@@ -71,6 +75,27 @@ export const App = {
                     <p style="color:#8c9ba5; font-size:0.85rem; margin-top:6px;">${err.message}</p>
                 </div>
             `;
+            this.resetScroll(contentContainer);
+        }
+    },
+
+    // Covers three possible scroll owners so it works no matter how
+    // a given page is built:
+    // 1. The window/document itself (normal page scroll)
+    // 2. #page-content, if that's the element with overflow set
+    // 3. The page's own root div (e.g. .about-page, .home-page),
+    //    if THAT element has its own overflow-y: auto — which is
+    //    how home.js's page is set up
+    resetScroll(contentContainer) {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        if (contentContainer) {
+            contentContainer.scrollTop = 0;
+
+            const pageRoot = contentContainer.firstElementChild;
+            if (pageRoot) pageRoot.scrollTop = 0;
         }
     }
 };
