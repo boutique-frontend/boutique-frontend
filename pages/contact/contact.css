@@ -1407,8 +1407,207 @@
 }
 
 /* =========================================================
-   GOLD SHIMMER SWEEP ON HEADING
+   GLOWING SANA EMBLEM — rotating rings + pulsing core,
+   centered over the hero photo
    ========================================================= */
+
+.sana-glow-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+
+    width: 168px;
+    height: 168px;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+}
+
+.badge-ring {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(212, 175, 55, 0.55);
+
+    box-shadow:
+        0 0 14px 2px rgba(212, 175, 55, 0.3),
+        inset 0 0 14px 2px rgba(212, 175, 55, 0.12);
+}
+
+.ring-1 {
+    animation: badgeSpin 18s linear infinite;
+}
+
+.ring-2 {
+    inset: -16px;
+    border-color: rgba(212, 175, 55, 0.32);
+    animation: badgeSpin 26s linear infinite reverse;
+}
+
+.ring-3 {
+    inset: -32px;
+    border-color: rgba(212, 175, 55, 0.18);
+    border-style: dashed;
+    animation: badgeSpin 40s linear infinite;
+}
+
+@keyframes badgeSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.badge-core {
+    position: absolute;
+    inset: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(20, 16, 6, 0.92),
+        rgba(5, 5, 5, 0.96)
+    );
+
+    box-shadow:
+        0 0 20px 4px rgba(212, 175, 55, 0.35),
+        inset 0 0 18px rgba(212, 175, 55, 0.15);
+
+    animation: badgeCorePulse 3.4s ease-in-out infinite;
+}
+
+@keyframes badgeCorePulse {
+    0%, 100% {
+        box-shadow:
+            0 0 20px 4px rgba(212, 175, 55, 0.35),
+            inset 0 0 18px rgba(212, 175, 55, 0.15);
+    }
+    50% {
+        box-shadow:
+            0 0 32px 8px rgba(212, 175, 55, 0.55),
+            inset 0 0 24px rgba(212, 175, 55, 0.25);
+    }
+}
+
+.badge-icon {
+    color: var(--sana-gold-light);
+}
+
+.badge-title {
+    color: var(--sana-gold-light);
+
+    font-family: "Cinzel", "Playfair Display", Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.badge-subtitle {
+    color: rgba(232, 199, 101, 0.75);
+
+    font-family: "Cinzel", "Playfair Display", Georgia, serif;
+    font-size: 0.42rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+}
+
+@media (max-width: 767px) {
+    .sana-glow-badge {
+        width: 108px;
+        height: 108px;
+    }
+
+    .badge-title {
+        font-size: 0.7rem;
+        letter-spacing: 1.4px;
+    }
+
+    .badge-subtitle {
+        font-size: 0.32rem;
+        letter-spacing: 1.8px;
+    }
+
+    .badge-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* =========================================================
+   COMET STREAK — top-right corner, matches the reference look
+   ========================================================= */
+
+.comet-streak {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    z-index: 3;
+
+    width: 65%;
+    height: 140%;
+
+    background: linear-gradient(
+        -35deg,
+        transparent 40%,
+        rgba(212, 175, 55, 0.05) 55%,
+        rgba(232, 199, 101, 0.18) 68%,
+        rgba(255, 244, 214, 0.35) 74%,
+        rgba(232, 199, 101, 0.18) 80%,
+        rgba(212, 175, 55, 0.05) 90%,
+        transparent 100%
+    );
+
+    filter: blur(2px);
+
+    pointer-events: none;
+
+    animation: cometShimmer 6s ease-in-out infinite;
+}
+
+@keyframes cometShimmer {
+    0%, 100% { opacity: 0.65; }
+    50% { opacity: 1; }
+}
+
+/* =========================================================
+   TWINKLE STARFIELD — small static dots that fade in/out,
+   scattered across the whole hero (no upward movement)
+   ========================================================= */
+
+.twinkle-dot {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        #fff6d9 0%,
+        #d4af37 60%,
+        transparent 100%
+    );
+
+    box-shadow: 0 0 4px 1px rgba(212, 175, 55, 0.6);
+
+    animation-name: twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.15); }
+}
+
+
 
 .contact-heading {
     background: linear-gradient(
@@ -1486,7 +1685,11 @@
     }
 
     .ember-particle,
+    .twinkle-dot,
     .hero-image-glow,
+    .badge-ring,
+    .badge-core,
+    .comet-streak,
     .contact-heading,
     .contact-card,
     .business-hours-card,
