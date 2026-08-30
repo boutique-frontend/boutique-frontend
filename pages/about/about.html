@@ -1,256 +1,123 @@
-<section class="about-page" aria-labelledby="aboutTitle">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="The story, mission and values behind SANA Boutique.">
+<title>About | SANA Boutique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/navigation.css">
+<link rel="stylesheet" href="../css/about.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<div id="app">
 
-    <!-- ABOUT US -->
-    <section class="about-section about-hero-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h1 id="aboutTitle">ABOUT US</h1>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
+<header class="app-header about-header">
+<button class="header-button" id="aboutBackButton" type="button" aria-label="Go back">←</button>
+<div class="brand"><div class="brand-name">SANA</div><div class="brand-subtitle">ABOUT US</div></div>
+<button class="header-button" id="aboutFavorite" type="button" aria-label="Favorite">♡</button>
+</header>
 
-        <div class="about-hero-card">
-            <div class="about-hero-content">
-                <span class="about-hero-small">SAnA Boutique</span>
+<main class="about-page">
 
-                <h2>
-                    Elevating<br>
-                    Elegance,<br>
-                    Empowering<br>
-                    <em>You.</em>
-                </h2>
+<section class="about-hero" id="aboutHero">
+<canvas id="particleCanvas" class="particle-canvas"></canvas>
+<div class="hero-glow glow-one"></div><div class="hero-glow glow-two"></div>
 
-                <div class="gold-divider"></div>
+<div class="fabric-scene" aria-hidden="true">
+<div class="fabric fabric-one"></div>
+<div class="fabric fabric-two"></div>
+<div class="fabric fabric-three"></div>
+</div>
 
-                <p>
-                    SAnA Boutique is more than just a brand —
-                    it’s a celebration of modesty, elegance and
-                    timeless fashion.
-                </p>
-            </div>
+<div class="hero-orbit" aria-hidden="true">
+<div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+<div class="orbit-core"><span>SANA</span><small>BOUTIQUE</small></div>
+</div>
 
-            <div class="about-hero-image">
-                <img
-                    src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85"
-                    alt="Elegant women's fashion"
-                    loading="eager"
-                >
-            </div>
-        </div>
-    </section>
+<div class="hero-copy">
+<span class="eyebrow reveal">OUR STORY <i>✦</i></span>
+<h1 class="reveal">Elegance<br><span>Redefined</span></h1>
+<div class="gold-line reveal"></div>
+<p class="reveal">SANA Boutique is more than a brand — it is a celebration of timeless style, quality, and the beauty of tradition woven into modern fashion.</p>
+<button class="luxury-button reveal" id="journeyButton" type="button">DISCOVER OUR JOURNEY <b>→</b></button>
+</div>
 
+<div class="scroll-cue"><span class="scroll-mouse"><i></i></span>SCROLL TO EXPLORE</div>
+</section>
 
-    <!-- OUR STORY -->
-    <section class="about-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h2>OUR STORY</h2>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
+<section class="mission-section about-section reveal-section" id="journey">
+<div class="mission-art">
+<div class="cloth-card">
+<div class="cloth-shine"></div>
+<span class="flower f1">✦</span><span class="flower f2">✧</span><span class="flower f3">✦</span><span class="flower f4">✧</span>
+<div class="cloth-thread t1"></div><div class="cloth-thread t2"></div><div class="cloth-thread t3"></div>
+<button id="fabricPlay" class="visual-play" type="button">▶</button>
+</div>
+<div class="bars"><i class="active"></i><i></i><i></i><i></i></div>
+</div>
+<div class="mission-copy">
+<span class="eyebrow">OUR MISSION <i>✦</i></span>
+<h2>Crafting Beauty,<br><span>Inspiring Confidence</span></h2>
+<p>We aim to bring you carefully curated pieces that blend comfort with elegance. Every stitch, every fabric, and every detail is chosen with love.</p>
+<div class="mini-values">
+<div><span>◇</span><b>THOUGHTFUL<br>DESIGN</b></div>
+<div><span>♡</span><b>PREMIUM<br>QUALITY</b></div>
+<div><span>✦</span><b>MADE FOR<br>YOU</b></div>
+</div>
+</div>
+</section>
 
-        <article class="about-text-card">
-            <p>
-                Founded with a passion for quality and elegance,
-                SAnA Boutique was created to bring premium women’s
-                fashion that blends tradition with modern style.
-            </p>
+<section class="values-section about-section reveal-section">
+<div class="section-heading">
+<span class="eyebrow">OUR VALUES <i>✦</i></span>
+<h2>What We Stand For</h2><div class="heading-line"></div>
+</div>
+<div class="value-grid">
+<article class="value-card"><div class="value-icon">◇</div><h3>QUALITY</h3><p>Premium fabrics and finest craftsmanship in every piece.</p></article>
+<article class="value-card"><div class="value-icon">♡</div><h3>PASSION</h3><p>We love what we do and let it reflect in our designs.</p></article>
+<article class="value-card"><div class="value-icon">♧</div><h3>TRADITION</h3><p>Rooted in tradition, designed for the modern you.</p></article>
+<article class="value-card"><div class="value-icon">☆</div><h3>TRUST</h3><p>Our customers are our family. Your trust is our strength.</p></article>
+</div>
+</section>
 
-            <p>
-                Every piece is carefully selected and designed to
-                make you feel confident, comfortable and beautiful —
-                every single day.
-            </p>
+<section class="brand-section reveal-section">
+<div>
+<span class="eyebrow dark-eyebrow">BEHIND THE BRAND <i>✦</i></span>
+<h2>Made With <span>Heart</span></h2><div class="gold-line"></div>
+<p>From concept to creation, every collection is designed with heart and attention to detail. We believe fashion should make you feel beautiful, confident, and you.</p>
+<button class="dark-gold-button" id="makersButton" type="button">MEET THE MAKERS <b>→</b></button>
+</div>
+<div class="maker-art">
+<div class="machine-light"></div><div class="machine-head"></div><div class="needle"></div><div class="machine-base"></div><div class="cloth-roll"></div><div class="moving-thread"></div>
+<span>CRAFTED WITH CARE ✦</span>
+</div>
+</section>
 
-            <div class="gold-divider gold-divider-center"></div>
-        </article>
-    </section>
+<section class="closing-section reveal-section">
+<span class="eyebrow">SANA BOUTIQUE</span>
+<h2>Wear Your<br><span>Elegance.</span></h2>
+<p>Timeless pieces. Thoughtful design. Made for you.</p>
+<button class="luxury-button" id="shopButton" type="button">EXPLORE COLLECTION <b>→</b></button>
+</section>
 
+</main>
 
-    <!-- WHAT WE OFFER -->
-    <section class="about-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h2>WHAT WE OFFER</h2>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
-
-        <div class="offer-grid">
-
-            <article class="offer-card">
-                <div class="offer-icon" aria-hidden="true">♟</div>
-                <h3>Premium<br>Quality</h3>
-                <p>
-                    Finest fabrics and attention to detail.
-                </p>
-            </article>
-
-            <article class="offer-card">
-                <div class="offer-icon" aria-hidden="true">◇</div>
-                <h3>Exclusive<br>Designs</h3>
-                <p>
-                    Unique styles crafted for elegant women.
-                </p>
-            </article>
-
-            <article class="offer-card">
-                <div class="offer-icon" aria-hidden="true">✥</div>
-                <h3>Trusted<br>Brand</h3>
-                <p>
-                    Loved by hundreds of satisfied customers.
-                </p>
-            </article>
-
-            <article class="offer-card">
-                <div class="offer-icon" aria-hidden="true">♧</div>
-                <h3>Modest &<br>Elegant</h3>
-                <p>
-                    Perfect blend of modesty and fashion.
-                </p>
-            </article>
-
-        </div>
-
-        <div class="about-image-card">
-            <img
-                src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1000&q=85"
-                alt="Luxury fashion fabric and boutique styling"
-                loading="lazy"
-            >
-        </div>
-    </section>
-
-
-    <!-- OUR MISSION -->
-    <section class="about-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h2>OUR MISSION</h2>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
-
-        <article class="mission-card">
-            <div class="quote-mark" aria-hidden="true">“</div>
-
-            <p>
-                To inspire confidence and beauty in every woman
-                by delivering premium fashion that reflects
-                her values, her style, and her personality.
-            </p>
-
-            <div class="gold-divider gold-divider-center"></div>
-        </article>
-    </section>
-
-
-    <!-- OUR VALUES -->
-    <section class="about-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h2>OUR VALUES</h2>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
-
-        <div class="values-card">
-
-            <article class="value-item">
-                <div class="value-icon" aria-hidden="true">◇</div>
-
-                <div class="value-content">
-                    <h3>Quality First</h3>
-                    <p>
-                        We never compromise on the quality
-                        of our fabrics and craftsmanship.
-                    </p>
-                </div>
-            </article>
-
-            <article class="value-item">
-                <div class="value-icon" aria-hidden="true">♡</div>
-
-                <div class="value-content">
-                    <h3>Customer Happiness</h3>
-                    <p>
-                        Your satisfaction is our top priority.
-                        We’re here to serve you better.
-                    </p>
-                </div>
-            </article>
-
-            <article class="value-item">
-                <div class="value-icon" aria-hidden="true">♢</div>
-
-                <div class="value-content">
-                    <h3>Trust & Transparency</h3>
-                    <p>
-                        We believe in honest service,
-                        clear communication and trust.
-                    </p>
-                </div>
-            </article>
-
-            <article class="value-item">
-                <div class="value-icon" aria-hidden="true">⌁</div>
-
-                <div class="value-content">
-                    <h3>Modesty & Elegance</h3>
-                    <p>
-                        We promote modest fashion that
-                        empowers and uplifts every woman.
-                    </p>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
-
-    <!-- WHY CHOOSE SANA -->
-    <section class="about-section why-choose-section">
-        <div class="about-section-heading">
-            <span class="heading-decoration">❧</span>
-            <h2>WHY CHOOSE SANA?</h2>
-            <span class="heading-decoration heading-decoration-right">❧</span>
-        </div>
-
-        <div class="why-choose-card">
-
-            <div class="why-list">
-
-                <div class="why-item">
-                    <span class="why-check" aria-hidden="true">✓</span>
-                    <p>Premium unstitched suits, kurtis, abayas & shawls</p>
-                </div>
-
-                <div class="why-item">
-                    <span class="why-check" aria-hidden="true">✓</span>
-                    <p>Latest designs with timeless elegance</p>
-                </div>
-
-                <div class="why-item">
-                    <span class="why-check" aria-hidden="true">✓</span>
-                    <p>Carefully curated collections</p>
-                </div>
-
-                <div class="why-item">
-                    <span class="why-check" aria-hidden="true">✓</span>
-                    <p>Affordable luxury for every woman</p>
-                </div>
-
-                <div class="why-item">
-                    <span class="why-check" aria-hidden="true">✓</span>
-                    <p>Reliable service & fast delivery</p>
-                </div>
-
-            </div>
-
-            <div class="why-image-card">
-                <img
-                    src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1000&q=85"
-                    alt="Elegant boutique clothing collection"
-                    loading="lazy"
-                >
-            </div>
-
-        </div>
-    </section>
-
-    </section>
+<nav class="bottom-navigation" aria-label="Main navigation">
+<a href="../index.html" class="nav-item"><span class="nav-icon">⌂</span><span>Home</span></a>
+<a href="shop.html" class="nav-item"><span class="nav-icon">♧</span><span>Shop</span></a>
+<a href="post.html" class="post-button" id="postButton" aria-label="Create product">+</a>
+<a href="about.html" class="nav-item active" aria-current="page"><span class="nav-icon">♙</span><span>About</span></a>
+<a href="contact.html" class="nav-item"><span class="nav-icon">⌕</span><span>Contact</span></a>
+</nav>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/about.js"></script>
+</body>
+</html>
