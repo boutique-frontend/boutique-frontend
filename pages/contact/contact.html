@@ -27,11 +27,8 @@
 
         <div class="contact-hero-image">
 
-            <!-- Pulsing gold glow ring behind the avatar -->
-            <div class="avatar-glow-ring" aria-hidden="true"></div>
-
-            <!-- Tighter ember layer just around the circle -->
-            <div class="ember-layer ember-layer-avatar" id="avatarEmberLayer" aria-hidden="true"></div>
+            <!-- Ambient gold glow behind the photo -->
+            <div class="hero-image-glow" aria-hidden="true"></div>
 
             <img
                 id="profileAvatarImg"
@@ -39,6 +36,10 @@
                 alt="SAnA Boutique"
                 onerror="this.style.display='none';"
             >
+
+            <!-- Embers rising over the photo panel -->
+            <div class="ember-layer ember-layer-avatar" id="avatarEmberLayer" aria-hidden="true"></div>
+
         </div>
 
     </section>
@@ -524,202 +525,3 @@
     </section>
 
 </div>
-
-
-<!-- =========================================================
-     GLOWING GOLD EMBER PARTICLES — self-contained styles + script
-     Safe to leave inline here; nothing else on the page needs
-     to change for this to work.
-     ========================================================= -->
-<style>
-
-    /* Containers need to clip their particles and sit above the
-       background but below the real content */
-    .contact-hero {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .contact-hero-content,
-    .contact-hero-image {
-        position: relative;
-        z-index: 2;
-    }
-
-    .ember-layer {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    .ember-layer-avatar {
-        z-index: 1;
-    }
-
-    .contact-hero-image {
-        position: relative;
-    }
-
-    .ember-particle {
-        position: absolute;
-        bottom: -12px;
-        border-radius: 50%;
-        background: radial-gradient(
-            circle,
-            #fff3d0 0%,
-            #ffd97a 35%,
-            #d4af37 70%,
-            rgba(212, 175, 55, 0) 100%
-        );
-        box-shadow: 0 0 6px 2px rgba(212, 175, 55, 0.55);
-        opacity: 0;
-        animation-name: emberRise;
-        animation-timing-function: ease-in;
-        animation-iteration-count: infinite;
-        will-change: transform, opacity;
-    }
-
-    @keyframes emberRise {
-        0% {
-            transform: translate(0, 0) scale(0.6);
-            opacity: 0;
-        }
-        12% {
-            opacity: 1;
-        }
-        80% {
-            opacity: 0.85;
-        }
-        100% {
-            transform: translate(var(--drift, 20px), var(--rise, -260px)) scale(1);
-            opacity: 0;
-        }
-    }
-
-    /* Pulsing glow ring behind the SANA avatar circle */
-    .avatar-glow-ring {
-        position: absolute;
-        inset: -14px;
-        border-radius: 50%;
-        border: 1px solid rgba(212, 175, 55, 0.55);
-        box-shadow:
-            0 0 18px 4px rgba(212, 175, 55, 0.35),
-            0 0 36px 10px rgba(212, 175, 55, 0.15);
-        animation: goldPulse 3.2s ease-in-out infinite;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    @keyframes goldPulse {
-        0%, 100% {
-            box-shadow:
-                0 0 18px 4px rgba(212, 175, 55, 0.35),
-                0 0 36px 10px rgba(212, 175, 55, 0.15);
-            transform: scale(1);
-        }
-        50% {
-            box-shadow:
-                0 0 28px 8px rgba(212, 175, 55, 0.55),
-                0 0 54px 16px rgba(212, 175, 55, 0.25);
-            transform: scale(1.035);
-        }
-    }
-
-    #profileAvatarImg {
-        position: relative;
-        z-index: 2;
-    }
-
-    /* Subtle gold glow on the contact cards when touched/hovered —
-       ties the rest of the page back to the same gold-ember mood */
-    .contact-card {
-        transition: box-shadow 0.35s ease, transform 0.35s ease;
-    }
-
-    .contact-card:hover,
-    .contact-card:focus-visible {
-        box-shadow: 0 0 22px rgba(212, 175, 55, 0.25);
-        transform: translateY(-2px);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .ember-particle,
-        .avatar-glow-ring {
-            animation: none !important;
-        }
-    }
-
-</style>
-
-<script>
-(function () {
-
-    // Builds `count` ember particles inside the element with id
-    // `containerId`. sizeRange / riseRange / driftRange in px,
-    // durationRange in seconds.
-    function spawnEmbers(containerId, count, opts) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-
-        const {
-            sizeRange = [2, 5],
-            riseRange = [140, 260],
-            driftRange = [-30, 30],
-            durationRange = [4, 8]
-        } = opts || {};
-
-        const frag = document.createDocumentFragment();
-
-        for (let i = 0; i < count; i++) {
-            const particle = document.createElement('span');
-            particle.className = 'ember-particle';
-
-            const size = sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]);
-            const rise = riseRange[0] + Math.random() * (riseRange[1] - riseRange[0]);
-            const drift = driftRange[0] + Math.random() * (driftRange[1] - driftRange[0]);
-            const duration = durationRange[0] + Math.random() * (durationRange[1] - durationRange[0]);
-            const delay = -Math.random() * duration; // negative delay = already mid-flight on load
-            const left = Math.random() * 100;
-
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${left}%`;
-            particle.style.setProperty('--rise', `-${rise}px`);
-            particle.style.setProperty('--drift', `${drift}px`);
-            particle.style.animationDuration = `${duration}s`;
-            particle.style.animationDelay = `${delay}s`;
-
-            frag.appendChild(particle);
-        }
-
-        container.appendChild(frag);
-    }
-
-    function init() {
-        // Wide, sparse embers across the whole hero banner
-        spawnEmbers('heroEmberLayer', 35, {
-            sizeRange: [2, 5],
-            riseRange: [160, 320],
-            driftRange: [-40, 40],
-            durationRange: [5, 9]
-        });
-
-        // Denser, smaller embers hugging just the avatar circle
-        spawnEmbers('avatarEmberLayer', 18, {
-            sizeRange: [1.5, 3.5],
-            riseRange: [60, 120],
-            driftRange: [-18, 18],
-            durationRange: [3, 5.5]
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
-})();
-</script>
