@@ -304,6 +304,8 @@ export const ContactPage = {
             driftRange: [-18, 18],
             durationRange: [3, 5.5]
         });
+
+        this._spawnTwinkleInto('heroTwinkleLayer', 40);
     },
 
     _spawnEmbersInto(containerId, count, opts) {
@@ -344,6 +346,41 @@ export const ContactPage = {
             particle.style.animationDelay = `${delay}s`;
 
             frag.appendChild(particle);
+        }
+
+        container.appendChild(frag);
+    },
+
+    // Scattered static dots that fade in/out — no upward drift.
+    // Spread wide across the whole hero for that starry-background
+    // look, unlike the rising ember particles.
+    _spawnTwinkleInto(containerId, count) {
+        const container = document.getElementById(containerId);
+
+        if (!container) return;
+        if (container.dataset.twinkleSpawned === 'true') return;
+        container.dataset.twinkleSpawned = 'true';
+
+        const frag = document.createDocumentFragment();
+
+        for (let i = 0; i < count; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'twinkle-dot';
+
+            const size = 1 + Math.random() * 2.5;
+            const duration = 2 + Math.random() * 4;
+            const delay = -Math.random() * duration;
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.top = `${top}%`;
+            dot.style.left = `${left}%`;
+            dot.style.animationDuration = `${duration}s`;
+            dot.style.animationDelay = `${delay}s`;
+
+            frag.appendChild(dot);
         }
 
         container.appendChild(frag);
