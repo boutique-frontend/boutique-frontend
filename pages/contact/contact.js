@@ -47,6 +47,13 @@ export const ContactPage = {
 
 
         /* =====================================================
+           GOLD EMBER PARTICLES
+           ===================================================== */
+
+        this.spawnEmberParticles();
+
+
+        /* =====================================================
            ELEMENTS
            ===================================================== */
 
@@ -265,6 +272,81 @@ export const ContactPage = {
                     event.stopPropagation();
                 });
             });
+    },
+
+    /* =====================================================
+       GOLD EMBER PARTICLES
+       Spawns glowing gold particles that drift upward, like
+       embers. Two layers: a wide sparse one across the whole
+       hero banner, and a denser one over the photo panel.
+       Skipped entirely if the user has reduced-motion on.
+       ===================================================== */
+
+    spawnEmberParticles() {
+
+        if (
+            window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+            return;
+        }
+
+        this._spawnEmbersInto('heroEmberLayer', 35, {
+            sizeRange: [2, 5],
+            riseRange: [160, 320],
+            driftRange: [-40, 40],
+            durationRange: [5, 9]
+        });
+
+        this._spawnEmbersInto('avatarEmberLayer', 18, {
+            sizeRange: [1.5, 3.5],
+            riseRange: [60, 120],
+            driftRange: [-18, 18],
+            durationRange: [3, 5.5]
+        });
+    },
+
+    _spawnEmbersInto(containerId, count, opts) {
+        const container = document.getElementById(containerId);
+
+        if (!container) return;
+
+        // Guard against re-spawning if bindData ever runs twice
+        if (container.dataset.embersSpawned === 'true') return;
+        container.dataset.embersSpawned = 'true';
+
+        const {
+            sizeRange = [2, 5],
+            riseRange = [140, 260],
+            driftRange = [-30, 30],
+            durationRange = [4, 8]
+        } = opts || {};
+
+        const frag = document.createDocumentFragment();
+
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'ember-particle';
+
+            const size = sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]);
+            const rise = riseRange[0] + Math.random() * (riseRange[1] - riseRange[0]);
+            const drift = driftRange[0] + Math.random() * (driftRange[1] - driftRange[0]);
+            const duration = durationRange[0] + Math.random() * (durationRange[1] - durationRange[0]);
+            const delay = -Math.random() * duration; // negative delay = already mid-flight on load
+            const left = Math.random() * 100;
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}%`;
+            particle.style.setProperty('--rise', `-${rise}px`);
+            particle.style.setProperty('--drift', `${drift}px`);
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+
+            frag.appendChild(particle);
+        }
+
+        container.appendChild(frag);
     }
 };
 
