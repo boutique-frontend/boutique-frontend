@@ -306,6 +306,7 @@ export const ContactPage = {
         });
 
         this._spawnTwinkleInto('heroTwinkleLayer', 40);
+        this._spawnRingSparkles();
     },
 
     _spawnEmbersInto(containerId, count, opts) {
@@ -384,6 +385,51 @@ export const ContactPage = {
         }
 
         container.appendChild(frag);
+    },
+
+    // Places small bright dots at even angles around the outer
+    // ring's own circumference, using its actual rendered size —
+    // this is the "necklace of light" look from the reference
+    // image, distinct from the ambient rising/twinkling particles.
+    _spawnRingSparkles() {
+        const badge = document.querySelector('.sana-glow-badge');
+        const ring = document.querySelector('.ring-2');
+
+        if (!badge || !ring) return;
+        if (badge.dataset.sparklesSpawned === 'true') return;
+        badge.dataset.sparklesSpawned = 'true';
+
+        const radius = ring.offsetWidth / 2;
+
+        if (!radius) return;
+
+        const count = 10;
+        const frag = document.createDocumentFragment();
+
+        for (let i = 0; i < count; i++) {
+            const angle = (i / count) * Math.PI * 2;
+            const x = 50 + (Math.cos(angle) * radius / badge.offsetWidth) * 100;
+            const y = 50 + (Math.sin(angle) * radius / badge.offsetHeight) * 100;
+
+            const dot = document.createElement('span');
+            dot.className = 'ring-sparkle';
+
+            const size = 3 + Math.random() * 3;
+            const duration = 1.8 + Math.random() * 2.2;
+            const delay = -Math.random() * duration;
+
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.left = `${x}%`;
+            dot.style.top = `${y}%`;
+            dot.style.transform = 'translate(-50%, -50%)';
+            dot.style.animationDuration = `${duration}s`;
+            dot.style.animationDelay = `${delay}s`;
+
+            frag.appendChild(dot);
+        }
+
+        badge.appendChild(frag);
     }
 };
 
