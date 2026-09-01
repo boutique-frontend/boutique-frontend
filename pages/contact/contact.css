@@ -158,7 +158,7 @@
     display: block;
 
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
 
     filter:
         brightness(0.72)
@@ -1375,222 +1375,37 @@
     }
 }
 
-/* Pulsing gold glow behind the hero photo panel — a ring doesn't
-   fit this container's actual rectangular/clipped shape, so this
-   is a soft radial glow instead, sized to the panel it's in */
-.hero-image-glow {
-    position: absolute;
-    inset: 0;
-
-    z-index: 1;
-
-    background:
-        radial-gradient(
-            circle at 30% 40%,
-            rgba(212, 175, 55, 0.22),
-            transparent 55%
-        );
-
-    animation: goldPulse 3.6s ease-in-out infinite;
-
-    pointer-events: none;
-}
-
-@keyframes goldPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-.contact-hero-image img {
-    position: relative;
-    z-index: 3;
-}
 
 /* =========================================================
-   GLOWING SANA EMBLEM — rotating rings + pulsing core,
-   centered over the hero photo
+   BOTTOM GLOW — replaces the old badge-on-photo glow. Sits
+   along the bottom edge of the whole hero section instead of
+   on top of the photo.
    ========================================================= */
 
-.sana-glow-badge {
+.hero-bottom-glow {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 4;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 90px;
 
-    width: 210px;
-    height: 210px;
+    z-index: 2;
 
-    transform: translate(-50%, -50%);
+    background: linear-gradient(
+        to top,
+        rgba(212, 175, 55, 0.28),
+        rgba(212, 175, 55, 0.08) 55%,
+        transparent 100%
+    );
 
     pointer-events: none;
+
+    animation: heroBottomGlowPulse 3.6s ease-in-out infinite;
 }
 
-/* Soft bloom behind everything so the whole emblem reads as a
-   glowing light source, not just thin outlined circles */
-.sana-glow-badge::before {
-    content: "";
-
-    position: absolute;
-    inset: -40px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        rgba(232, 199, 101, 0.35),
-        rgba(212, 175, 55, 0.12) 55%,
-        transparent 75%
-    );
-
-    filter: blur(6px);
-
-    animation: badgeCorePulse 3.4s ease-in-out infinite;
-}
-
-.badge-ring {
-    position: absolute;
-    inset: 0;
-
-    border-radius: 50%;
-
-    border: 2px solid rgba(232, 199, 101, 0.85);
-
-    box-shadow:
-        0 0 22px 4px rgba(212, 175, 55, 0.6),
-        0 0 44px 10px rgba(212, 175, 55, 0.3),
-        inset 0 0 22px 4px rgba(212, 175, 55, 0.25);
-}
-
-.ring-1 {
-    animation: badgeSpin 18s linear infinite;
-}
-
-.ring-2 {
-    inset: -20px;
-    border-width: 1.5px;
-    border-color: rgba(212, 175, 55, 0.55);
-    box-shadow:
-        0 0 16px 3px rgba(212, 175, 55, 0.4),
-        inset 0 0 16px 3px rgba(212, 175, 55, 0.18);
-    animation: badgeSpin 26s linear infinite reverse;
-}
-
-.ring-3 {
-    inset: -40px;
-    border-color: rgba(212, 175, 55, 0.3);
-    border-style: dashed;
-    box-shadow: 0 0 12px 2px rgba(212, 175, 55, 0.25);
-    animation: badgeSpin 40s linear infinite;
-}
-
-@keyframes badgeSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.badge-core {
-    position: absolute;
-    inset: 26px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        rgba(30, 24, 8, 0.95),
-        rgba(5, 5, 5, 0.98)
-    );
-
-    box-shadow:
-        0 0 28px 6px rgba(212, 175, 55, 0.5),
-        inset 0 0 22px rgba(212, 175, 55, 0.22);
-
-    animation: badgeCorePulse 3.4s ease-in-out infinite;
-}
-
-@keyframes badgeCorePulse {
-    0%, 100% {
-        box-shadow:
-            0 0 28px 6px rgba(212, 175, 55, 0.5),
-            inset 0 0 22px rgba(212, 175, 55, 0.22);
-    }
-    50% {
-        box-shadow:
-            0 0 42px 12px rgba(212, 175, 55, 0.75),
-            inset 0 0 30px rgba(212, 175, 55, 0.35);
-    }
-}
-
-.badge-icon {
-    color: var(--sana-gold-light);
-}
-
-.badge-title {
-    color: var(--sana-gold-light);
-
-    font-family: "Cinzel", "Playfair Display", Georgia, serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.badge-subtitle {
-    color: rgba(232, 199, 101, 0.75);
-
-    font-family: "Cinzel", "Playfair Display", Georgia, serif;
-    font-size: 0.42rem;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-}
-
-@media (max-width: 767px) {
-    .sana-glow-badge {
-        width: 140px;
-        height: 140px;
-    }
-
-    .badge-title {
-        font-size: 0.7rem;
-        letter-spacing: 1.4px;
-    }
-
-    .badge-subtitle {
-        font-size: 0.32rem;
-        letter-spacing: 1.8px;
-    }
-
-    .badge-icon {
-        width: 20px;
-        height: 20px;
-    }
-}
-
-/* Sparkle dots riding along the ring circumference — positioned
-   by JS via left/top percentages computed from angle + radius.
-   Steady twinkle, no drift, so they read as fixed points of
-   light on the ring itself (the "necklace of light" look). */
-.ring-sparkle {
-    position: absolute;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        #fff9e6 0%,
-        #ffd97a 45%,
-        rgba(212, 175, 55, 0) 100%
-    );
-
-    box-shadow: 0 0 8px 3px rgba(255, 217, 122, 0.75);
-
-    animation-name: twinkle;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+@keyframes heroBottomGlowPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
 /* =========================================================
@@ -1738,10 +1553,7 @@
 
     .ember-particle,
     .twinkle-dot,
-    .ring-sparkle,
-    .hero-image-glow,
-    .badge-ring,
-    .badge-core,
+    .hero-bottom-glow,
     .comet-streak,
     .contact-heading,
     .contact-card,
