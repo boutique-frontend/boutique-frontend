@@ -224,3 +224,346 @@
 .submit-btn:active:not(:disabled) {
     transform: scale(0.97);
 }
+
+
+/* =========================================================
+   PASSWORD CONFIRMATION MODAL
+   Cinematic entrance: backdrop fades + blurs in, card rises
+   with a soft overshoot, lock icon pulses with a rotating
+   glow ring behind it. Wrong password triggers a shake +
+   red flash on the input.
+   ========================================================= */
+
+.password-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    /* Hidden by default — post.js toggles .active */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.password-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.password-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(3, 4, 6, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.password-modal-card {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 340px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    padding: 32px 26px 26px;
+
+    background: linear-gradient(160deg, #12161d 0%, #090b0f 100%);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 20px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(212, 175, 55, 0.12);
+
+    opacity: 0;
+    transform: translateY(28px) scale(0.94);
+}
+
+.password-modal-overlay.active .password-modal-card {
+    animation: passwordCardEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes passwordCardEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.94);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.015);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.password-modal-card.shake {
+    animation: passwordCardShake 0.45s ease;
+}
+
+@keyframes passwordCardShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-9px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(4px); }
+}
+
+/* Glow behind the lock icon */
+.password-modal-glow {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 140px;
+    height: 140px;
+
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.28), transparent 70%);
+    filter: blur(4px);
+
+    animation: passwordGlowPulse 2.6s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes passwordGlowPulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+.password-modal-lock-wrap {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-modal-lock-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 175, 55, 0.55);
+    box-shadow: 0 0 16px 3px rgba(212, 175, 55, 0.35);
+    animation: lockRingSpin 12s linear infinite;
+}
+
+.password-modal-lock-ring::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    margin-left: -2.5px;
+    border-radius: 50%;
+    background: #ffd97a;
+    box-shadow: 0 0 6px 2px rgba(255, 217, 122, 0.85);
+}
+
+@keyframes lockRingSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.password-modal-lock-icon {
+    position: relative;
+    z-index: 1;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30, 24, 8, 0.95), rgba(5, 5, 5, 0.98));
+    box-shadow: inset 0 0 14px rgba(212, 175, 55, 0.25);
+
+    color: #e8c765;
+
+    animation: lockIconPulse 2.6s ease-in-out infinite;
+}
+
+@keyframes lockIconPulse {
+    0%, 100% { box-shadow: inset 0 0 14px rgba(212, 175, 55, 0.25), 0 0 12px rgba(212, 175, 55, 0.25); }
+    50% { box-shadow: inset 0 0 18px rgba(212, 175, 55, 0.4), 0 0 22px rgba(212, 175, 55, 0.5); }
+}
+
+.password-modal-title {
+    margin: 0 0 8px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+.password-modal-subtitle {
+    margin: 0 0 20px;
+
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #8c9ba5;
+    max-width: 260px;
+}
+
+.password-modal-field {
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.password-modal-input {
+    width: 100%;
+    padding: 14px 46px 14px 16px;
+
+    background-color: #0f141c;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+
+    color: #ffffff;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-align: center;
+
+    outline: none;
+    box-sizing: border-box;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.password-modal-input:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.password-modal-input.input-error {
+    border-color: #f87171;
+    box-shadow: 0 0 12px rgba(248, 113, 113, 0.35);
+    background-color: rgba(248, 113, 113, 0.06);
+}
+
+.password-toggle-visibility {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    color: #667585;
+    cursor: pointer;
+}
+
+.password-toggle-visibility:active {
+    color: #d4af37;
+}
+
+.password-modal-error {
+    min-height: 1.1em;
+    margin: 4px 0 6px;
+
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #f87171;
+
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.password-modal-error.visible {
+    opacity: 1;
+}
+
+.password-modal-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+.password-modal-cancel,
+.password-modal-confirm {
+    flex: 1;
+    padding: 13px;
+
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.password-modal-cancel {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #8c9ba5;
+}
+
+.password-modal-cancel:active {
+    transform: scale(0.97);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.password-modal-confirm {
+    background: linear-gradient(135deg, #f3e0aa 0%, #d4af37 50%, #997409 100%);
+    border: none;
+    color: #000000;
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.3);
+}
+
+.password-modal-confirm:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.password-modal-confirm:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .password-modal-overlay,
+    .password-modal-card,
+    .password-modal-glow,
+    .password-modal-lock-ring,
+    .password-modal-lock-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .password-modal-overlay.active .password-modal-card {
+        opacity: 1;
+        transform: none;
+    }
+}
