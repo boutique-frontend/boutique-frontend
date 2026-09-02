@@ -9,24 +9,6 @@ export const HomePage = {
     adminPassword: '5090',
 
     // =========================================================
-    // STATIC IMAGES (hero + the 4 collection cards)
-    // Change a path here and it updates everywhere — no need to
-    // touch the HTML. Keys under "collections" must match each
-    // card's data-cat attribute in home.html.
-    // =========================================================
-    images: {
-        hero: '/boutique-frontend/assets/images/hero/hero-bg-1.jpg',
-        collections: {
-            unstitched: '/boutique-frontend/assets/images/categories/unstitched.jpg',
-            kurtis: '/boutique-frontend/assets/images/categories/kurtis.jpg',
-            abayas: '/boutique-frontend/assets/images/categories/abayas.jpg',
-            shawls: '/boutique-frontend/assets/images/categories/shawls.jpg'
-        },
-        fallback:
-            'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop'
-    },
-
-    // =========================================================
     // RENDER HOME PAGE
     // =========================================================
     async render() {
@@ -57,7 +39,6 @@ export const HomePage = {
     // =========================================================
     async init() {
         this.bindEvents();
-        this.applyStaticImages();
         await this.loadFeaturedProducts();
     },
 
@@ -99,59 +80,6 @@ export const HomePage = {
 
                 dot.classList.add('active');
             });
-        });
-    },
-
-    // =========================================================
-    // STATIC IMAGES: HERO + 4 COLLECTION CARDS
-    // =========================================================
-    applyStaticImages() {
-        this.setHeroImage(this.images.hero);
-        this.setCollectionImages();
-    },
-
-    setHeroImage(src) {
-        const heroEl = document.getElementById('homeHero');
-
-        if (!heroEl) return;
-
-        // Preload first so a broken path never leaves the hero
-        // section with a blank/black background — it swaps to the
-        // fallback instead, the same way the product feed does.
-        const preload = new Image();
-
-        preload.onload = () => {
-            heroEl.style.backgroundImage = `url('${src}')`;
-        };
-
-        preload.onerror = () => {
-            console.warn(
-                `Hero image failed to load (${src}), using fallback.`
-            );
-            heroEl.style.backgroundImage =
-                `url('${this.images.fallback}')`;
-        };
-
-        preload.src = src;
-    },
-
-    setCollectionImages() {
-        document.querySelectorAll('.collection-card').forEach(card => {
-            const category = card.getAttribute('data-cat');
-            const img = card.querySelector('img');
-
-            if (!img || !category) return;
-
-            const src = this.images.collections[category];
-
-            if (!src) return;
-
-            img.src = src;
-
-            img.onerror = () => {
-                img.onerror = null;
-                img.src = this.images.fallback;
-            };
         });
     },
 
@@ -764,25 +692,7 @@ export const HomePage = {
             return;
         }
 
-        const inputPassword =
-            prompt('🔐 Enter Admin Password:');
-
-        if (inputPassword === null) return;
-
-        if (
-            inputPassword.trim() !==
-            this.adminPassword
-        ) {
-            alert(
-                '❌ Incorrect password.\n\nAccess denied.'
-            );
-            return;
-        }
-
-        const confirmed =
-            confirm(
-                '⚠️ DELETE THIS POST?\n\nThis action cannot be undone.'
-            );
+        const confirmed = await this.showDeletePasswordModal();
 
         if (!confirmed) return;
 
@@ -842,6 +752,159 @@ export const HomePage = {
                 '❌ Could not delete the post from the server.'
             );
         }
+    },
+
+    // =========================================================
+    // DELETE PASSWORD MODAL
+    // Same visual treatment as the Post page's publish modal —
+    // golden glowing ring behind a padlock, a card that rises
+    // in, and a shake on wrong password. Built and torn down on
+    // demand since it's only needed while deleting a post.
+    // Returns a Promise<boolean>: true if the correct password
+    // was entered, false if the user cancelled.
+    // =========================================================
+    showDeletePasswordModal() {
+        return new Promise((resolve) => {
+
+            const modalHTML = `
+                <div class="password-modal-overlay" id="homeDeletePasswordOverlay">
+
+                    <div class="password-modal-backdrop" id="homeDeletePasswordBackdrop"></div>
+
+                    <div class="password-modal-card" id="homeDeletePasswordCard" role="dialog" aria-modal="true" aria-labelledby="homeDeletePasswordTitle">
+
+                        <div class="password-modal-glow" aria-hidden="true"></div>
+
+                        <div class="password-modal-lock-wrap">
+                            <div class="password-modal-lock-ring"></div>
+                            <div class="password-modal-lock-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+                                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h3 id="homeDeletePasswordTitle" class="password-modal-title">Confirm Delete</h3>
+
+                        <p class="password-modal-subtitle">
+                            Enter the admin password to permanently
+                            delete this listing. This cannot be undone.
+                        </p>
+
+                        <div class="password-modal-field">
+                            <input
+                                type="password"
+                                id="homeDeletePasswordInput"
+                                class="password-modal-input"
+                                placeholder="Enter password"
+                                autocomplete="off"
+                                inputmode="numeric"
+                            >
+                            <button type="button" class="password-toggle-visibility" id="homeDeletePasswordToggle" aria-label="Show password">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <p class="password-modal-error" id="homeDeletePasswordError"></p>
+
+                        <div class="password-modal-actions">
+                            <button type="button" class="password-modal-cancel" id="homeDeletePasswordCancel">Cancel</button>
+                            <button type="button" class="password-modal-confirm password-modal-danger" id="homeDeletePasswordConfirm">
+                                Confirm &amp; Delete
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+            const overlay = document.getElementById('homeDeletePasswordOverlay');
+            const backdrop = document.getElementById('homeDeletePasswordBackdrop');
+            const card = document.getElementById('homeDeletePasswordCard');
+            const input = document.getElementById('homeDeletePasswordInput');
+            const toggleBtn = document.getElementById('homeDeletePasswordToggle');
+            const errorEl = document.getElementById('homeDeletePasswordError');
+            const cancelBtn = document.getElementById('homeDeletePasswordCancel');
+            const confirmBtn = document.getElementById('homeDeletePasswordConfirm');
+
+            let settled = false;
+
+            const cleanup = (result) => {
+                if (settled) return;
+                settled = true;
+
+                document.removeEventListener('keydown', escHandler);
+                overlay.classList.remove('active');
+
+                setTimeout(() => overlay.remove(), 250);
+
+                resolve(result);
+            };
+
+            const showError = (message) => {
+                errorEl.textContent = message;
+                errorEl.classList.toggle('visible', Boolean(message));
+            };
+
+            const attemptConfirm = () => {
+                const entered = input.value.trim();
+
+                if (entered !== this.adminPassword) {
+                    showError('Incorrect password. Please try again.');
+                    input.classList.add('input-error');
+                    input.value = '';
+                    input.focus();
+
+                    card.classList.remove('shake');
+                    void card.offsetWidth;
+                    card.classList.add('shake');
+                    return;
+                }
+
+                cleanup(true);
+            };
+
+            const escHandler = (e) => {
+                if (e.key === 'Escape') cleanup(false);
+            };
+
+            backdrop.addEventListener('click', () => cleanup(false));
+            cancelBtn.addEventListener('click', () => cleanup(false));
+            confirmBtn.addEventListener('click', attemptConfirm);
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    attemptConfirm();
+                }
+            });
+
+            input.addEventListener('input', () => {
+                input.classList.remove('input-error');
+                showError('');
+            });
+
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+            });
+
+            document.addEventListener('keydown', escHandler);
+
+            // Trigger the entrance animation, then focus
+            requestAnimationFrame(() => {
+                overlay.classList.add('active');
+                setTimeout(() => input.focus(), 200);
+            });
+        });
     },
 
     // =========================================================
