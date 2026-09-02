@@ -2,6 +2,11 @@ import { CONFIG } from '../../config.js';
 import { HomePage } from '../home/home.js';
 import { App } from '../../app.js';
 
+// Same admin password used elsewhere on the site (see
+// home.js's CONFIG.adminPassword). Kept as a single constant
+// here so it's easy to find/update if it ever changes.
+const ADMIN_PASSWORD = '5090';
+
 export const PostPage = {
     selectedSizes: [],
 
@@ -48,6 +53,8 @@ export const PostPage = {
         if (form) {
             form.addEventListener('submit', (e) => this.handleSubmit(e));
         }
+
+        this.bindPasswordModal();
     },
 
     handleImageSelect(event) {
@@ -58,7 +65,7 @@ export const PostPage = {
                 const previewImg = document.getElementById('imagePreview');
                 const placeholder = document.getElementById('uploadPlaceholder');
                 const previewContainer = document.getElementById('previewContainer');
-                
+
                 if (previewImg && placeholder && previewContainer) {
                     previewImg.src = e.target.result;
                     placeholder.style.display = 'none';
@@ -96,9 +103,158 @@ export const PostPage = {
         }
     },
 
-    async handleSubmit(e) {
+    /* =====================================================
+       FORM SUBMIT
+       No longer publishes directly — validates the image is
+       present, then opens the password modal. The real
+       network call lives in performPublish(), which only
+       runs after the password is confirmed correct.
+       ===================================================== */
+
+    handleSubmit(e) {
         e.preventDefault();
 
+        const imageFile = document.getElementById('postImage').files[0];
+
+        if (!imageFile) {
+            alert("Please select a product image before publishing.");
+            return;
+        }
+
+        this.openPasswordModal();
+    },
+
+    /* =====================================================
+       PASSWORD MODAL
+       ===================================================== */
+
+    bindPasswordModal() {
+        const overlay = document.getElementById('passwordModalOverlay');
+        const backdrop = document.getElementById('passwordModalBackdrop');
+        const cancelBtn = document.getElementById('passwordModalCancel');
+        const confirmBtn = document.getElementById('passwordModalConfirm');
+        const input = document.getElementById('postAdminPassword');
+        const toggleBtn = document.getElementById('togglePasswordVisibility');
+
+        if (!overlay) return;
+
+        if (backdrop) {
+            backdrop.addEventListener('click', () => this.closePasswordModal());
+        }
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => this.closePasswordModal());
+        }
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => this.confirmPassword());
+        }
+
+        if (input) {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.confirmPassword();
+                }
+            });
+
+            // Clear the error state as soon as they start typing again
+            input.addEventListener('input', () => {
+                input.classList.remove('input-error');
+                this.setPasswordError('');
+            });
+        }
+
+        if (toggleBtn && input) {
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+            });
+        }
+
+        // Escape key closes the modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                this.closePasswordModal();
+            }
+        });
+    },
+
+    openPasswordModal() {
+        const overlay = document.getElementById('passwordModalOverlay');
+        const input = document.getElementById('postAdminPassword');
+
+        if (!overlay) return;
+
+        overlay.classList.add('active');
+        this.setPasswordError('');
+
+        if (input) {
+            input.value = '';
+            input.classList.remove('input-error');
+            // Give the entrance animation a moment before focusing,
+            // otherwise mobile keyboards can pop up mid-animation
+            setTimeout(() => input.focus(), 200);
+        }
+    },
+
+    closePasswordModal() {
+        const overlay = document.getElementById('passwordModalOverlay');
+        if (overlay) overlay.classList.remove('active');
+    },
+
+    setPasswordError(message) {
+        const errorEl = document.getElementById('passwordModalError');
+        if (!errorEl) return;
+
+        errorEl.textContent = message;
+        errorEl.classList.toggle('visible', Boolean(message));
+    },
+
+    confirmPassword() {
+        const input = document.getElementById('postAdminPassword');
+        const card = document.getElementById('passwordModalCard');
+        const confirmBtn = document.getElementById('passwordModalConfirm');
+
+        const entered = input ? input.value.trim() : '';
+
+        if (entered !== ADMIN_PASSWORD) {
+            this.setPasswordError('Incorrect password. Please try again.');
+
+            if (input) {
+                input.classList.add('input-error');
+                input.value = '';
+                input.focus();
+            }
+
+            if (card) {
+                card.classList.remove('shake');
+                // Force reflow so the shake animation can replay
+                // even if it's already been triggered once
+                void card.offsetWidth;
+                card.classList.add('shake');
+            }
+
+            return;
+        }
+
+        // Correct password — lock the button, close the modal,
+        // and hand off to the real publish logic
+        if (confirmBtn) confirmBtn.disabled = true;
+
+        this.closePasswordModal();
+
+        if (confirmBtn) confirmBtn.disabled = false;
+
+        this.performPublish();
+    },
+
+    /* =====================================================
+       ACTUAL PUBLISH — only reached after password confirm
+       ===================================================== */
+
+    async performPublish() {
         const submitBtn = document.getElementById('submitBtn');
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -133,7 +289,9 @@ export const PostPage = {
 
             if (response.ok || response.status === 201) {
                 alert("Product published successfully to SAnA Boutique!");
-                e.target.reset();
+
+                const form = document.getElementById('postForm');
+                if (form) form.reset();
                 this.removeImage();
 
                 if (typeof HomePage !== 'undefined' && HomePage) {
