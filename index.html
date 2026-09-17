@@ -4,28 +4,37 @@
     <meta charset="UTF-8">
     <!-- Rigid App Viewport: Prevents accidental scaling/pinching -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    
+
     <!-- Native App Experience Settings -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SAnA Boutique">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#06080c">
 
     <title>SAnA Boutique</title>
+
+    <!-- PWA Manifest — this is what makes Chrome offer "Install App" -->
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Global Base Stylesheet -->
     <link rel="stylesheet" href="./main.css">
-    
+
     <!-- Component Stylesheets -->
     <link rel="stylesheet" href="./js/components/navbar.css">
-    
+
     <!-- Page Specific Stylesheets -->
     <link rel="stylesheet" href="./pages/home/home.css">
     <link rel="stylesheet" href="./pages/shop/shop.css">
@@ -40,6 +49,19 @@
 
     <!-- Main Entry Script -->
     <script type="module" src="./app.js"></script>
+
+    <!-- Service Worker Registration (enables PWA install) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker
+                    .register('./service-worker.js')
+                    .catch((err) => {
+                        console.warn('Service worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
 
 </body>
 </html>
